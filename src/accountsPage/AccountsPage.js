@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import './Homepage.css';
+import './AccountsPage.css';
 import NavBanner from '../navigationBanner/NavBanner.js'
 
-class Homepage extends Component {
+class AccountsPage extends Component {
 
 render() {
     return (
     <div>
         <NavBanner/>
       <div className="Homepage">
-        Homepage
+        Accounts page
       </div>
     </div>
     );
   }
 }
 
-export default Homepage;
+export default AccountsPage;

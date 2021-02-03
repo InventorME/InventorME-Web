@@ -27,7 +27,7 @@ class NavBanner extends Component {
                 <div class="inventor-title">InventorME</div>
                 <img src={InventorLogo} class="inventor-logo" alt="" />
             </div>
-            <div class="profile">profile</div>
+            <div class="profile">Profile</div>
         </div>
         <OverlayMenu 
           open={this.state.isOpen} 
