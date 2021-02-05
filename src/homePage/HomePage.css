@@ -1,0 +1,32 @@
+body { 
+    background-color: black;
+}
+
+.center{
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+}
+.primary{
+    color: #139187;
+    font-size: 20px;
+    font-style: italic;
+    text-align: center;
+}
+.secondary{
+    color : white;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+}
+.click{
+    color: black;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 25px;
+}
