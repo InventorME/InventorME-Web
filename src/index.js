@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ProfilePage from './navigationBanner/profilePage/ProfilePage';
+import AccountsPage from './accountsPage/AccountsPage';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+   <BrowserRouter>
+   <Switch>
+    <Route exact path="/" component={App}/>
+    <Route path="/accounts-page" component={AccountsPage}/>
+    <Route path="/profile-page" component={ProfilePage}/>
+  </Switch>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

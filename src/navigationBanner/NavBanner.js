@@ -3,6 +3,7 @@ import InventorLogo from '../images/InventorLogo.png'
 import hamburgerIcon from '../images/hamburgerIcon.png'
 import './NavBanner.css';
 import OverlayMenu from 'react-overlay-menu';
+import { Link } from "react-router-dom";
 
 class NavBanner extends Component {
 
@@ -82,7 +83,9 @@ class NavBanner extends Component {
                <div ref={this.profileMenu}
                 class = "overlay"
                 style = {this.state.style}>
+                    <Link to="/profile-page" style={{ textDecoration: 'none' }}>
                     <div><p>Profile</p></div>
+                    </Link>
                     <div><p>Logout</p></div>
                 </div>
           </div>
