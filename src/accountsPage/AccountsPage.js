@@ -6,9 +6,9 @@ class AccountsPage extends Component {
 
 render() {
     return (
-    <div>
+    <div className="container">
         <NavBanner/>
-      <div className="Homepage">
+      <div>
         Accounts page
       </div>
     </div>

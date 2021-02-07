@@ -48,13 +48,58 @@
 .side-menu {
     margin: auto;
     background-color: #139187;
-    padding: 2em;
+    padding-top: 4.5em;
+    padding-left: 2em;
+    padding-right: 2em;
     height: -webkit-fill-available;
+}
+
+.side-menu h1:hover, .side-menu h1:focus {
+    outline-color: white;
+    outline-width: 0.5px;
+    outline-style: double;
+}
+
+.side-menu div {
+    padding-top: 1.2em;
 }
 
 .menu-text {
     color: white;
     font-size: 1.1em;
-    padding-top: 4em;
-    
+    padding: 1em;
+}
+
+.overlay {
+    position: fixed;
+    z-index: 1;
+    right: 0;
+    margin-right: 2.5%;
+    background-color: #139187;
+    overflow: hidden;
+    transition: 0.2s;
+    border-top: 2px solid white;
+}
+
+.overlay div {
+    padding-top: 1em;
+    width: 6em;
+    margin: auto;
+}
+
+.overlay p {
+    color: white;
+    background-color: #139187;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 0.3em;
+    margin: auto;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay p:hover, .overlay p:focus {
+    outline-color: white;
+    outline-width: 0.5px;
+    outline-style: double;
 }
