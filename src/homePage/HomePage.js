@@ -9,7 +9,7 @@ class HomePage extends Component{
         <div class="home-title">
         <div class="home-inventor-title"></div>
         <img src={InventorLogo} class="center" alt="" />
-        <p className = 'primary'>InventorMe is a new, revolutionary management app that prioritizes and streamlines efficieny for
+        <p className = 'primary'>InventorMe is a new, revolutionary management app that prioritizes and streamlines efficiency for
         digital photos, documents, and other items that you need to oversee.
         You now have the power to manage all of your belongings with just the tip of your fingers.  </p>
         <p className = 'secondary'> Join the Revolution today </p>
