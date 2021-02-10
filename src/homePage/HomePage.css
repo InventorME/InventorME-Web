@@ -1,32 +1,38 @@
 body { 
-    background-color: black;
+    background-color: white;
+}
+.home-title{
+    height: 100vh;
+    display:block;
+    background-color:white;
 }
 
 .center{
-    display:block;
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 35%;
+    width:400px;
+    height: 380px;
 }
 .primary{
     color: #139187;
-    font-size: 20px;
+    font-size: 17px;
     font-style: italic;
     text-align: center;
 }
 .secondary{
-    color : white;
-    font-size: 30px;
+    color : black;
+    font-size: 17px;
     font-style: italic;
     font-weight: bold;
     text-align: center;
 }
 .click{
     color: black;
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
+    display: block;
+    
     font-style: italic;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 17px;
+    text-align: center;
 }

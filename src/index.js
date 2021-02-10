@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ProfilePage from './navigationBanner/profilePage/ProfilePage';
 import AccountsPage from './accountsPage/AccountsPage';
+import SignInPage from './signinPage/SignInPage';
+import HomePage from './homePage/HomePage';
+
 
 ReactDOM.render(
    <BrowserRouter>
@@ -13,6 +16,8 @@ ReactDOM.render(
     <Route exact path="/" component={App}/>
     <Route path="/accounts-page" component={AccountsPage}/>
     <Route path="/profile-page" component={ProfilePage}/>
+    <Route path= "/home-page" component = {HomePage}/>
+    <Route path = "/signin-page" component = {SignInPage}/>
   </Switch>
   </BrowserRouter>,
   document.getElementById('root')
