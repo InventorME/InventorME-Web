@@ -72,11 +72,21 @@ class NavBanner extends Component {
             open={this.state.isOpen} 
             onClose={this.toggleMenu}>
                 <div class="side-menu">
+                    <Link style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Categories</h1></div>
+                    </Link>
+                    <Link style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Photos</h1></div>
+                    </Link>
+                    <Link style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Completed</h1></div>
+                    </Link>
+                    <Link style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Date</h1></div>
+                    </Link>
+                    <Link style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Settings</h1></div>
+                    </Link>
                 </div>
             </OverlayMenu>            
             <div>
@@ -86,7 +96,9 @@ class NavBanner extends Component {
                     <Link to="/profile-page" style={{ textDecoration: 'none' }}>
                     <div><p>Profile</p></div>
                     </Link>
+                    <Link style={{ textDecoration: 'none' }}>
                     <div><p>Logout</p></div>
+                    </Link>
                 </div>
           </div>
         </div>
