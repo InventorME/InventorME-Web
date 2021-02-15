@@ -1,6 +1,79 @@
-.like{
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 55%;
+.signin-inventor-title {
+    display: inline-flex;
+    width: 100%;
+}
+.signin-inventor-title h2 {
+    color: #0e7e92;
+    margin-left: 35%;
+    margin-top: 1em;
+    font-size: 1.8em;
+}
+.password{
+    position: absolute;
+    margin-top: 18%;
+    margin-left: -25%;
+}
+.email{
+    position: absolute;
+    margin-top: 12%;
+    margin-left: -25%;
+}
+.lbox{
+    height : 27em;
+}
+.login-box {
+    
+    position: relative;
+    margin-left: 15%;
+    margin-top: 0%;
+    padding-bottom: 0%;
+    transition: 0.2s;
+}
+.login-account {
+    position: absolute;
+    top: 14em;
+    left: 1.6em;
+    padding: 0.8em;
+    font-size: 1.0em;
+    color: white;
+    background-color: #0e7e92;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+.create-account {
+    position: absolute;
+    top: 22em;
+    left: 1.6em;
+    padding: 0.8em;
+    font-size: 1.0em;
+    color: white;
+    background-color: #0e7e92;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+.or-message{
+    position: absolute;
+    top: 15em;
+    left: 1.6em;
+    font-size: 1.2em;
+    color: #0e7e92;
+}
+
+.Password{
+    position: absolute;
+    top: 6em;
+    left: 1.6em;
+    font-size: 1.2em;
+    color: #0e7e92;
+}
+.Email{
+    position: absolute;
+    top: 3em;
+    left: 1.6em;
+    font-size: 1.2em;
+    color: #0e7e92;
 }

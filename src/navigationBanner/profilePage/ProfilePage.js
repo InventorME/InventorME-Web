@@ -3,6 +3,7 @@ import './ProfilePage.css';
 import { Link } from "react-router-dom";
 import ProfileBox from '../../images/profile-box.png'
 import BackButton from '../../images/back-button.png'
+
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
@@ -40,6 +41,7 @@ render() {
         <p class="user-email-value">{this.state.response.userEmail}</p>
         <h2 class="creation">Creation Date</h2>
         <p class="creation-date">{this.state.response.userCreateDate}</p>
+        
         <button class="update-profile" onClick={{}}>UPDATE PROFILE</button>
       </div>
     </div>

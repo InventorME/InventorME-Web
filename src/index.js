@@ -8,7 +8,7 @@ import ProfilePage from './navigationBanner/profilePage/ProfilePage';
 import AccountsPage from './accountsPage/AccountsPage';
 import SignInPage from './signinPage/SignInPage';
 import HomePage from './homePage/HomePage';
-
+import CreateAcctPage from './createacctPage/CreateAcctPage';
 
 ReactDOM.render(
    <BrowserRouter>
@@ -18,6 +18,7 @@ ReactDOM.render(
     <Route path="/profile-page" component={ProfilePage}/>
     <Route path= "/home-page" component = {HomePage}/>
     <Route path = "/signin-page" component = {SignInPage}/>
+    <Route path = "/createacct-page" component = {CreateAcctPage}/>
   </Switch>
   </BrowserRouter>,
   document.getElementById('root')
