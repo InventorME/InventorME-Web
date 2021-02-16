@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './HomePage.css';
 import InventorLogo from '../images/InventorMeLogo.png';
-import { BrowserRouter, Route, Switch ,Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 class HomePage extends Component{
     
     render(){
