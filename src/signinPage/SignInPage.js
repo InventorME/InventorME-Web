@@ -35,7 +35,7 @@ class SignInPage extends Component{
     <input type="password"  input class = "password" value={this.state.value} onChange={this.handleChange}/>
     <p class ="Email"> Email: </p>
     <input type="text"  input class = "email" value={this.state.value} onChange={this.handleChange}/>
-        <button class="login-account" onClick={{}}>Log in</button>
+        <button class="login-account" onClick={event =>  window.location.href="/accounts-page"}>Log in</button>
         <p class ="or-message"> Don't have an account?</p>
         <button class="create-account" onClick={event =>  window.location.href="/createacct-page"}>Create an Account </button>
       </div>

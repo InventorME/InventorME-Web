@@ -1,0 +1,94 @@
+.createacct-inventor-title {
+    display: inline-flex;
+    width: 100%;
+}
+.createacct-inventor-title h2 {
+    color: #0e7e92;
+    margin-left: 35%;
+    margin-top: 1em;
+    font-size: 1.8em;
+}
+
+.first{
+    position: absolute;
+    margin-top: 20%;
+    margin-left: -65%;
+}
+.email2{
+    position: absolute;
+    margin-top: 13.5%;
+    margin-left: -65%;
+}
+.last{
+    position: absolute;
+    margin-top: 25.7%;
+    margin-left: -65%;
+}
+.phone{
+    position: absolute;
+    margin-top: 31.4%;
+    margin-left: -65%;
+}
+.password2{
+    position: absolute;
+    margin-top: 37.09%;
+    margin-left: -65%;
+}
+
+
+
+.Fname{
+    position: absolute;
+    top: 8.5em;
+    left: 19.6em;
+    font-size: 1.2em;
+    color: #0e7e92;
+}
+.Email2{
+    position: absolute;
+    top: 5em;
+    left: 19.6em;
+    font-size: 1.2em;
+    color: #0e7e92;
+}
+.Lname{
+    position: absolute;
+    top: 11.8em;
+    left: 19.6em;
+    font-size: 1.2em;
+    color: #0e7e92;
+}
+.Phone{
+    position: absolute;
+    top: 15em;
+    left: 19.6em;
+    font-size: 1.2em;
+    color: #0e7e92;
+}
+.Password2{
+    position: absolute;
+    top: 18.2em;
+    left: 19.6em;
+    font-size: 1.2em;
+    color: #0e7e92;
+}
+.goto-account {
+    position: absolute;
+    top: 29em;
+    left: 23.6em;
+    padding: 0.8em;
+    font-size: 1.0em;
+    color: white;
+    background-color: #0e7e92;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+.calogo{
+    position: relative;
+    margin-left: 65%;
+    margin-top: 5%;
+    padding-bottom: 0%;
+    transition: 0.2s;
+}
