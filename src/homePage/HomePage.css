@@ -11,18 +11,18 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width:400px;
-    height: 380px;
+    width:500px;
+    height: 480px;
 }
 .primary{
     color: #0e7e92;
-    font-size: 17px;
+    font-size: 23px;
     font-style: italic;
     text-align: center;
 }
 .secondary{
     color : black;
-    font-size: 17px;
+    font-size: 27px;
     font-style: italic;
     font-weight: bold;
     text-align: center;
@@ -33,6 +33,6 @@ body {
     
     font-style: italic;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 27px;
     text-align: center;
 }

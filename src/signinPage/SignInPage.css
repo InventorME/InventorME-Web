@@ -2,36 +2,39 @@ html,body{
     overflow:hidden;
 }
 
-
 .signin-inventor-title {
     display: inline-flex;
-    width: 100%;
+    width: 100em;
 }
 .signin-inventor-title h2 {
     color: #0e7e92;
-    margin-left: 35%;
+    margin-left: 18em;
     top: 1em;
-    font-size: 1.8em;
+    font-size: 2.0em;
 }
 .password{
     position: absolute;
-    top: 39%;
-    left: 3%;
+    top: 15em;
+    left: 2.4em;
+    width: 17em;
+    height: 1.6em;
 }
 .email{
     position: absolute;
-    top: 25%;
-    left: 3%;
+    top: 8em;
+    left: 2.4em;
+    width: 17em;
+    height: 1.6em;
 }
 .lbox{
-    height : 27em;
+    height : 37em;
 }
 .login-box {
     overflow: hidden;
     position: relative;
-    left: 15%;
-    top: -2%;
-    padding-bottom: 0%;
+    left: 12em;
+    top: 2em;
+    padding-bottom: 5em;
     transition: 0.2s;
 }
 .login-account {
@@ -39,7 +42,7 @@ html,body{
     top: 14em;
     left: 1.6em;
     padding: 0.8em;
-    font-size: 1.0em;
+    font-size: 1.3em;
     color: white;
     background-color: #0e7e92;
     border-radius: 10px;
@@ -49,10 +52,10 @@ html,body{
 }
 .create-account {
     position: absolute;
-    top: 22em;
+    top: 24em;
     left: 1.6em;
     padding: 0.8em;
-    font-size: 1.0em;
+    font-size: 1.3em;
     color: white;
     background-color: #0e7e92;
     border-radius: 10px;
@@ -62,9 +65,9 @@ html,body{
 }
 .or-message{
     position: absolute;
-    top: 15em;
+    top: 20em;
     left: 1.6em;
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #0e7e92;
 }
 
@@ -72,13 +75,13 @@ html,body{
     position: absolute;
     top: 6em;
     left: 1.6em;
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #0e7e92;
 }
 .Email{
     position: absolute;
-    top: 3em;
+    top: 1.6em;
     left: 1.6em;
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #0e7e92;
 }
