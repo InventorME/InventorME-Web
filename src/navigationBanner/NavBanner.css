@@ -19,6 +19,7 @@
     margin-top: auto;
     margin-left: 4%;
     margin-bottom: auto;
+    cursor: pointer;
 }
 
 .menu-icon {
@@ -32,6 +33,7 @@
     margin-right: 6%;
     margin-bottom: auto;
     color: white;
+    cursor: pointer;
 }
 
 .inventor-logo {
