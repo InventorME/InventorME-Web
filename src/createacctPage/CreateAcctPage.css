@@ -3,45 +3,56 @@
     width: 100em;
 }
 .createacct-inventor-title h2 {
+    position: absolute;
     color: #0e7e92;
     margin-left: 18em;
     margin-top: 1em;
     font-size: 2.0em;
 }
+.backwards {
+    position: absolute;
+    height: 3.5em;
+    width: 3.5em;
+    padding-left: 3em;
+    padding-top: 2em;
+    left: .5em;
+}
 .email2{
     position: absolute;
-    margin-top: 12.7em;
-    margin-left: -89.5em;
+    top: 13em;
+    left: 30.4em;
     width: 17em;
     height: 1.6em;
+    
 }
+
 
 .first{
     position: absolute;
-    margin-top: 17.7em;
-    margin-left: -89.5em;
+    top: 19.7em;
+    left: 30.4em;
     width: 17em;
     height: 1.6em;
 }
 
 .last{
     position: absolute;
-    margin-top: 22.7em;
-    margin-left: -89.5em;
+    top: 25.9em;
+    left: 30.4em;
     width: 17em;
     height: 1.6em;
 }
 .phone{
     position: absolute;
-    margin-top: 27.5em;
-    margin-left: -89.5em;
+    top: 32.5em;
+    left: 30.4em;
     width: 17em;
     height: 1.6em;
 }
 .password2{
     position: absolute;
-    margin-top: 32.6em;
-    margin-left: -89.5em;
+    top: 38.6em;
+    left: 30.4em;
     width: 17em;
     height: 1.6em;
 }
@@ -50,7 +61,7 @@
 
 .Fname{
     position: absolute;
-    top: 8.5em;
+    top: 9.5em;
     left: 19.6em;
     font-size: 1.3em;
     color: #0e7e92;
@@ -64,28 +75,28 @@
 }
 .Lname{
     position: absolute;
-    top: 11.8em;
+    top: 13.8em;
     left: 19.6em;
     font-size: 1.3em;
     color: #0e7e92;
 }
 .Phone{
     position: absolute;
-    top: 15em;
+    top: 18em;
     left: 19.6em;
     font-size: 1.3em;
     color: #0e7e92;
 }
 .Password2{
     position: absolute;
-    top: 18.2em;
+    top: 21.9em;
     left: 19.6em;
     font-size: 1.3em;
     color: #0e7e92;
 }
 .goto-account {
     position: absolute;
-    top: 27em;
+    top: 30em;
     left: 19.6em;
     padding: 0.8em;
     font-size: 1.3em;
@@ -97,9 +108,9 @@
     outline: none;
 }
 .calogo{
-    position: relative;
-    margin-left: 55em;
-    margin-top: 2em;
+    position: absolute;
+    left: 50em;
+    top: 11em;
     padding-bottom: 0em;
     transition: 0.2s;
     width:400px;

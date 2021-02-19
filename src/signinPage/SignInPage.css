@@ -1,6 +1,4 @@
-html,body{
-    overflow:hidden;
-}
+
 
 .signin-inventor-title {
     display: inline-flex;
@@ -30,7 +28,6 @@ html,body{
     height : 37em;
 }
 .login-box {
-    overflow: hidden;
     position: relative;
     left: 12em;
     top: 2em;
