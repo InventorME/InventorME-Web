@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './HomePage.css';
+import './AboutPage.css';
 import InventorLogo from '../images/InventorMeLogo.png';
 import {Link} from "react-router-dom";
-class HomePage extends Component{
+class AboutPage extends Component{
     
     render(){
     return (
@@ -12,11 +12,10 @@ class HomePage extends Component{
         <p className = 'primary'>InventorMe is a new, revolutionary management app that prioritizes and streamlines efficiency for
         digital photos, documents, and other items that you need to oversee.
         You now have the power to manage all of your belongings with just the tip of your fingers.  </p>
-        <p className = 'secondary'> Join the Revolution today </p>
-        <Link to= "/signin-page" className = 'click'>Sign In</Link>
+        
         </div>
     
       );
     }
 }
-export default HomePage;
+export default AboutPage;
