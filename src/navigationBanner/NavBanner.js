@@ -87,6 +87,9 @@ class NavBanner extends Component {
                     <Link style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Settings</h1></div>
                     </Link>
+                    <Link to="/about-page" style={{ textDecoration: 'none' }}>
+                    <div><h1 class="menu-text">About</h1></div>
+                    </Link>
                 </div>
             </OverlayMenu>            
             <div>

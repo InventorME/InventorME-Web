@@ -1,0 +1,19 @@
+.home-title{
+    height: 100vh;
+    display:block;
+    background-color:white;
+}
+
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:400px;
+    height: 380px;
+}
+.primary{
+    color: #0e7e92;
+    font-size: 20px;
+    font-style: italic;
+    text-align: center;
+}
