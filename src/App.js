@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import HomePage from './homePage/HomePage';
+import SignInPage from './signinPage/SignInPage';
 
 class App extends Component {
   state = {
@@ -40,7 +40,7 @@ class App extends Component {
 render() {
     return (
       <div className="">
-      <HomePage/>
+      <SignInPage/>
       </div>
     );
   }

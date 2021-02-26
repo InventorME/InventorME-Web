@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './CreateAcctPage.css';
 import InventorLogo from '../images/InventorMeLogo.png';
 import { BrowserRouter, Route, Switch ,Link} from "react-router-dom";
-import ProfileBox from '../images/profile-box.png';
+import ProfileBox from '../images/profile-box.png'
+import BackButton from '../images/back-button.png'
 
 class CreateAcctPage extends Component{
   constructor(props) {
@@ -30,6 +31,10 @@ class CreateAcctPage extends Component{
       <h2>InventorME</h2>
       </div>
 
+      <Link to="/signin-page" style={{ textDecoration: 'none' }}>
+          <img src={BackButton} class="backwards" alt="back" />
+        </Link> 
+
     <p class ="Email2"> Email: </p>
     <input type="text"  input class = "email2" onChange={this.handleChange}/>
 
@@ -40,7 +45,7 @@ class CreateAcctPage extends Component{
     <input type="text"  input class = "last" onChange={this.handleChange}/>
 
     <p class = "Phone"> Phone Number: </p>
-    <input onChange = {event => this.setState({value: event.target.value.replace(/\D/,'')})} input class = "phone" value={this.state.value} onChange={this.handleChange}/>
+    <input type = "text" input class = "phone" value={this.state.value} onChange={this.handleChange}/>
 
     <p class = "Password2"> Password: </p>
     <input type="password"  input class = "password2" onChange={this.handleChange}/>
