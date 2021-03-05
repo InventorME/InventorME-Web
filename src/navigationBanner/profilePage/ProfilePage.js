@@ -41,7 +41,7 @@ class ProfilePage extends Component {
   }
   
   getProfile = async () => {
-    const response = await fetch('/api/profile');
+    const response = await fetch('/api/user');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body;
@@ -208,7 +208,7 @@ render() {
             </div>
             <div class="edit-last-input">
             <p class="edit-last"> Last Name: </p>  
-            <input disabled={this.state.disabled} type="text" class="last-input"value={this.state.lastName} onChange={this.lastNameOnChange}/>
+            <input disabled={this.state.disabled} type="text" class="last-input" value={this.state.lastName} onChange={this.lastNameOnChange}/>
             </div>
            </div>
           

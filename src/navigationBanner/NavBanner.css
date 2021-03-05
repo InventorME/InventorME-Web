@@ -32,8 +32,14 @@
     margin-top: auto;
     margin-right: 6%;
     margin-bottom: auto;
+    display: inline-flex;
     color: white;
     cursor: pointer;
+}
+
+.firstName-profile {
+    padding-left: 1em;
+    font-weight: normal;
 }
 
 .inventor-logo {
@@ -53,7 +59,7 @@
     padding-top: 4.5em;
     padding-left: 2em;
     padding-right: 2em;
-    height: -webkit-fill-available;
+    height: 100vh;
 }
 
 .side-menu h1:hover, .side-menu h1:focus {
@@ -104,4 +110,13 @@
     outline-color: white;
     outline-width: 0.5px;
     outline-style: double;
+}
+
+
+.overlay-menu__wrap {
+    overflow: hidden !important;
+}
+
+.overlay-menu__overlay {
+    background: none !important;
 }

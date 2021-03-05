@@ -9,7 +9,7 @@ class NavBanner extends Component {
 
     constructor(props) {
        super(props);
-       this.state = { isOpen: false, showProfileMenu: false, show: true, style : {
+       this.state = { response: '', isOpen: false, showProfileMenu: false, show: true, style : {
         width : 150,
         height: 0,
     }};
@@ -22,6 +22,9 @@ class NavBanner extends Component {
 
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
+        this.getProfile().then(res => {
+            this.setState({ response: res })
+        }).catch(err => console.log(err));
     }
 
     componentWillUnmount() {
@@ -34,6 +37,13 @@ class NavBanner extends Component {
             this.showProfileMenu()
         }
     }
+
+    getProfile = async () => {
+        const response = await fetch('/api/user');
+        const body = await response.json();
+        if (response.status !== 200) throw Error(body.message);
+        return body;
+      };
 
     handleClickOutside(event) {
         if (this.profileMenu && !this.profileMenu.current.contains(event.target)) {
@@ -66,10 +76,13 @@ class NavBanner extends Component {
                     <div class="inventor-title">InventorME</div>
                     <img src={InventorLogo} class="inventor-logo" alt="" />
                 </div>
-                <div class="profile" onClick={this.showProfileMenu}>Profile</div>
-            </div>
+                <div class="profile" onClick={this.showProfileMenu}>
+                    <img style={{borderRadius: "12em", height: "2.5em", width: "2.5em", 'paddingTop': '0.4em'}} alt="" src={this.state.response.userProfilePicURL} />
+                    <p class="firstName-profile"> {this.state.response.userFirstName}</p>
+                </div>
+                </div>
             <OverlayMenu
-            open={this.state.isOpen} 
+            open={this.state.isOpen}
             onClose={this.toggleMenu}>
                 <div class="side-menu">
                     <Link style={{ textDecoration: 'none' }}>
