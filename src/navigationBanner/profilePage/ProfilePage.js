@@ -5,25 +5,23 @@ import BackButton from '../../images/back-button.png'
 import ReactRoundedImage from "react-rounded-image"
 import UploadButton from '../../images/upload-button.png'
 import Input, { isPossiblePhoneNumber } from 'react-phone-number-input/input'
+import ToastMessage from '../../components/toastMessage/ToastMessage';
 
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
-    this.state = { response: '', disabled: false, loading: false, toastMessage: '', profile: true,
+    this.state = { response: '', disabled: false, loading: false, profile: true,
       userID: null,
       firstName: '',
       lastName: '',
       userEmail: '',
       userProfilePic: '',
-      userPhone: '',
-      toastStyle : {
-        width: '0%',
-        height: '12%'
-    }
+      userPhone: ''
     }
     this.toggleForm = this.toggleForm.bind(this);
     this.saveProfile = this.saveProfile.bind(this);
     this.hiddenFileInput = React.createRef();
+    this.toast = React.createRef();
   }
 
   componentDidMount() {
@@ -83,27 +81,6 @@ class ProfilePage extends Component {
     }
   }
 
-  // resizeFile = (file) => new Promise(resolve => {
-  //   Resizer.imageFileResizer(file, 170, 160, 'PNG', 100, 0,
-  //   uri => {
-  //     resolve(uri); //Set uri state
-  //   },
-  //   'base64'
-  //   );
-  // });
-
-  setToastStyle(style) {
-    this.setState({ toastStyle: style });
-    clearInterval(this.start);
-  }
-
-  closeToast = () => {
-    this.start = setInterval(() => {
-      const toastStyle = { width : '0%', height: '12%' };
-      this.setToastStyle(toastStyle);
-    }, 3000); 
-  }
-
   reloadPage = () => {
     setInterval(() => {
       window.location.reload(true)
@@ -113,9 +90,7 @@ class ProfilePage extends Component {
   saveProfile=(event) => {
     if(!isPossiblePhoneNumber(this.state.userPhone)){   
       event.preventDefault();
-      const toastStyle = { width : '17%', height: '12%' };
-      this.setState({ toastStyle, toastMessage: 'Error: Failed to save ☹' });
-      this.closeToast();
+      this.toastMessage('Error: Failed to save ☹');
     } else {
       const reqBody = {
         userID: this.state.userID,
@@ -126,12 +101,16 @@ class ProfilePage extends Component {
         userProfilePicURL: this.state.userProfilePic
       };
       event.preventDefault();
-      const toastStyle = { width : '17%', height: '12%' };
-      this.setState({ toastStyle, loading: true, disabled: true, toastMessage: 'Saved Successfully! ㋡' });
+      this.toastMessage('Saved Successfully! ㋡');
+      this.setState({ loading: true, disabled: true });
       this.reloadPage();
     }
   }
   
+  toastMessage = (message) => {
+    this.toast.current.openToast(message);
+  };
+
   handleClick = () => {
     this.hiddenFileInput.current.click();
   };
@@ -140,21 +119,19 @@ render() {
     return (
     <div className="profile-container">
       { this.state.loading ?
-      <div class="load-container"> <div class="load-symbol"/></div>
+      <div className="load-container"> <div className="load-symbol"/></div>
       : null }
-      <div class="profile-banner">
+      <div className="profile-banner">
         <Link to="/accounts-page" style={{ textDecoration: 'none' }}>
-          <img src={BackButton} class="profile-back" alt="back" />
+          <img src={BackButton} className="profile-back" alt="back" />
         </Link> 
         <h2>InventorME</h2>   
       </div>
-      <div class="toast" style={this.state.toastStyle}>
-        <p class="toast-message">{this.state.toastMessage}</p>
-      </div>
+      <ToastMessage ref={this.toast}/>
         { this.state.profile ?
           <div>
             <div style={{display: 'block', width: '100%', height: '20%'}}>
-              <div class="profile-image-container">
+              <div className="profile-image-container">
                <ReactRoundedImage 
                roundedColor="#66A5CC"
                imageWidth="170"
@@ -162,34 +139,34 @@ render() {
                roundedSize="1"
                image={this.state.userProfilePic} />
               </div>
-              <h1 class="profile-name">{this.state.response.userFirstName} {this.state.response.userLastName}</h1>
+              <h1 className="profile-name">{this.state.response.userFirstName} {this.state.response.userLastName}</h1>
             </div>
             
             <div style={{display: 'inline-flex', width: '100%', height: '25%'}}>
-               <div class ="edit-email-input">
-                <h3 class ="edit-email"> Email: </h3>
-                <p class="user-email-value">{this.state.response.userEmail}</p>
+               <div className ="edit-email-input">
+                <h3 className ="edit-email"> Email: </h3>
+                <p className="user-email-value">{this.state.response.userEmail}</p>
                </div>
-               <div class = "edit-phone-input">
-                <h3 class = "edit-phone"> Phone Number: </h3>
-                <p class="phone-number-value">{this.formatPhoneNumber(this.state.userPhone)}</p>
+               <div className = "edit-phone-input">
+                <h3 className = "edit-phone"> Phone Number: </h3>
+                <p className="phone-number-value">{this.formatPhoneNumber(this.state.userPhone)}</p>
                </div>
             </div>
 
-            <div style={{display: 'inline-flex', width: '100%', height: '25%'}} class="info-container">  
+            <div style={{display: 'inline-flex', width: '100%', height: '25%'}} className="info-container">  
               <div style={{display: 'inline-flex', width: '29%'}}>
-              <h2 class="creation">Creation Date: </h2>
-              <p class="creation-date">{this.state.response.userCreateDate}</p>
+              <h2 className="creation">Creation Date: </h2>
+              <p className="creation-date">{this.state.response.userCreateDate}</p>
               </div>
-              <h2 class="user-id">UserID: </h2>
-              <p class="creation-date">{this.state.response.userID}</p>
+              <h2 className="user-id">UserID: </h2>
+              <p className="creation-date">{this.state.response.userID}</p>
             </div>
-             <button class="update-profile" onClick={() => this.toggleForm()}>UPDATE PROFILE</button>
+             <button className="update-profile" onClick={() => this.toggleForm()}>UPDATE PROFILE</button>
            </div>
           : 
         <form style={{height: '100vh'}}>
            <div style={{display: 'inline-flex', width: '100%', height: '20%'}}>
-            <div class="profile-image-container">
+            <div className="profile-image-container">
              <input disabled={this.state.disabled} type="file" ref={this.hiddenFileInput} onChange={this.onImageChange} style={{display: 'none'}}/>
                <ReactRoundedImage 
                roundedColor="#66A5CC"
@@ -202,32 +179,29 @@ render() {
            </div>
 
            <div style={{display: 'inline-flex', width: '100%', height: '20%'}}>
-            <div class="edit-first-input">
-            <p class="edit-first"> First Name: </p>
-            <input disabled={this.state.disabled} class="first-input" type="text" onChange={this.firstNameOnChange} value={this.state.firstName} />
+            <div className="edit-first-input">
+            <p className="edit-first"> First Name: </p>
+            <input disabled={this.state.disabled} className="first-input" type="text" onChange={this.firstNameOnChange} value={this.state.firstName} />
             </div>
-            <div class="edit-last-input">
-            <p class="edit-last"> Last Name: </p>  
-            <input disabled={this.state.disabled} type="text" class="last-input" value={this.state.lastName} onChange={this.lastNameOnChange}/>
+            <div className="edit-last-input">
+            <p className="edit-last"> Last Name: </p>  
+            <input disabled={this.state.disabled} type="text" className="last-input" value={this.state.lastName} onChange={this.lastNameOnChange}/>
             </div>
            </div>
           
            <div style={{display: 'inline-flex', width: '100%', height: '25%'}}>
-            <div class ="edit-email-input">
-              <p class ="edit-email"> Email: </p>
-              <input disabled={this.state.disabled} type="text" value={this.state.userEmail} class="email-input" onChange={this.emailOnChange}/>
+            <div className ="edit-email-input">
+              <p className ="edit-email"> Email: </p>
+              <input disabled={this.state.disabled} type="text" value={this.state.userEmail} className="email-input" onChange={this.emailOnChange}/>
             </div>
-            <div class = "edit-phone-input">
-            <p class = "edit-phone"> Phone Number: </p>
-            <Input disabled={this.state.disabled} country="US" class="phone-input"  value={this.state.userPhone} onChange={this.phoneOnChange}/>
+            <div className = "edit-phone-input">
+            <p className = "edit-phone"> Phone Number: </p>
+            <Input disabled={this.state.disabled} country="US" className="phone-input"  value={this.state.userPhone} onChange={this.phoneOnChange}/>
             </div>
-           </div>
-          
-          {/* <p class = "Password2"> Password: </p>
-          <input type="password"  input class = "password2" onChange={this.handleChange}/> */}
-          <div style={{display: 'inline-flex', width: '100%', height: '5%'}}>
-             <button type='submit' class="save-profile" onClick={this.saveProfile}>SAVE</button>
-             <button class="cancel-profile" onClick={() => window.location.reload(true)}>CANCEL</button>
+           </div>  
+         <div style={{display: 'inline-flex', width: '100%', height: '5%'}}>
+             <button type='submit' className="save-profile" onClick={this.saveProfile}>SAVE</button>
+             <button className="cancel-profile" onClick={() => window.location.reload(true)}>CANCEL</button>
           </div>
         </form> 
           }

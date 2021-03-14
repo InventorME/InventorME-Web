@@ -1,0 +1,158 @@
+.enter-manually {
+    cursor: pointer;
+    font-weight: bold;
+    color: black;
+    margin-left: 10.2em;
+}
+
+.enter-manually p:hover {
+    color: #0e7e92;
+}
+
+.searchCode-box {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding-left: 0.5em;
+    outline: none;
+    margin-left: 7em;
+}
+
+.item-image-container {
+    position: relative;
+    transition: 0.2s;
+    margin-left: 24em;
+    padding-top: 1.5em;
+}
+
+.item-upload {
+    position: absolute;
+    height: 2.5em;
+    cursor: pointer;
+    z-index: 1;
+    top: 9.5em;
+    left: 8.5em; 
+}
+
+.save-button {
+    border-radius: 8px;
+    border-color: #0e7e92;
+    background-color: #0e7e92;
+    color: white;
+    margin-left: 1em;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 4em;
+    height: 2em;
+}
+
+.cancel-button {
+    border-radius: 8px;
+    border-color: #0e7e92;
+    background-color: #0e7e92;
+    color: white;
+    margin-left: 6em;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 4em;
+    height: 2em;
+}
+
+.searchCode-button {
+    border-radius: 8px;
+    border-color: #0e7e92;
+    background-color: #0e7e92;
+    color: white;
+    margin-left: 2em;
+    cursor: pointer;
+}
+
+.loading-container {
+    position: absolute;
+    background-color: rgb(235, 235, 235);
+    opacity: 40%;
+    height: 100vh;
+    width: 100%;
+}
+
+.form-container {
+    margin-left: 20%;
+    width: 90%;
+}
+
+.form-container h2 {
+    color:#0e7e92;
+    font-size: 1.2em;
+}
+
+.input-notes {
+    width: 25em;
+    height: 10em;
+    overflow-wrap: break-word;
+    outline: none;
+}
+
+.input-box {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    outline: none;
+    margin-bottom: 1em;
+    width: 36em;
+    font-size: 1em;
+}
+
+.input-tags-box {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    outline: none;
+    margin-bottom: 1em;
+    font-size: 1em;
+}
+
+.input-tag {
+    background: white;
+    border: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+.input-tag-tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.input-tag-tags li {
+    align-items: center;
+    background: #0e7e92;
+    border-radius: 1em;
+    color: white;
+    display: flex;
+    font-weight: 500;
+    list-style: none;
+    margin-bottom: 0.5em;
+    margin-right: 1em;
+    padding: 0.3em 0.8em;
+}
+  
+.input-tag-tags li button {
+    align-items: center;
+    appearance: none;
+    background: #333333;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 0.7em;
+    height: 1.2em;
+    justify-content: center;
+    line-height: 0;
+    margin-left: 1em;
+    padding: 0;
+    width: 15px;
+}

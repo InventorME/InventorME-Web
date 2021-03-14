@@ -69,45 +69,45 @@ class NavBanner extends Component {
         return (
         <div>
             <div className="NavBanner">
-                <div class="menu">
-                    <img class="menu-icon" src={hamburgerIcon} alt="Menu" onClick={this.toggleMenu}/>
+                <div className="menu">
+                    <img className="menu-icon" src={hamburgerIcon} alt="Menu" onClick={this.toggleMenu}/>
                 </div>
-                <div class="title">
-                    <div class="inventor-title">InventorME</div>
-                    <img src={InventorLogo} class="inventor-logo" alt="" />
+                <div className="title">
+                    <div className="inventor-title">InventorME</div>
+                    <img src={InventorLogo} className="inventor-logo" alt="" />
                 </div>
-                <div class="profile" onClick={this.showProfileMenu}>
+                <div className="profile" onClick={this.showProfileMenu}>
                     <img style={{borderRadius: "12em", height: "2.5em", width: "2.5em", 'paddingTop': '0.4em'}} alt="" src={this.state.response.userProfilePicURL} />
-                    <p class="firstName-profile"> {this.state.response.userFirstName}</p>
+                    <p className="firstName-profile"> {this.state.response.userFirstName}</p>
                 </div>
                 </div>
             <OverlayMenu
             open={this.state.isOpen}
             onClose={this.toggleMenu}>
-                <div class="side-menu">
+                <div className="side-menu">
                     <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Categories</h1></div>
+                    <div><h1 className="menu-text">Categories</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Photos</h1></div>
+                    <div><h1 className="menu-text">Photos</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Completed</h1></div>
+                    <div><h1 className="menu-text">Completed</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Date</h1></div>
+                    <div><h1 className="menu-text">Date</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Settings</h1></div>
+                    <div><h1 className="menu-text">Settings</h1></div>
                     </Link>
                     <Link to="/about-page" style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">About</h1></div>
+                    <div><h1 className="menu-text">About</h1></div>
                     </Link>
                 </div>
             </OverlayMenu>            
             <div>
                <div ref={this.profileMenu}
-                class = "overlay"
+                className = "overlay"
                 style = {this.state.style}>
                     <Link to="/profile-page" style={{ textDecoration: 'none' }}>
                     <div><p>Profile</p></div>

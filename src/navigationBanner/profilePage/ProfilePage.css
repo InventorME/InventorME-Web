@@ -26,26 +26,6 @@
     padding-top: 2em;
 }
 
-.toast {
-    background: #0e7e92;
-    transition: 0.2s;
-    overflow: hidden;
-    top: 3em;
-    right: 2em;
-    border-radius: 1em;
-    position: fixed;
-}
-
-.toast-message {
-    color: white;
-    transition: 0.4s;
-    font-weight: 600;
-    width: 80%;
-    margin: 14%;
-    font-size: 1.2em;
-    position: relative;
-}
-
 .load-container {
     position: absolute;
     background-color: rgb(235, 235, 235);
@@ -171,7 +151,6 @@
 .save-profile {
     position: relative;
     margin-left: 40%;
-    padding: 0.8em;
     padding-right: 1.5em;
     padding-left: 1.5em;
     font-size: 1.0em;
@@ -186,7 +165,8 @@
 .cancel-profile {
     position: relative;
     margin-left: 10%;
-    padding: 0.8em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
     font-size: 1.0em;
     color: white;
     background-color: #0e7e92;
