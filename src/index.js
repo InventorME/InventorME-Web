@@ -9,16 +9,19 @@ import AccountsPage from './accountsPage/AccountsPage';
 import SignInPage from './signinPage/SignInPage';
 import AboutPage from './aboutPage/AboutPage';
 import CreateAcctPage from './createacctPage/CreateAcctPage';
+import { Account } from './util/Accounts';
 
 ReactDOM.render(
    <BrowserRouter>
    <Switch>
-    <Route exact path="/" component={App}/>
-    <Route path="/accounts-page" component={AccountsPage}/>
-    <Route path="/profile-page" component={ProfilePage}/>
-    <Route path= "/about-page" component = {AboutPage}/>
-    <Route path = "/signin-page" component = {SignInPage}/>
-    <Route path = "/createacct-page" component = {CreateAcctPage}/>
+     <Account>
+      <Route exact path="/" component={App}/>
+      <Route path="/accounts-page" component={AccountsPage}/>
+      <Route path="/profile-page" component={ProfilePage}/>
+      <Route path= "/about-page" component = {AboutPage}/>
+      <Route path = "/signin-page" component = {SignInPage}/>
+      <Route path = "/createacct-page" component = {CreateAcctPage}/>
+    </Account>
   </Switch>
   </BrowserRouter>,
   document.getElementById('root')
