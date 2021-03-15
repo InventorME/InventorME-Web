@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './ProfilePage.css';
-import { Link } from "react-router-dom";
-import BackButton from '../../images/back-button.png'
 import ReactRoundedImage from "react-rounded-image"
 import UploadButton from '../../images/upload-button.png'
 import Input, { isPossiblePhoneNumber } from 'react-phone-number-input/input'

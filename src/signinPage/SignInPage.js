@@ -81,11 +81,7 @@ class SignInPage extends Component{
         <p class ="or-message"> Don't have an account?</p>
         <button class="create-account" onClick={event =>  window.location.href="/createacct-page"}>Create an Account</button>
       </div>
-      </div>
-
-
-    
-      
+      </div>      
        );
   }
 }

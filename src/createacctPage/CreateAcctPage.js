@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './CreateAcctPage.css';
 import InventorLogo from '../images/InventorMeLogo.png';
-import { BrowserRouter, Route, Switch ,Link} from "react-router-dom";
-import ProfileBox from '../images/profile-box.png';
+import { Link} from "react-router-dom";
 import BackButton from '../images/back-button.png';
 import UserPool from "../util/UserPool";
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
@@ -21,18 +20,7 @@ class CreateAcctPage extends Component{
     this.setFamilyName = this.setFamilyName.bind(this);
   
   }
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res }))
-      .catch(err => console.log(err));
-  }
   
-  callApi = async () => {
-    const response = await fetch('/api/user');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
   setEmail(event){
     this.setState({ email: event.target.value});
     event.preventDefault();
@@ -152,22 +140,22 @@ class CreateAcctPage extends Component{
           <img src={BackButton} class="backwards" alt="back" />
         </Link> 
 
-    <p class ="Email2"> Email: </p>
+    <p className ="Email2"> Email: </p>
     <input type="text"  input class = "email2" value={this.state.email} onChange={this.setEmail}/>
 
-    <p class = "Fname"> First Name: </p>
+    <p className = "Fname"> First Name: </p>
     <input type="text"  input class = "first" value={this.state.name} onChange={this.setName}/>
 
-    <p class = "Lname"> Last Name: </p>
+    <p className = "Lname"> Last Name: </p>
     <input type="text"  input class = "last" value={this.state.family_name} onChange={this.setFamilyName}/>
 
-    <p class = "Phone"> Phone Number: </p>
+    <p className = "Phone"> Phone Number: </p>
     <input type = "text" input class = "phone" value={this.state.phone_number} onChange={this.setPhone}/>
 
-    <p class = "Password2"> Password: </p>
+    <p className = "Password2"> Password: </p>
     <input type="password"  input class = "password2" value={this.state.password} onChange={this.setPassword}/>
 
-    <button class="goto-account" onClick={this.validateUser}>Create Account </button>
+    <button className="goto-account" onClick={this.validateUser}>Create Account </button>
     <img src={InventorLogo} class="calogo" alt="" />
 
 </div>
