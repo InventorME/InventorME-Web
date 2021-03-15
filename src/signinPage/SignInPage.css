@@ -15,6 +15,7 @@
 }
 .password{
     position: absolute;
+    outline: none;
     top: 15em;
     left: 2.4em;
     width: 17em;
@@ -22,6 +23,7 @@
 }
 .email{
     position: absolute;
+    outline: none;
     top: 8em;
     left: 2.4em;
     width: 17em;
@@ -33,7 +35,7 @@
 .login-box {
     position: relative;
     margin-left: 34%;
-    top: 2em;
+    top: 3.5em;
     padding-bottom: 5em;
     width: auto;
     transition: 0.2s;
