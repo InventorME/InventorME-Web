@@ -56,7 +56,7 @@
 .side-menu {
     margin: auto;
     background-color: #0e7e92;
-    padding-top: 4.5em;
+    padding-top: 6em;
     padding-left: 2em;
     padding-right: 2em;
     height: 100vh;
@@ -69,7 +69,7 @@
 }
 
 .side-menu div {
-    padding-top: 1.2em;
+    padding-top: 2em;
 }
 
 .menu-text {
