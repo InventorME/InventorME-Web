@@ -4,9 +4,10 @@ import hamburgerIcon from '../images/hamburgerIcon.png'
 import './NavBanner.css';
 import OverlayMenu from 'react-overlay-menu';
 import { Link } from "react-router-dom";
+import { AccountContext } from '../util/Accounts';
 
 class NavBanner extends Component {
-
+    static contextType = AccountContext
     constructor(props) {
        super(props);
        this.state = { response: '', isOpen: false, showProfileMenu: false, show: true, style : {
@@ -18,6 +19,7 @@ class NavBanner extends Component {
        this.handleClickOutside = this.handleClickOutside.bind(this);
        this.showProfileMenu = this.showProfileMenu.bind(this);
        this.closeProfileMenu = this.closeProfileMenu.bind(this);
+       this.logoutUser = this.logoutUser.bind(this);
     }
 
     componentDidMount() {
@@ -63,6 +65,11 @@ class NavBanner extends Component {
     closeProfileMenu() {
         const style = { width : 150, height: 0 };
         this.setState({ style });
+    }
+    logoutUser(){
+        const { logout } = this.context;
+        logout();
+        window.location.href="/signin-page";
     }
 
     render() {
@@ -112,7 +119,7 @@ class NavBanner extends Component {
                     <Link to="/profile-page" style={{ textDecoration: 'none' }}>
                     <div><p>Profile</p></div>
                     </Link>
-                    <Link style={{ textDecoration: 'none' }}>
+                    <Link style={{ textDecoration: 'none' }} onClick={this.logoutUser}>
                     <div><p>Logout</p></div>
                     </Link>
                 </div>

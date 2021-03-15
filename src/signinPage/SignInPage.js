@@ -18,7 +18,16 @@ class SignInPage extends Component{
 
       }
       componentDidMount() {
-        
+        const { getSession } = this.context;
+        console.log("componentDidMount");
+        getSession()
+        .then(session => {
+          console.log('Signed In:', "user found");
+          console.log('Session:', session);
+          window.location.href="/accounts-page";
+        }).catch(err => {
+          console.log('err:', "no user found");
+        });
         this.callApi()
           .then(res => this.setState({ response: res }))
           .catch(err => console.log(err));
