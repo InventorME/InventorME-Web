@@ -5,8 +5,10 @@ import BackButton from '../../images/back-button.png'
 import ReactRoundedImage from "react-rounded-image"
 import UploadButton from '../../images/upload-button.png'
 import Input, { isPossiblePhoneNumber } from 'react-phone-number-input/input'
+import { AccountContext } from '../../util/Accounts';
 
 class ProfilePage extends Component {
+  static contextType = AccountContext
   constructor(props) {
     super(props);
     this.state = { response: '', disabled: false, loading: false, toastMessage: '', profile: true,
@@ -27,17 +29,32 @@ class ProfilePage extends Component {
   }
 
   componentDidMount() {
-    this.getProfile()
-      .then(res => { 
-        let formatPhone = "+" + res.userPhone;
-        this.setState({ response: res })
-        this.setState({ firstName: res.userFirstName })
-        this.setState({ lastName: res.userLastName })
-        this.setState({ userEmail: res.userEmail })
-        this.setState({ userPhone: formatPhone })
-        this.setState({ userProfilePic: res.userProfilePicURL })
+    const { getSession } = this.context;
+    getSession()
+      .then((data) => { 
+        let formatPhone = "+" + data.phoneNumber;
+        this.setState({ response: data.user })
+        this.setState({ firstName: data.name })
+        this.setState({ lastName: data.family_name })
+        this.setState({ userEmail: data.email })
+        this.setState({ userPhone: data.phone_number })
+        // this.setState({ userProfilePic: res.userProfilePicURL })
+        console.log("Data:",data);
+        console.log("Name:",data.name);
+        this.setState({ response: ''})
+        
       })
-      .catch(err => console.log(err));
+      .catch(err =>{
+        console.log(err);
+        alert("Error: No user found, please sign in again");
+    });
+
+
+
+
+
+
+
   }
   
   getProfile = async () => {
@@ -82,6 +99,8 @@ class ProfilePage extends Component {
       this.setState({userProfilePic: URL.createObjectURL(event.target.files[0])});    
     }
   }
+
+
 
   // resizeFile = (file) => new Promise(resolve => {
   //   Resizer.imageFileResizer(file, 170, 160, 'PNG', 100, 0,
@@ -162,13 +181,13 @@ render() {
                roundedSize="1"
                image={this.state.userProfilePic} />
               </div>
-              <h1 class="profile-name">{this.state.response.userFirstName} {this.state.response.userLastName}</h1>
+              <h1 class="profile-name">{this.state.userFirstName} {this.state.userLastName}</h1>
             </div>
             
             <div style={{display: 'inline-flex', width: '100%', height: '25%'}}>
                <div class ="edit-email-input">
                 <h3 class ="edit-email"> Email: </h3>
-                <p class="user-email-value">{this.state.response.userEmail}</p>
+                <p class="user-email-value">{this.state.userEmail}</p>
                </div>
                <div class = "edit-phone-input">
                 <h3 class = "edit-phone"> Phone Number: </h3>
@@ -182,7 +201,7 @@ render() {
               <p class="creation-date">{this.state.response.userCreateDate}</p>
               </div>
               <h2 class="user-id">UserID: </h2>
-              <p class="creation-date">{this.state.response.userID}</p>
+              <p class="creation-date">{this.state.userID}</p>
             </div>
              <button class="update-profile" onClick={() => this.toggleForm()}>UPDATE PROFILE</button>
            </div>
