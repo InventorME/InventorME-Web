@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './SignInPage.css';
-import { Link, useHistory, withRouter } from "react-router-dom";
 import ProfileBox from '../images/profile-box.png';
 import { AccountContext } from '../util/Accounts';
 
@@ -19,7 +18,6 @@ class SignInPage extends Component{
       }
       componentDidMount() {
         const { getSession } = this.context;
-        console.log("componentDidMount");
         getSession()
         .then(session => {
           console.log('Signed In:', "user found");
@@ -28,17 +26,7 @@ class SignInPage extends Component{
         }).catch(err => {
           console.log('err:', "no user found");
         });
-        this.callApi()
-          .then(res => this.setState({ response: res }))
-          .catch(err => console.log(err));
       }
-      
-      callApi = async () => {
-        const response = await fetch('/api/user');
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
-      };
 
 
       setEmail(event){
@@ -61,8 +49,6 @@ class SignInPage extends Component{
         const { authenticate } = this.context;
         authenticate(this.state.email, this.state.password)
           .then(data =>{
-            //success
-            // console.log('Logged in!', data);
             window.location.href="/items-page";
             // console.log('Logged in!', data);
           })
@@ -71,9 +57,6 @@ class SignInPage extends Component{
             console.error('Failed to login!', err);
           })
       };
-
-
-    
 
    render(){
        return(
