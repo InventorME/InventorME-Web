@@ -5,6 +5,7 @@ import BackButton from '../../images/back-button.png'
 import ReactRoundedImage from "react-rounded-image"
 import UploadButton from '../../images/upload-button.png'
 import Input, { isPossiblePhoneNumber } from 'react-phone-number-input/input'
+import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import { AccountContext } from '../../util/Accounts';
 
 class ProfilePage extends Component {
@@ -25,6 +26,7 @@ class ProfilePage extends Component {
     }
     this.toggleForm = this.toggleForm.bind(this);
     this.saveProfile = this.saveProfile.bind(this);
+    this.validateUser = this.validateUser.bind(this);
     this.hiddenFileInput = React.createRef();
   }
 
@@ -48,15 +50,9 @@ class ProfilePage extends Component {
         console.log(err);
         alert("Error: No user found, please sign in again");
     });
-
-
-
-
-
-
-
   }
   
+
   getProfile = async () => {
     const response = await fetch('/api/user');
     const body = await response.json();
@@ -111,6 +107,52 @@ class ProfilePage extends Component {
   //   );
   // });
 
+  upperCheck(str){
+    if(str.toLowerCase() === str){
+      return false;
+    }
+    return true;
+  }
+  lowerCheck(str){
+    if(str.toUpperCase() === str){
+      return false;
+    }
+    return true;
+  }
+  alphCheck(str){
+    var regex = /[a-zA-Z]/g;
+    return regex.test(str);
+  }
+  numCheck(str){
+    var regex = /\d/g;
+    return regex.test(str);
+  }
+  phoneCheck(num){
+    //insert phone number checking here
+    var regex = /^(\+1\d{3}\d{3}\d{4}$)/g
+    return regex.test(num);
+  }
+  emailCheck(str){
+    var regex = /^[a-zA-Z]+[0-9_.+-]*@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/g
+    return regex.test(str);
+  }
+  validateUser(){
+    if(this.state.firstName === ""){
+      alert("Create Account Error: Please Type First Name");
+    }else if(this.state.lastName === ""){
+      alert("Create Account Error: Please Type Last Name");
+    // }else if(!this.phoneCheck(this.state.phoneNumber)){
+    //   alert("Create Account Error: Phone Number Must Be At Least 9 Numbers Long");
+    }else if(!this.emailCheck(this.state.userEmail)){
+      alert("Create Account Error: Email must be in the correct format 'Example@Example.Example'");
+    }
+    else{
+      return true;
+    }
+    return false;
+  };
+  
+
   setToastStyle(style) {
     this.setState({ toastStyle: style });
     clearInterval(this.start);
@@ -130,21 +172,37 @@ class ProfilePage extends Component {
   }
 
   saveProfile=(event) => {
+    const { getSession } = this.context;
+    
     if(!isPossiblePhoneNumber(this.state.userPhone)){   
       event.preventDefault();
       const toastStyle = { width : '17%', height: '12%' };
       this.setState({ toastStyle, toastMessage: 'Error: Failed to save ☹' });
       this.closeToast();
     } else {
-      const reqBody = {
-        userID: this.state.userID,
-        userFirstName: this.state.firstName,
-        userLastName: this.state.lastName,
-        userEmail: this.state.userEmail,
-        userPhone: this.state.userPhone,
-        userProfilePicURL: this.state.userProfilePic
-      };
       event.preventDefault();
+      if(this.validateUser()){
+        getSession().then(({ user }) => {
+          const attributes = [];
+          attributes.push(new CognitoUserAttribute({
+            Name: 'name',
+            Value: this.state.firstName
+          }));
+          attributes.push(new CognitoUserAttribute({
+            Name: 'phone_number',
+            Value: this.state.userPhone
+          }));
+          attributes.push(new CognitoUserAttribute({
+            Name: 'family_name',
+            Value: this.state.lastName
+          }));
+    
+          user.updateAttributes(attributes, (err, result) => {
+            if (err) console.error(err);
+            console.log(result);
+          });
+        });
+      }
       const toastStyle = { width : '17%', height: '12%' };
       this.setState({ toastStyle, loading: true, disabled: true, toastMessage: 'Saved Successfully! ㋡' });
       this.reloadPage();

@@ -58,7 +58,7 @@ class SignInPage extends Component{
           this.submit();
       };
       submit(event){
-        const { authenticate, getSession } = this.context;
+        const { authenticate } = this.context;
         authenticate(this.state.email, this.state.password)
           .then(data =>{
             //success
