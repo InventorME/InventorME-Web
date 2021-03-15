@@ -12,6 +12,7 @@
 }
 .password{
     position: absolute;
+    outline: none;
     top: 15em;
     left: 2.4em;
     width: 17em;
@@ -19,6 +20,7 @@
 }
 .email{
     position: absolute;
+    outline: none;
     top: 8em;
     left: 2.4em;
     width: 17em;

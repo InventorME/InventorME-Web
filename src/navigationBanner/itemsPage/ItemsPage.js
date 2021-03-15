@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './AccountsPage.css';
-import NavBanner from '../navigationBanner/NavBanner.js'
+import './ItemsPage.css';
+import NavBanner from '../NavBanner.js'
 
-class AccountsPage extends Component {
+class ItemsPage extends Component {
   constructor(props) {
     super(props);
     this.state = { response: '', barcodeNumber: ''};
@@ -42,4 +42,4 @@ render() {
   }
 }
 
-export default AccountsPage;
+export default ItemsPage;

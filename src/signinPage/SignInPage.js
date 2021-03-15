@@ -24,7 +24,7 @@ class SignInPage extends Component{
         .then(session => {
           console.log('Signed In:', "user found");
           console.log('Session:', session);
-          window.location.href="/accounts-page";
+          window.location.href="/items-page";
         }).catch(err => {
           console.log('err:', "no user found");
         });
@@ -63,7 +63,7 @@ class SignInPage extends Component{
           .then(data =>{
             //success
             // console.log('Logged in!', data);
-            window.location.href="/accounts-page";
+            window.location.href="/items-page";
             // console.log('Logged in!', data);
           })
           .catch(err =>{
@@ -86,12 +86,12 @@ class SignInPage extends Component{
     <img class = "lbox"img style = {this.state.style} src={ProfileBox} alt=""/>
     <p class ="Password"> Password: </p>
     <input type="password"
-      input class = "password" 
+      input className = "password" 
       value={this.state.password} 
       onChange={this.setPassword}/>
     <p class ="Email"> Email: </p>
     <input type="text" 
-     input class = "email" 
+     input className = "email" 
      value={this.state.email} 
      onChange={this.setEmail}/>
         <button class="login-account" onClick={this.validateUser}>Log in</button>

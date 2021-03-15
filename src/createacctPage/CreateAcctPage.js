@@ -75,7 +75,7 @@ class CreateAcctPage extends Component{
       } 
       //If no errors new user is created here
       else{
-        window.location.href="/accounts-page";
+        window.location.href="/items-page";
         console.log(data);
       }
       
