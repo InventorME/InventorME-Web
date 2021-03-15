@@ -5,7 +5,7 @@ import UploadButton from '../../images/upload-button.png'
 class FormPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {response: {}, disabled: false, barcodeNumber: '', 
+    this.state = {response: {}, barcodeNumber: '', 
     imageURL: "https://images.barcodelookup.com/8910/89101614-1.jpg",
     name: 'Dove Antiperspirant Deodorant Advanced Care Rejuvenate 2.6 Oz', category: 'Personal Care', notes: '', tags: ["Deodorant & Anti-Perspirant","Deodorant"], showError: 'none', showForm: false, loading: false};
     this.hiddenFileInput = React.createRef();
@@ -13,7 +13,13 @@ class FormPage extends Component {
 
  searchBarcodeItem() {
       this.getBarcodeItem().then(res => {
-         this.setState({ response: res, tags: res.tags, name: res.name, category: res.category, imageURL: res.imageURL });
+        if (Object.keys(res).length === 0) {
+          this.setState({ showError: 'block'})
+        } else {
+          this.setState({ response: res, tags: res.tags, name: res.name, category: res.category, imageURL: res.imageURL });
+          this.showForm();
+        }
+        this.setState({ loading: false})
      }).catch(err => console.log(err))
  }
 
@@ -22,12 +28,6 @@ class FormPage extends Component {
     const response = await fetch('/api/getBarcodeItem?code=' + this.state.barcodeNumber);
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
-    this.setState({ loading: false})
-    if (Object.keys(body).length === 0) {
-      this.setState({ showError: 'block'})
-    } else {
-      this.showForm();
-    }
     return body;
 };
 
@@ -58,7 +58,7 @@ showForm() {
 }
 
 cancelForm() {
-  this.setState({showForm: false, showError: 'none', barcodeNumber: '', response: []});
+  window.location.reload(true)
 }
 
 handleClick = () => {
@@ -73,14 +73,22 @@ onImageChange = async(event) => {
 
 render() {
     return (
-    <div className="container">
+    <div className="add-edit-container">
       { this.state.loading ?
-      <div className="loading-container"> <div className="load-symbol"/></div>
+      <div className="loading-container"> <div className="form-load-symbol"/></div>
       : null }
+      { true ? 
+      <div className="form-header">
+        <h2 style={{marginLeft: '40%', width: '48%'}}>Add Item</h2>
+        <h2 style={{cursor: 'pointer'}}>X</h2>
+      </div> : 
+        <div>Edit</div>
+      }
       { this.state.showForm ?
       <div className="form-container">
+        <div style={{marginLeft: '1em'}}>
         <div className="item-image-container">
-          <input disabled={this.state.disabled} type="file" ref={this.hiddenFileInput} onChange={this.onImageChange} style={{display: 'none'}}/>
+          <input type="file" ref={this.hiddenFileInput} onChange={this.onImageChange} style={{display: 'none'}}/>
           <img style={{height: "9em", width: "9em", 'paddingTop': '0.4em'}} alt="Upload item img" src={this.state.imageURL} />          
           <img onClick={this.handleClick} src={UploadButton} className="item-upload" alt=""/>
         </div>
@@ -104,16 +112,19 @@ render() {
           <h2>Notes</h2>
           <textarea name="notes" className="input-notes" type="textarea" onChange={this.onChange} placeholder="Notes"/>
         </div>
-        <button className="save-button" onClick={()=>this.cancelForm()}>Save</button>
-        <button className="cancel-button" onClick={()=>this.cancelForm()}>Cancel</button>
+        <div style={{paddingTop: '2em', paddingBottom: '2em'}}>
+          <button className="save-button" onClick={()=>this.cancelForm()}>Save</button>
+          <button className="cancel-button" onClick={()=>this.cancelForm()}>Cancel</button>
+        </div>
+        </div>
       </div>
       :
       <div>
-        <div style={{marginLeft: "20%", width: "90%"}}>
+        <div style={{marginTop: '12em'}}>
           <input type="text" name="barcodeNumber" className="searchCode-box" placeholder="Enter barcode" onChange={this.onChange} value={this.state.barcodeNumber}/>
           <button className="searchCode-button" onClick={()=>this.searchBarcodeItem()} ref={this.hiddenInput}>Search</button>
-          <p style={{marginLeft: "8em", color: "red", fontSize: "0.9em", display: this.state.showError}}>Item not found. Please try again.</p>
-          <p style={{marginLeft: "13em"}}>or</p>
+          <p style={{marginLeft: "33%", color: "red", fontSize: "1em", display: this.state.showError}}>Item not found. Please try again.</p>
+          <p style={{marginLeft: "43%", fontSize: '1.3em'}}>or</p>
           <div className="enter-manually" onClick={()=> this.showForm()}><p>Enter manually</p></div>
         </div>
       </div>

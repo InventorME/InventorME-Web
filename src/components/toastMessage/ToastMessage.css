@@ -5,6 +5,7 @@
     top: 3em;
     right: 2em;
     border-radius: 1em;
+    z-index: 3;
     position: fixed;
 }
 

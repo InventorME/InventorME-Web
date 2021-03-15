@@ -4,6 +4,7 @@ import hamburgerIcon from '../images/hamburgerIcon.png'
 import './NavBanner.css';
 import OverlayMenu from 'react-overlay-menu';
 import { Link } from "react-router-dom";
+import FormPage from '../components/formPage/FormPage';
 
 class NavBanner extends Component {
 
@@ -76,6 +77,9 @@ class NavBanner extends Component {
                     <div className="inventor-title">InventorME</div>
                     <img src={InventorLogo} className="inventor-logo" alt="" />
                 </div>
+                <div style={{backgroundColor: 'white', borderRadius: '1em', textAlign: 'center', marginTop: '2em', cursor: 'pointer', fontSize: '0.6em', height: '3em', width: '7em'}}>
+                    <div className="add-item-button">Add Item</div>
+                </div>
                 <div className="profile" onClick={this.showProfileMenu}>
                     <img style={{borderRadius: "12em", height: "2.5em", width: "2.5em", 'paddingTop': '0.4em'}} alt="" src={this.state.response.userProfilePicURL} />
                     <p className="firstName-profile"> {this.state.response.userFirstName}</p>
@@ -86,13 +90,13 @@ class NavBanner extends Component {
             onClose={this.toggleMenu}>
                 <div className="side-menu">
                     <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 className="menu-text">Categories</h1></div>
+                    <div><h1 className="menu-text">Collections</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 className="menu-text">Photos</h1></div>
+                    <div><h1 className="menu-text">Folders</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 className="menu-text">Completed</h1></div>
+                    <div><h1 className="menu-text">Archive</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>
                     <div><h1 className="menu-text">Date</h1></div>
@@ -116,6 +120,9 @@ class NavBanner extends Component {
                     <div><p>Logout</p></div>
                     </Link>
                 </div>
+          </div>
+          <div>
+            <FormPage/>
           </div>
         </div>
         );

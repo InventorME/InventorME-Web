@@ -10,7 +10,7 @@ import ToastMessage from '../../components/toastMessage/ToastMessage';
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
-    this.state = { response: '', disabled: false, loading: false, profile: true,
+    this.state = { response: '', loading: false, profile: true,
       userID: null,
       firstName: '',
       lastName: '',
@@ -102,7 +102,7 @@ class ProfilePage extends Component {
       };
       event.preventDefault();
       this.toastMessage('Saved Successfully! ㋡');
-      this.setState({ loading: true, disabled: true });
+      this.setState({ loading: true });
       this.reloadPage();
     }
   }
@@ -167,7 +167,7 @@ render() {
         <form style={{height: '100vh'}}>
            <div style={{display: 'inline-flex', width: '100%', height: '20%'}}>
             <div className="profile-image-container">
-             <input disabled={this.state.disabled} type="file" ref={this.hiddenFileInput} onChange={this.onImageChange} style={{display: 'none'}}/>
+             <input type="file" ref={this.hiddenFileInput} onChange={this.onImageChange} style={{display: 'none'}}/>
                <ReactRoundedImage 
                roundedColor="#66A5CC"
                imageWidth="170"
@@ -181,22 +181,22 @@ render() {
            <div style={{display: 'inline-flex', width: '100%', height: '20%'}}>
             <div className="edit-first-input">
             <p className="edit-first"> First Name: </p>
-            <input disabled={this.state.disabled} className="first-input" type="text" onChange={this.firstNameOnChange} value={this.state.firstName} />
+            <input className="first-input" type="text" onChange={this.firstNameOnChange} value={this.state.firstName} />
             </div>
             <div className="edit-last-input">
             <p className="edit-last"> Last Name: </p>  
-            <input disabled={this.state.disabled} type="text" className="last-input" value={this.state.lastName} onChange={this.lastNameOnChange}/>
+            <input type="text" className="last-input" value={this.state.lastName} onChange={this.lastNameOnChange}/>
             </div>
            </div>
           
            <div style={{display: 'inline-flex', width: '100%', height: '25%'}}>
             <div className ="edit-email-input">
               <p className ="edit-email"> Email: </p>
-              <input disabled={this.state.disabled} type="text" value={this.state.userEmail} className="email-input" onChange={this.emailOnChange}/>
+              <input type="text" value={this.state.userEmail} className="email-input" onChange={this.emailOnChange}/>
             </div>
             <div className = "edit-phone-input">
             <p className = "edit-phone"> Phone Number: </p>
-            <Input disabled={this.state.disabled} country="US" className="phone-input"  value={this.state.userPhone} onChange={this.phoneOnChange}/>
+            <Input country="US" className="phone-input"  value={this.state.userPhone} onChange={this.phoneOnChange}/>
             </div>
            </div>  
          <div style={{display: 'inline-flex', width: '100%', height: '5%'}}>

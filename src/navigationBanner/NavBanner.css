@@ -27,6 +27,16 @@
     width: 2.5em;
 }
 
+.add-item-button {
+    color: #0e7e92;
+    width: 6em;
+    height: 1.5em;
+    padding-top: 0.4em;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: bolder;
+}
+
 .profile  {
     margin-left: auto;
     margin-top: auto;
@@ -80,7 +90,6 @@
 
 .overlay {
     position: fixed;
-    z-index: 1;
     right: 0;
     margin-right: 2.5%;
     background-color: #0e7e92;
