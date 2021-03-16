@@ -1,7 +1,9 @@
 .home-title{
-    height: 100vh;
     display:block;
+    width: 90%;
     background-color:white;
+    margin-left: 5%;
+    margin-top: 7%;
 }
 
 .center{

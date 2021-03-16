@@ -1,5 +1,5 @@
 .profile-container {
-    height: 100vh;
+    margin-top: 3%;
     overflow-x: hidden;
     background-color: white;
     background-position: center;
@@ -14,7 +14,7 @@
 
 .profile-banner h2 {
     color: #0e7e92;
-    margin-left: 35%;
+    margin-left: 39%;
     margin-top: 1em;
     font-size: 1.8em;
 }
@@ -26,22 +26,65 @@
     padding-top: 2em;
 }
 
-.profile-box {
-    position: relative;
-    margin-left: 15%;
-    margin-top: 3%;
-    padding-bottom: 5%;
+.toast {
+    background: #0e7e92;
     transition: 0.2s;
+    overflow: hidden;
+    top: 3em;
+    right: 2em;
+    border-radius: 1em;
+    position: fixed;
 }
 
+.toast-message {
+    color: white;
+    transition: 0.4s;
+    font-weight: 600;
+    width: 80%;
+    margin: 14%;
+    font-size: 1.2em;
+    position: relative;
+}
+
+.load-container {
+    position: absolute;
+    background-color: rgb(235, 235, 235);
+    opacity: 100%;
+    height: 100vh;
+    width: 100%;
+}
+
+.load-symbol {
+    left: 50%;
+    top: 45%;
+    z-index: 1;
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 5px solid rgba(29, 161, 242, 0.2);
+    border-left-color: #26a6bd;
+    animation: rotate-s-loader 1s linear infinite;
+}
+
+@keyframes rotate-s-loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
 .profile-name { 
-    position: absolute; 
-    top: 1.5em; 
-    left: 1.5em;
+    position: relative;
+    margin-left: 45%;
+    padding-top: 2%;
+    padding-bottom: 2%;
     color: #0e7e92;
  }
 
- .phone-number {
+.phone-number {
     position: absolute;
     top: 10em;
     left: 3em;
@@ -50,10 +93,9 @@
 }
 
 .phone-number-value {
-    position: absolute;
-    top: 14.5em;
-    left: 3.6em;
+    position: relative;
     font-size: 1em;
+    height: 1.5em;
     color: #0e7e92;
 }
 
@@ -66,33 +108,40 @@
 }
 
 .user-email-value {
-    position: absolute;
-    top: 20.5em;
-    left: 3.6em;
-    font-size: 1em;
+    position: relative;
+    height: 1.5em;
+    font-size: 1em; 
     color: #0e7e92;
 }
 
+.info-container {
+    margin-top: 5%;
+    margin-left: 31%;
+}
+
 .creation {
-    position: absolute;
-    top: 20em;
-    left: 3em;
+    position: relative;
     font-size: 1.2em;
     color: #0e7e92;
 }
 
 .creation-date {
-    position: absolute;
-    top: 26.5em;
-    left: 3.6em;
-    font-size: 1em;
+    position: relative;
+    font-size: 1.1em;
+    padding-left: 2%;
+    color: #0e7e92;
+}
+
+.user-id {
+    position: relative;
+    font-size: 1.2em;
     color: #0e7e92;
 }
 
 .update-profile {
-    position: absolute;
-    top: 37em;
-    left: 7.6em;
+    position: relative;
+    margin-left: 45%;
+    margin-top: 6%;
     padding: 0.8em;
     font-size: 1.0em;
     color: white;
@@ -101,4 +150,163 @@
     border: none;
     cursor: pointer;
     outline: none;
+}
+
+.profile-image-container {
+    position: relative;
+    transition: 0.2s;
+    margin-left: 45%;
+    padding-top: 1.5%;
+}
+
+.file-upload {
+    position: absolute;
+    height: 3em;
+    cursor: pointer;
+    z-index: 1;
+    top: 7.5em;
+    left: 7.5em; 
+}
+
+.save-profile {
+    position: relative;
+    margin-left: 40%;
+    padding: 0.8em;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+    font-size: 1.0em;
+    color: white;
+    background-color: #0e7e92;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.cancel-profile {
+    position: relative;
+    margin-left: 10%;
+    padding: 0.8em;
+    font-size: 1.0em;
+    color: white;
+    background-color: #0e7e92;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.edit-first-input {
+    position: relative;
+    margin-left: 31%;
+    width: 70%;
+    font-size: 1.1em;
+}
+
+.edit-first {
+    position: relative;
+    width: 5em;
+    font-size: 1.3em;
+    color: #0e7e92;
+}
+
+.first-input {
+    position: relative;
+    height: 1.5em;
+    font-size: 1.2em;
+    outline: none;
+    border-top: none; 
+    border-left: none;
+    border-right: none;
+    border-width: 0 0 1.5px; 
+    border-color: gray;
+    color: black;
+}
+
+.edit-last-input {
+    position: relative;
+    width: inherit;
+    font-size: 1.1em;
+}
+
+.edit-last {
+    position: relative;
+    width: inherit;
+    font-size: 1.3em;
+    color: #0e7e92;
+}
+
+.last-input {
+    position: relative;
+    height: 1.5em;
+    font-size: 1.2em;
+    outline: none;
+    border-top: none; 
+    border-left: none;
+    border-right: none;
+    border-width: 0 0 1.5px; 
+    border-color: gray;
+    color: black;
+}
+
+.edit-email-input {
+    position: relative;
+    width: 70%;
+    margin-left: 31%;
+    font-size: 1.1em;
+}
+
+.edit-email {
+    position: relative;
+    font-size: 1.3em;
+    color: #0e7e92;
+}
+
+.email-input {
+    position: relative;
+    height: 1.5em;
+    font-size: 1.2em;    
+    outline: none;
+    border-top: none; 
+    border-left: none;
+    border-right: none;
+    border-width: 0 0 1.5px; 
+    border-color: gray;
+    color: black;
+}
+
+.edit-phone-input {
+    position: relative;
+    width: inherit;
+    font-size: 1.1em;
+}
+
+.edit-phone {
+    position: relative;
+    width: inherit;
+    font-size: 1.3em;
+    color: #0e7e92;
+}
+
+.phone-input {
+    position: relative;
+    height: 1.5em;
+    font-size: 1.2em;
+    outline: none;
+    border-top: none; 
+    border-left: none;
+    border-right: none;
+    border-width: 0 0 1.5px; 
+    border-color: gray;
+    color: black;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
