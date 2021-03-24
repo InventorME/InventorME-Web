@@ -5,12 +5,13 @@ import { Link} from "react-router-dom";
 import BackButton from '../images/back-button.png';
 import UserPool from "../util/UserPool";
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
+import ToastMessage from '../components/toastMessage/ToastMessage';
 
 
 class CreateAcctPage extends Component{
   constructor(props) {
     super(props);
-    this.state = {response: '', post: '', email: '', password: '', phone_number: '', name: '', family_name: ''}
+    this.state = {response: '', post: '', email: '', password: '', phone_number: '', name: '', family_name: '', loading: false}
     this.setPassword = this.setPassword.bind(this);
     this.setEmail = this.setEmail.bind(this);
     this.validateUser = this.validateUser.bind(this);
@@ -18,7 +19,7 @@ class CreateAcctPage extends Component{
     this.setPhone = this.setPhone.bind(this);
     this.setName = this.setName.bind(this);
     this.setFamilyName = this.setFamilyName.bind(this);
-  
+    this.toast = React.createRef();
   }
   
   setEmail(event){
@@ -43,6 +44,7 @@ class CreateAcctPage extends Component{
   }
 
   submit(event){
+    this.setState({ loading: true})
     const attributeList = [];
     attributeList.push(new CognitoUserAttribute({
       Name: 'name',
@@ -59,12 +61,12 @@ class CreateAcctPage extends Component{
 
     UserPool.signUp(this.state.email, this.state.password, attributeList, null, (err, data) => {
       if (err){
-        console.error(err);
+        this.setState({ loading: true})
+        this.toastMessage('Error creating account')
       } 
       //If no errors new user is created here
       else{
         window.location.href="/items-page";
-        console.log(data);
       }
       
     });
@@ -104,23 +106,23 @@ class CreateAcctPage extends Component{
 
   validateUser(){
     if(this.state.name === ""){
-      alert("Create Account Error: Please Type First Name");
+      this.toastMessage("Create Account Error: Please Type First Name");
     }else if(this.state.family_name === ""){
-      alert("Create Account Error: Please Type Last Name");
+      this.toastMessage("Create Account Error: Please Type Last Name");
     }else if(this.state.password.length<8){
-      alert("Create Account Error: Password Must Be At Least 8 Characters Long");
+      this.toastMessage("Create Account Error: Password Must Be At Least 8 Characters Long");
     }else if(!this.alphCheck(this.state.password)){
-      alert("Create Account Error: Password Must Contain Letter");
+      this.toastMessage("Create Account Error: Password Must Contain Letter");
     }else if(!this.upperCheck(this.state.password)){
-      alert("Create Account Error: Password Must Contain One Upper-Case Letter");
+      this.toastMessage("Create Account Error: Password Must Contain One Upper-Case Letter");
     }else if(!this.lowerCheck(this.state.password)){
-      alert("Create Account Error: Password Must Contain One Lower-Case Letter");
+      this.toastMessage("Create Account Error: Password Must Contain One Lower-Case Letter");
     }else if(!this.numCheck(this.state.password)){
-      alert("Create Account Error: Password Must Contain One Number");
+      this.toastMessage("Create Account Error: Password Must Contain One Number");
     }else if(!this.phoneCheck(this.state.phone_number)){
-      alert("Create Account Error: Phone Number Must Be At Least 9 Numbers Long");
+      this.toastMessage("Create Account Error: Phone Number Must Be At Least 9 Numbers Long");
     }else if(!this.emailCheck(this.state.email)){
-      alert("Create Account Error: Email must be in the correct format 'Example@Example.Example'");
+      this.toastMessage("Create Account Error: Email must be in the correct format 'Example@Example.Example'");
     }
     else{
       this.submit();
@@ -128,17 +130,24 @@ class CreateAcctPage extends Component{
 
   };
 
+  toastMessage = (message) => {
+    this.toast.current.openToast(message);
+  };
+
     render(){
     return (
       <div class="createacct-title">
-
+        { this.state.loading ?
+      <div className="loading-container-sign"> <div className="form-load-symbol-sign"/></div>
+      : null }
       <div class="createacct-inventor-title">
       <h2>InventorME</h2>
       </div>
 
       <Link to="/signin-page" style={{ textDecoration: 'none' }}>
           <img src={BackButton} class="backwards" alt="back" />
-        </Link> 
+      </Link> 
+      <ToastMessage ref={this.toast}/>
 
     <p className ="Email2"> Email: </p>
     <input type="text"  input class = "email2" value={this.state.email} onChange={this.setEmail}/>
@@ -158,14 +167,7 @@ class CreateAcctPage extends Component{
     <button className="goto-account" onClick={this.validateUser}>Create Account </button>
     <img src={InventorLogo} class="calogo" alt="" />
 
-</div>
-      
-      
-      
-      
-
-  
-        
+</div>     
     
       );
     }

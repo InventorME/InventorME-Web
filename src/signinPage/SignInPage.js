@@ -10,12 +10,12 @@ class SignInPage extends Component{
   static contextType = AccountContext
     constructor(props) {
         super(props);
-        this.state = { response: '', post: '', email: '', password: '' };
+        this.state = { response: '', post: '', email: '', password: '', loading: false };
         this.setPassword = this.setPassword.bind(this);
         this.setEmail = this.setEmail.bind(this);
         this.validateUser = this.validateUser.bind(this);
         this.submit = this.submit.bind(this);
-
+        this.toast = React.createRef();
       }
       
       componentDidMount() {
@@ -48,15 +48,15 @@ class SignInPage extends Component{
       };
 
       submit(event){
+        this.setState({ loading: true})
         const { authenticate } = this.context;
         authenticate(this.state.email, this.state.password)
           .then(data =>{
             window.location.href="/items-page";
-            console.log('Logged in!', data);
           })
           .catch(err =>{
+            this.setState({ loading: false})
             this.toastMessage('Error: Password or Email is incorrect');
-            console.error('Failed to login!', err);
           })
       };
 
@@ -68,6 +68,9 @@ class SignInPage extends Component{
    render(){
        return(
     <div class="signin-title">
+      { this.state.loading ?
+      <div className="loading-container-sign"> <div className="form-load-symbol-sign"/></div>
+      : null }
     <div class="signin-inventor-title">
     <h2>InventorME</h2>
     </div>
