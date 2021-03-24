@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import './ProfilePage.css';
 import ReactRoundedImage from "react-rounded-image"
 import UploadButton from '../../images/upload-button.png'
-import Input, { isPossiblePhoneNumber } from 'react-phone-number-input/input'
+import PhoneInput from 'react-phone-input-2'
 import ToastMessage from '../../components/toastMessage/ToastMessage';
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import { AccountContext } from '../../util/Accounts';
-import NavBanner from '../NavBanner';
+import BackButton from '../../images/back-button.png'
+import { Link } from "react-router-dom";
 
 class ProfilePage extends Component {
   static contextType = AccountContext
   constructor(props) {
     super(props);
-    this.state = { response: '', loading: false, profile: true,
+    this.state = { loading: false, profile: true,
       userID: null,
       firstName: '',
       lastName: '',
@@ -28,35 +29,24 @@ class ProfilePage extends Component {
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
     const { getSession } = this.context;
     getSession()
       .then((data) => { 
-        let formatPhone = "+" + data.phoneNumber;
         this.setState({ response: data.user })
         this.setState({ firstName: data.name })
         this.setState({ lastName: data.family_name })
         this.setState({ userEmail: data.email })
         this.setState({ userPhone: data.phone_number })
-        // this.setState({ userProfilePic: res.userProfilePicURL })
-        console.log("Data:",data);
-        console.log("Name:",data.name);
-        this.setState({ response: ''})
-        
+        // this.setState({ userProfilePic: res.userProfilePicURL }) 
+        this.setState({ loading: false });       
       })
       .catch(err =>{
         console.log(err);
-        alert("Error: No user found, please sign in again");
+        this.toastMessage("Error: No user found, please sign in again");
     });
   }
   
-
-  getProfile = async () => {
-    const response = await fetch('/api/user');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
-
   formatPhoneNumber(phoneNumberString) {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
     var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
@@ -79,12 +69,8 @@ class ProfilePage extends Component {
     this.setState({lastName: event.target.value});
   }
 
-  emailOnChange = (event) => {
-    this.setState({userEmail: event.target.value});
-  }
-
   phoneOnChange = (event) => {
-    this.setState({userPhone: event});
+    this.setState({userPhone: "+" + event});
   }
 
   onImageChange = async(event) => {
@@ -99,38 +85,41 @@ class ProfilePage extends Component {
     }
     return true;
   }
+
   lowerCheck(str){
     if(str.toUpperCase() === str){
       return false;
     }
     return true;
   }
+
   alphCheck(str){
     var regex = /[a-zA-Z]/g;
     return regex.test(str);
   }
+
   numCheck(str){
     var regex = /\d/g;
     return regex.test(str);
   }
+
   phoneCheck(num){
-    //insert phone number checking here
     var regex = /^(\+1\d{3}\d{3}\d{4}$)/g
     return regex.test(num);
   }
+
   emailCheck(str){
     var regex = /^[a-zA-Z]+[0-9_.+-]*@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/g
     return regex.test(str);
   }
+
   validateUser(){
     if(this.state.firstName === ""){
-      alert("Create Account Error: Please Type First Name");
-    }else if(this.state.lastName === ""){
-      alert("Create Account Error: Please Type Last Name");
-    // }else if(!this.phoneCheck(this.state.phoneNumber)){
-    //   alert("Create Account Error: Phone Number Must Be At Least 9 Numbers Long");
-    }else if(!this.emailCheck(this.state.userEmail)){
-      alert("Create Account Error: Email must be in the correct format 'Example@Example.Example'");
+      this.toastMessage("Error: Please Type First Name");
+    } else if(this.state.lastName === ""){
+      this.toastMessage("Error: Please Type Last Name");
+    } else if(!this.phoneCheck(this.state.userPhone)){
+      this.toastMessage("Error: Please Type A Valid Phone Number");
     }
     else{
       return true;
@@ -159,13 +148,13 @@ class ProfilePage extends Component {
 
   saveProfile=(event) => {
     const { getSession } = this.context;
-    
-    if(!isPossiblePhoneNumber(this.state.userPhone)){   
+    let phone = "+" + this.state.userPhone;
+    this.setState({userPhone: phone});
+    if(!this.validateUser()){   
       event.preventDefault();
-      this.toastMessage('Error: Failed to save ☹');
     } else {
+      this.setState({ loading: true });
       event.preventDefault();
-      if(this.validateUser()){
         getSession().then(({ user }) => {
           const attributes = [];
           attributes.push(new CognitoUserAttribute({
@@ -182,14 +171,17 @@ class ProfilePage extends Component {
           }));
     
           user.updateAttributes(attributes, (err, result) => {
-            if (err) console.error(err);
-            console.log(result);
+            if (err) {
+              console.error(err);
+              this.setState({ loading: false });
+              this.toastMessage('Error: Failed to save profile.');
+            } else {
+              this.toastMessage('Saved Successfully! ㋡');
+              this.reloadPage();
+            }
           });
         });
-      }
-      this.toastMessage('Saved Successfully! ㋡');
-      this.setState({ loading: true });
-      this.reloadPage();
+      
     }
   }
   
@@ -204,14 +196,17 @@ class ProfilePage extends Component {
 render() {
     return (
       <div>
-        <NavBanner/>
-      <div className="profile-container">
         { this.state.loading ?
         <div class="load-container"> <div class="load-symbol"/></div>
         : null }
-        <div class="toast" style={this.state.toastStyle}>
-          <p class="toast-message">{this.state.toastMessage}</p>
-        </div>
+        <div class="profile-banner">
+        <Link to="/items-page" style={{ textDecoration: 'none' }}>
+          <img src={BackButton} class="profile-back" alt="back" />
+        </Link> 
+        <h2>InventorME</h2>   
+      </div>
+      <div className="profile-container">
+        <ToastMessage ref={this.toast}/>
           { this.state.profile ?
             <div>
               <div style={{display: 'block', width: '100%', height: '20%'}}>
@@ -223,10 +218,13 @@ render() {
                 roundedSize="1"
                 image={this.state.userProfilePic} />
                 </div>
-                <h1 class="profile-name">{this.state.userFirstName} {this.state.userLastName}</h1>
+                <h1 class="profile-name" style={{display: 'inline-flex'}}>
+                  <div style={{paddingRight: '1em'}}>{this.state.firstName}</div> 
+                  <div>{this.state.lastName}</div>
+                </h1>
               </div>
               
-              <div style={{display: 'inline-flex', width: '100%', height: '25%'}}>
+              <div style={{display: 'inline-flex', marginTop: '2%', width: '100%', height: '25%'}}>
                 <div class ="edit-email-input">
                   <h3 class ="edit-email"> Email: </h3>
                   <p class="user-email-value">{this.state.userEmail}</p>
@@ -237,21 +235,13 @@ render() {
                 </div>
               </div>
 
-              <div style={{display: 'inline-flex', width: '100%', height: '25%'}} class="info-container">  
-                <div style={{display: 'inline-flex', width: '29%'}}>
-                <h2 class="creation">Creation Date: </h2>
-                <p class="creation-date">{this.state.response.userCreateDate}</p>
-                </div>
-                <h2 class="user-id">UserID: </h2>
-                <p class="creation-date">{this.state.userID}</p>
-              </div>
               <button class="update-profile" onClick={() => this.toggleForm()}>UPDATE PROFILE</button>
             </div>
             : 
           <form style={{height: '100vh'}}>
             <div style={{display: 'inline-flex', width: '100%', height: '20%'}}>
               <div class="profile-image-container">
-              <input disabled={this.state.disabled} type="file" ref={this.hiddenFileInput} onChange={this.onImageChange} style={{display: 'none'}}/>
+              <input type="file" ref={this.hiddenFileInput} onChange={this.onImageChange} style={{display: 'none'}}/>
                 <ReactRoundedImage 
                 roundedColor="#66A5CC"
                 imageWidth="170"
@@ -262,25 +252,21 @@ render() {
               </div>
             </div>
 
-            <div style={{display: 'inline-flex', width: '100%', height: '20%'}}>
+            <div style={{display: 'inline-flex', width: '100%', height: '20%', marginLeft: '31%', paddingTop: '2em'}}>
               <div class="edit-first-input">
               <p class="edit-first"> First Name: </p>
-              <input disabled={this.state.disabled} class="first-input" type="text" onChange={this.firstNameOnChange} value={this.state.firstName} />
+              <input class="first-input" type="text" onChange={this.firstNameOnChange} value={this.state.firstName} />
               </div>
               <div class="edit-last-input">
               <p class="edit-last"> Last Name: </p>  
-              <input disabled={this.state.disabled} type="text" class="last-input" value={this.state.lastName} onChange={this.lastNameOnChange}/>
+              <input type="text" class="last-input" value={this.state.lastName} onChange={this.lastNameOnChange}/>
               </div>
             </div>
             
-            <div style={{display: 'inline-flex', width: '100%', height: '25%'}}>
-              <div class ="edit-email-input">
-                <p class ="edit-email"> Email: </p>
-                <input disabled={this.state.disabled} type="text" value={this.state.userEmail} class="email-input" onChange={this.emailOnChange}/>
-              </div>
-              <div class = "edit-phone-input">
+            <div style={{display: 'inline-flex', width: '100%', height: '22%'}}>
+              <div class = "edit-phone-input2">
               <p class = "edit-phone"> Phone Number: </p>
-              <Input disabled={this.state.disabled} country="US" class="phone-input"  value={this.state.userPhone} onChange={this.phoneOnChange}/>
+              <PhoneInput country='us' countryCodeEditable={false} withCountryCallingCode={true} class="phone-input"  value={this.state.userPhone} onChange={this.phoneOnChange}/>
               </div>
             </div>
             

@@ -11,11 +11,14 @@ class NavBanner extends Component {
     static contextType = AccountContext
     constructor(props) {
        super(props);
-       this.state = { response: '', isOpen: false, showProfileMenu: false, show: true, style : {
+       this.state = { response: '', isOpen: false, showItemMenu: false, showProfileMenu: false, show: true, 
+       firstName: '',
+       style : {
         width : 150,
         height: 0,
     }};
        this.toggleMenu = this.toggleMenu.bind(this);
+       this.toggleItemMenu = this.toggleItemMenu.bind(this);
        this.profileMenu = React.createRef();
        this.handleClickOutside = this.handleClickOutside.bind(this);
        this.showProfileMenu = this.showProfileMenu.bind(this);
@@ -25,9 +28,16 @@ class NavBanner extends Component {
 
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
-        this.getProfile().then(res => {
-            this.setState({ response: res })
-        }).catch(err => console.log(err));
+        const { getSession } = this.context;
+        getSession()
+          .then((data) => {
+            this.setState({ firstName: data.name })
+            // this.setState({ userProfilePic: res.userProfilePicURL })        
+          })
+          .catch(err =>{
+            console.log(err);
+            this.toastMessage("Error: No user found, please sign in again");
+        });
     }
 
     componentWillUnmount() {
@@ -41,13 +51,6 @@ class NavBanner extends Component {
         }
     }
 
-    getProfile = async () => {
-        const response = await fetch('/api/user');
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
-      };
-
     handleClickOutside(event) {
         if (this.profileMenu && !this.profileMenu.current.contains(event.target)) {
             this.closeProfileMenu();
@@ -56,6 +59,10 @@ class NavBanner extends Component {
 
     toggleMenu() {
        this.setState({ isOpen: !this.state.isOpen });
+    }
+
+    toggleItemMenu() {
+        this.setState({ showItemMenu: !this.state.showItemMenu });
     }
 
     showProfileMenu() {
@@ -85,28 +92,28 @@ class NavBanner extends Component {
                     <img src={InventorLogo} className="inventor-logo" alt="" />
                 </div>
                 <div style={{backgroundColor: 'white', borderRadius: '1em', textAlign: 'center', marginTop: '2em', cursor: 'pointer', fontSize: '0.6em', height: '3em', width: '7em'}}>
-                    <div className="add-item-button">Add Item</div>
+                    <div className="add-item-button" onClick={() => this.toggleItemMenu()}>Add Item</div>
                 </div>
                 <div className="profile" onClick={this.showProfileMenu}>
                     <img style={{borderRadius: "12em", height: "2.5em", width: "2.5em", 'paddingTop': '0.4em'}} alt="" src={this.state.response.userProfilePicURL} />
-                    <p className="firstName-profile"> {this.state.response.userFirstName}</p>
+                    <p className="firstName-profile"> {this.state.firstName}</p>
                 </div>
                 </div>
             <OverlayMenu
             open={this.state.isOpen}
             onClose={this.toggleMenu}>
-                <div class="side-menu">
+                <div className="side-menu">
                     <Link to="/items-page" style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Items</h1></div>
+                    <div><h1 className="menu-text">Items</h1></div>
                     </Link>
                     <Link to="/collections" style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Collections</h1></div>
+                    <div><h1 className="menu-text">Collections</h1></div>
                     </Link>
-                    <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Folders</h1></div>
+                    <Link to="" style={{ textDecoration: 'none' }}>
+                    <div><h1 className="menu-text">Folders</h1></div>
                     </Link>
-                    <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Archive</h1></div>
+                    <Link to="" style={{ textDecoration: 'none' }}>
+                    <div><h1 className="menu-text">Archive</h1></div>
                     </Link>
                     <Link to="/about-page" style={{ textDecoration: 'none' }}>
                     <div><h1 className="menu-text">About</h1></div>
@@ -120,13 +127,14 @@ class NavBanner extends Component {
                     <Link to="/profile-page" style={{ textDecoration: 'none' }}>
                     <div><p>Profile</p></div>
                     </Link>
-                    <Link style={{ textDecoration: 'none' }} onClick={this.logoutUser}>
-                    <div><p>Logout</p></div>
-                    </Link>
+                    <div onClick={this.logoutUser} style={{cursor: 'pointer'}}>
+                        <p>Logout</p>
+                    </div>
                 </div>
           </div>
           <div>
-            <FormPage/>
+            { this.state.showItemMenu ?
+            <FormPage toggleItemMenu = {this.toggleItemMenu}/> : null }
           </div>
         </div>
         );

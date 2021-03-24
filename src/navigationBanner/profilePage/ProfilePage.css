@@ -1,10 +1,29 @@
 .profile-container {
-    margin-top: 3%;
+    margin-top: 2%;
     overflow-x: hidden;
     background-color: white;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.profile-banner {
+    display: inline-flex;
+    width: 100%;
+}
+
+.profile-banner h2 {
+    color: #0e7e92;
+    padding-left: 39%;
+    margin-top: 1.2em;
+    font-size: 1.8em;
+}
+
+.profile-back {
+    height: 3.5em;
+    width: 3.5em;
+    padding-left: 3em;
+    padding-top: 2em;
 }
 
 .load-container {
@@ -81,29 +100,10 @@
     margin-left: 31%;
 }
 
-.creation {
-    position: relative;
-    font-size: 1.2em;
-    color: #0e7e92;
-}
-
-.creation-date {
-    position: relative;
-    font-size: 1.1em;
-    padding-left: 2%;
-    color: #0e7e92;
-}
-
-.user-id {
-    position: relative;
-    font-size: 1.2em;
-    color: #0e7e92;
-}
-
 .update-profile {
     position: relative;
     margin-left: 45%;
-    margin-top: 6%;
+    margin-top: 5%;
     padding: 0.8em;
     font-size: 1.0em;
     color: white;
@@ -160,8 +160,7 @@
 
 .edit-first-input {
     position: relative;
-    margin-left: 31%;
-    width: 70%;
+    width: 45%;
     font-size: 1.1em;
 }
 
@@ -224,23 +223,17 @@
     color: #0e7e92;
 }
 
-.email-input {
-    position: relative;
-    height: 1.5em;
-    font-size: 1.2em;    
-    outline: none;
-    border-top: none; 
-    border-left: none;
-    border-right: none;
-    border-width: 0 0 1.5px; 
-    border-color: gray;
-    color: black;
-}
-
 .edit-phone-input {
     position: relative;
     width: inherit;
     font-size: 1.1em;
+}
+
+.edit-phone-input2 {
+    position: relative;
+    width: inherit;
+    font-size: 1.1em;
+    margin-left: 45%;
 }
 
 .edit-phone {
@@ -253,6 +246,7 @@
 .phone-input {
     position: relative;
     height: 1.5em;
+    width: 9em;
     font-size: 1.2em;
     outline: none;
     border-top: none; 
@@ -261,6 +255,18 @@
     border-width: 0 0 1.5px; 
     border-color: gray;
     color: black;
+}
+
+.special-label {
+    display: none;
+}
+
+.form-control {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    font-size: 1em;
 }
 
 input[type=number]::-webkit-inner-spin-button, 

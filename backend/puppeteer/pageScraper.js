@@ -30,6 +30,24 @@ const scraperObject = {
             element = await page.$('#img_preview')
             let imageURL = await page.evaluate(el => el.getAttribute('src'), element)
 
+            let onlineUrl = "";
+            try {
+                onlineUrl = await page.evaluate(
+                    () => Array.from(
+                    document.querySelectorAll('#product-body > div.container > div > div.col-md-6.col-md-push-6.online-stores > div.store-list > ol > li:nth-child(1) > a'),
+                    a => a.getAttribute('href')
+                    )
+                );
+            } catch (e){}
+
+            let price = "";
+            try {
+                await page.waitForSelector('#product-body > div.container > div > div.col-md-6.col-md-push-6.online-stores > div.store-list > ol > li:nth-child(1) > a > span.store-link');
+                element = await page.$('#product-body > div.container > div > div.col-md-6.col-md-push-6.online-stores > div.store-list > ol > li:nth-child(1) > a > span.store-link');
+                price = await page.evaluate(el => el.textContent, element)
+                price =  price.replace(/\$/g, '');
+            } catch (e){}
+            
             let category = '';
             let tags = [];
             let categoryArr = categories.split(/[>]+/);
@@ -44,6 +62,8 @@ const scraperObject = {
                 name,
                 category,
                 tags,
+                price,
+                onlineUrl: onlineUrl[0],
                 imageURL: imageURL
             }
         } else {
