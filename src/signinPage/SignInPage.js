@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './SignInPage.css';
 import ProfileBox from '../images/profile-box.png';
 import { AccountContext } from '../util/Accounts';
+import ToastMessage from '../components/toastMessage/ToastMessage';
 
 
 
@@ -16,6 +17,7 @@ class SignInPage extends Component{
         this.submit = this.submit.bind(this);
 
       }
+      
       componentDidMount() {
         const { getSession } = this.context;
         getSession()
@@ -28,7 +30,6 @@ class SignInPage extends Component{
         });
       }
 
-
       setEmail(event){
         this.setState({ email: event.target.value});
         event.preventDefault();
@@ -39,24 +40,30 @@ class SignInPage extends Component{
       }
       validateUser(event){
         if(this.state.email === "")
-          alert("Error: Please Type Email");
+          this.toastMessage("Error: Please Type Email");
         else if(this.state.password === "")
-          alert("Error: Please Type Password");
+          this.toastMessage("Error: Please Type Password");
         else
           this.submit();
       };
+
       submit(event){
         const { authenticate } = this.context;
         authenticate(this.state.email, this.state.password)
           .then(data =>{
             window.location.href="/items-page";
-            // console.log('Logged in!', data);
+            console.log('Logged in!', data);
           })
           .catch(err =>{
-            alert("Error: Password or Email is incorrect");
+            this.toastMessage('Error: Password or Email is incorrect');
             console.error('Failed to login!', err);
           })
       };
+
+      toastMessage = (message) => {
+        this.toast.current.openToast(message);
+      };
+
 
    render(){
        return(
@@ -64,7 +71,7 @@ class SignInPage extends Component{
     <div class="signin-inventor-title">
     <h2>InventorME</h2>
     </div>
-
+    <ToastMessage ref={this.toast}/>
     <div  class="login-box">
     <img class = "lbox"img style = {this.state.style} src={ProfileBox} alt=""/>
     <p class ="Password"> Password: </p>

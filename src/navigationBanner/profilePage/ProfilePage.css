@@ -1,5 +1,5 @@
 .profile-container {
-    margin-top: 3%;
+    margin-top: 2%;
     overflow-x: hidden;
     background-color: white;
     background-position: center;
@@ -14,8 +14,8 @@
 
 .profile-banner h2 {
     color: #0e7e92;
-    margin-left: 39%;
-    margin-top: 1em;
+    padding-left: 39%;
+    margin-top: 1.2em;
     font-size: 1.8em;
 }
 
@@ -26,30 +26,11 @@
     padding-top: 2em;
 }
 
-.toast {
-    background: #0e7e92;
-    transition: 0.2s;
-    overflow: hidden;
-    top: 3em;
-    right: 2em;
-    border-radius: 1em;
-    position: fixed;
-}
-
-.toast-message {
-    color: white;
-    transition: 0.4s;
-    font-weight: 600;
-    width: 80%;
-    margin: 14%;
-    font-size: 1.2em;
-    position: relative;
-}
-
 .load-container {
     position: absolute;
+    z-index: 2;
     background-color: rgb(235, 235, 235);
-    opacity: 100%;
+    opacity: 40%;
     height: 100vh;
     width: 100%;
 }
@@ -119,29 +100,10 @@
     margin-left: 31%;
 }
 
-.creation {
-    position: relative;
-    font-size: 1.2em;
-    color: #0e7e92;
-}
-
-.creation-date {
-    position: relative;
-    font-size: 1.1em;
-    padding-left: 2%;
-    color: #0e7e92;
-}
-
-.user-id {
-    position: relative;
-    font-size: 1.2em;
-    color: #0e7e92;
-}
-
 .update-profile {
     position: relative;
     margin-left: 45%;
-    margin-top: 6%;
+    margin-top: 5%;
     padding: 0.8em;
     font-size: 1.0em;
     color: white;
@@ -171,7 +133,6 @@
 .save-profile {
     position: relative;
     margin-left: 40%;
-    padding: 0.8em;
     padding-right: 1.5em;
     padding-left: 1.5em;
     font-size: 1.0em;
@@ -186,7 +147,8 @@
 .cancel-profile {
     position: relative;
     margin-left: 10%;
-    padding: 0.8em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
     font-size: 1.0em;
     color: white;
     background-color: #0e7e92;
@@ -198,8 +160,7 @@
 
 .edit-first-input {
     position: relative;
-    margin-left: 31%;
-    width: 70%;
+    width: 45%;
     font-size: 1.1em;
 }
 
@@ -262,23 +223,17 @@
     color: #0e7e92;
 }
 
-.email-input {
-    position: relative;
-    height: 1.5em;
-    font-size: 1.2em;    
-    outline: none;
-    border-top: none; 
-    border-left: none;
-    border-right: none;
-    border-width: 0 0 1.5px; 
-    border-color: gray;
-    color: black;
-}
-
 .edit-phone-input {
     position: relative;
     width: inherit;
     font-size: 1.1em;
+}
+
+.edit-phone-input2 {
+    position: relative;
+    width: inherit;
+    font-size: 1.1em;
+    margin-left: 45%;
 }
 
 .edit-phone {
@@ -291,6 +246,7 @@
 .phone-input {
     position: relative;
     height: 1.5em;
+    width: 9em;
     font-size: 1.2em;
     outline: none;
     border-top: none; 
@@ -299,6 +255,18 @@
     border-width: 0 0 1.5px; 
     border-color: gray;
     color: black;
+}
+
+.special-label {
+    display: none;
+}
+
+.form-control {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    font-size: 1em;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
