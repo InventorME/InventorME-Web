@@ -102,23 +102,6 @@ class NavBanner extends Component {
             <OverlayMenu
             open={this.state.isOpen}
             onClose={this.toggleMenu}>
-<<<<<<< Updated upstream
-                <div className="side-menu">
-                    <Link to="/items-page" style={{ textDecoration: 'none' }}>
-                    <div><h1 className="menu-text">Items</h1></div>
-                    </Link>
-                    <Link to="/collections" style={{ textDecoration: 'none' }}>
-                    <div><h1 className="menu-text">Collections</h1></div>
-                    </Link>
-                    <Link to="" style={{ textDecoration: 'none' }}>
-                    <div><h1 className="menu-text">Folders</h1></div>
-                    </Link>
-                    <Link to="" style={{ textDecoration: 'none' }}>
-                    <div><h1 className="menu-text">Archive</h1></div>
-                    </Link>
-                    <Link to="/about-page" style={{ textDecoration: 'none' }}>
-                    <div><h1 className="menu-text">About</h1></div>
-=======
                 <div class="side-menu">
                     <Link style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Items</h1></div>
@@ -137,7 +120,6 @@ class NavBanner extends Component {
                     </Link>
                     <Link to="/about-page" style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Profile</h1></div>
->>>>>>> Stashed changes
                     </Link>
                 </div>
             </OverlayMenu>            
