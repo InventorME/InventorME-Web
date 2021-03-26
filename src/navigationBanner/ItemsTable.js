@@ -1,34 +1,34 @@
 import React, { Component } from 'react';
-import archived from '../images/archived.png'
+import upload from '../images/upload-button.png'
 
-import './Table.css'
+import './ItemsTable.css'
 
 
 
-class Table extends Component {
+class ItemsTable extends Component {
     
     constructor(props){
         super(props)
         this.state = {
             
     
-            Archived_Items:[
-                {Name:"Inventory", Collections: "Electronics", Notes: "Los Angeles",Archived:<img src={archived} width="40" height="20"/>  },
-                {Name:"InventorME",  Collections: "Internet", Notes: "New York City", Archived:<img src={archived} width="40" height="20"/> }
+            Current_Items:[
+                {Name:"Inventory", Collections: "Hardware", Notes: "Apple",Image:<img src={upload} width="40" height="30"/>  },
+                {Name:"InventorME",  Collections: "Software", Notes: "Microsoft", Image:<img src={upload} width="40" height="30"/> }
             ]
         }
     }
     renderTableData(){
     
-        return this.state.Archived_Items.map((Archived_Item,index) => {
+        return this.state.Current_Items.map((Current_Item,index) => {
             
-            const {Name,Collections,Notes,Archived} = Archived_Item
+            const {Name,Collections,Notes,Image} = Current_Item
             return(
                 <tr key = {Name}>
                 <td>{Name}</td> 
                 <td>{Collections}</td>
                 <td>{Notes}</td>
-                <td>{Archived}</td>   
+                <td>{Image}</td>   
                 </tr>
             )
         })
@@ -51,7 +51,7 @@ class Table extends Component {
     };
     
     renderTableHeader(){
-        let header = Object.keys(this.state.Archived_Items[0])
+        let header = Object.keys(this.state.Current_Items[0])
         return header.map((key,index) => {
             return <th key={index}>{key.toUpperCase()}</th>
         })
@@ -60,8 +60,8 @@ class Table extends Component {
       
         return (
         <div>
-                <h1 id = 'title'>Archived Items</h1>
-                <table id= 'Archived_Items'>
+                <h1 id = 'Title'>Current Items</h1>
+                <table id= 'Current_Items'>
                 <tbody>
                 <tr>{this.renderTableHeader()}</tr>
                 {this.renderTableData()}
@@ -73,4 +73,4 @@ class Table extends Component {
         )
     }
 }
-    export default Table;
+    export default ItemsTable;

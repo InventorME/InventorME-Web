@@ -103,7 +103,7 @@ class NavBanner extends Component {
             open={this.state.isOpen}
             onClose={this.toggleMenu}>
                 <div class="side-menu">
-                    <Link style={{ textDecoration: 'none' }}>
+                    <Link to = "/items-page"style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Items</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>

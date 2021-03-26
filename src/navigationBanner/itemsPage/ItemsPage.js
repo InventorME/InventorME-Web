@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import './ItemsPage.css';
-import NavBanner from '../NavBanner.js'
-
+import NavBanner from '../NavBanner.js';
+import ItemsTable from '../ItemsTable.js'
 class ItemsPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { response: '' };
- }
+    
 
-render() {
-    return (
-    <div>
-      <NavBanner/>
-      <div className="acct-container">
-        <div>yooo</div>
-      </div>
-    </div>
-    );
-  }
+    render() {
+      
+        return (
+            <div>
+            <NavBanner/>
+            
+            <ItemsTable/>
+        </div>
+    
+               
+               
+        )
+    }
 }
-
-export default ItemsPage;
+    export default ItemsPage;
