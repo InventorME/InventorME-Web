@@ -9,8 +9,8 @@ class AboutPage extends Component{
     return (
         <div>
           <NavBanner/>
-          <div class="home-title">
-            <img src={InventorLogo} class="center" alt="" />
+          <div className="home-title">
+            <img src={InventorLogo} className="center" alt="" />
             <p className = 'primary'>InventorMe is a new, revolutionary management app that prioritizes and streamlines efficiency for
             digital photos, documents, and other items that you need to oversee.
             You now have the power to manage all of your belongings with just the tip of your fingers.  </p>

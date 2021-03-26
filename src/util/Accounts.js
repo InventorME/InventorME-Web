@@ -22,7 +22,6 @@ const Account = props => {
                 if (err) {
                   reject(err)
                 } else {
-                  console.log('attributes:', attributes)
                   const results = {}
 
                   for (let attribute of attributes) {

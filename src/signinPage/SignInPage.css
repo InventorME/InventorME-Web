@@ -40,6 +40,29 @@
     width: auto;
     transition: 0.2s;
 }
+
+.loading-container-sign {
+    position: fixed;
+    z-index: 1;
+    background-color: rgb(211, 211, 211);
+    opacity: 25%;
+    height: 100vh;
+    width: 100%;
+}
+
+.form-load-symbol-sign {
+    left: 43%;
+    top: 43%;
+    z-index: 1;
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 5px solid rgba(29, 161, 242, 0.2);
+    border-left-color: #26a6bd;
+    animation: rotate-s-loader 1s linear infinite;
+}
+
 .login-account {
     position: absolute;
     top: 14em;

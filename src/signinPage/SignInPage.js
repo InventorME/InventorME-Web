@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './SignInPage.css';
 import ProfileBox from '../images/profile-box.png';
 import { AccountContext } from '../util/Accounts';
+import ToastMessage from '../components/toastMessage/ToastMessage';
 
 
 
@@ -9,13 +10,14 @@ class SignInPage extends Component{
   static contextType = AccountContext
     constructor(props) {
         super(props);
-        this.state = { response: '', post: '', email: '', password: '' };
+        this.state = { response: '', post: '', email: '', password: '', loading: false };
         this.setPassword = this.setPassword.bind(this);
         this.setEmail = this.setEmail.bind(this);
         this.validateUser = this.validateUser.bind(this);
         this.submit = this.submit.bind(this);
-
+        this.toast = React.createRef();
       }
+      
       componentDidMount() {
         const { getSession } = this.context;
         getSession()
@@ -28,7 +30,6 @@ class SignInPage extends Component{
         });
       }
 
-
       setEmail(event){
         this.setState({ email: event.target.value});
         event.preventDefault();
@@ -39,32 +40,41 @@ class SignInPage extends Component{
       }
       validateUser(event){
         if(this.state.email === "")
-          alert("Error: Please Type Email");
+          this.toastMessage("Error: Please Type Email");
         else if(this.state.password === "")
-          alert("Error: Please Type Password");
+          this.toastMessage("Error: Please Type Password");
         else
           this.submit();
       };
+
       submit(event){
+        this.setState({ loading: true})
         const { authenticate } = this.context;
         authenticate(this.state.email, this.state.password)
           .then(data =>{
             window.location.href="/items-page";
-            // console.log('Logged in!', data);
           })
           .catch(err =>{
-            alert("Error: Password or Email is incorrect");
-            console.error('Failed to login!', err);
+            this.setState({ loading: false})
+            this.toastMessage('Error: Password or Email is incorrect');
           })
       };
+
+      toastMessage = (message) => {
+        this.toast.current.openToast(message);
+      };
+
 
    render(){
        return(
     <div class="signin-title">
+      { this.state.loading ?
+      <div className="loading-container-sign"> <div className="form-load-symbol-sign"/></div>
+      : null }
     <div class="signin-inventor-title">
     <h2>InventorME</h2>
     </div>
-
+    <ToastMessage ref={this.toast}/>
     <div  class="login-box">
     <img class = "lbox"img style = {this.state.style} src={ProfileBox} alt=""/>
     <p class ="Password"> Password: </p>

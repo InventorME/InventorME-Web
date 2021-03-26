@@ -24,3 +24,8 @@ yarn-debug.log*
 yarn-error.log*
 .eslintcache
 .eslintcache
+<<<<<<< Updated upstream
+=======
+.eslintcache
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
