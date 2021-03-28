@@ -106,7 +106,7 @@ class NavBanner extends Component {
                     <Link to = "/items-page"style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Items</h1></div>
                     </Link>
-                    <Link style={{ textDecoration: 'none' }}>
+                    <Link to = "/collections" style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Collections</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>
