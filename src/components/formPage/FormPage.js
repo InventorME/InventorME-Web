@@ -17,8 +17,9 @@ class FormPage extends Component {
     itemReceipt: '', itemManual: '', onlineUrl: '',
     buyDate: '', sellDate: '', 
     tags: [], notes: '',
-    itemCreationDate: '', itemArchived: '', addItem: false,
-    showForm: false, loading: false};
+    itemCreationDate: '', itemArchived: '', addItem: false, itemFolder: '',
+    showForm: false, loading: false,
+    baseURL: "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"};
     this.hiddenFileInput = React.createRef();
     this.scrollRef = React.createRef()
     this.toast = React.createRef();
@@ -116,6 +117,44 @@ onImageChange = async(event) => {
   }
 }
 
+saveItem() {
+  let POSTitemFORMAT = {
+      userEmail: "'lukelmiller@icloud.com'",
+      itemCategory: this.state.itemCategory,
+      itemName: this.state.name,
+      itemPhotoURL: this.state.imageURL,
+      itemSerialNum: this.state.serialNum,
+      itemPurchaseAmount: this.state.purchaseAmount,
+      itemWorth: this.state.itemWorth,
+      itemReceiptPhotoURL: this.state.itemReceipt,
+      itemManualURL: this.state.itemManual,
+      itemSellDate: this.state.sellDate,
+      itemBuyDate: this.state.buyDate,
+      itemLocation: this.state.itemLocation,
+      itemNotes: "'REALLY good for running and working out and such,Pro version'",
+      itemSellAmount: this.state.sellAmount,
+      itemRecurringPaymentAmount: this.state.recurringAmount,
+      itemEbayURL: this.state.onlineUrl,
+      itemTags: this.state.tags.join(),
+      itemArchived: '0',
+      itemFolder: this.state.itemFolder
+  }
+  this.post(POSTitemFORMAT);
+}
+
+post = async(item) => {
+  return new Promise((resolve, reject)=>{
+      var postData = {
+          method: 'POST',
+          body: JSON.stringify(item),
+          headers: { 'Content-Type': 'application/json' }
+      }
+      fetch(this.state.baseURL,postData)
+      .then(res => resolve(res.json()))
+      .catch(err => reject(err))
+  });
+}
+
 render() {
     return (
     <div className="add-edit-container">
@@ -208,6 +247,11 @@ render() {
               decimalsLimit={2}
               onValueChange={(value, name) => this.onDollarChange(value, name)}/>
           </div>
+          <div style={{display: 'block', marginLeft: '2em'}}>
+            <h2>Item Folder</h2>
+            <input type="text" name="itemFolder" className="input-box3" placeholder="Enter folder name"
+              onChange={this.onChange} value={this.state.itemFolder} />
+          </div>
         </div>
 
         <div style={{display: 'inline-flex', width: '100%'}}>
@@ -257,7 +301,7 @@ render() {
           <textarea name="notes" className="input-notes" type="textarea" onChange={this.onChange} placeholder="Notes"/>
         </div>
         <div style={{paddingTop: '2em', paddingBottom: '2em'}}>
-          <button className="save-button" onClick={()=>this.cancelForm()}>Save</button>
+          <button className="save-button" onClick={()=>this.saveItem()}>Save</button>
           <button className="cancel-button" onClick={()=>this.cancelForm()}>Cancel</button>
         </div>
         </div>

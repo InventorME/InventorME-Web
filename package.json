@@ -10,6 +10,7 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
     "amazon-cognito-identity-js": "^4.5.14",
+    "axios": "^0.21.1",
     "puppeteer": "^8.0.0",
     "react": "^17.0.1",
     "react-currency-input-field": "^3.3.1",

@@ -36,7 +36,7 @@ class NavBanner extends Component {
           })
           .catch(err =>{
             console.log(err);
-            this.toastMessage("Error: No user found, please sign in again");
+            window.location.href="/signin-page";
         });
     }
 
@@ -109,8 +109,8 @@ class NavBanner extends Component {
                     <Link to = "/collections" style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Collections</h1></div>
                     </Link>
-                    <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Folders</h1></div>
+                    <Link to="" style={{ textDecoration: 'none' }}>
+                    <div><h1 className="menu-text">Folders</h1></div>
                     </Link>
                     <Link to ="/archivepage" style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Archive</h1></div>
@@ -119,7 +119,7 @@ class NavBanner extends Component {
                     <div><h1 class="menu-text">Stats</h1></div>
                     </Link>
                     <Link to="/about-page" style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Profile</h1></div>
+                    <div><h1 className="menu-text">About</h1></div>
                     </Link>
                 </div>
             </OverlayMenu>            
