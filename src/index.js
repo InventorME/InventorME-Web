@@ -11,7 +11,6 @@ import AboutPage from './navigationBanner/aboutPage/AboutPage';
 import CreateAcctPage from './createacctPage/CreateAcctPage';
 import { Account } from './util/Accounts';
 import Collections from './navigationBanner/collections/Collections';
-import ArchivePage from './navigationBanner/archivepage/ArchivePage';
 
 ReactDOM.render(
    <BrowserRouter>
@@ -24,7 +23,6 @@ ReactDOM.render(
       <Route path = "/signin-page" component = {SignInPage}/>
       <Route path = "/createacct-page" component = {CreateAcctPage}/>
       <Route path="/collections" component={Collections}/>
-      <Route path = "/archivepage" component = {ArchivePage}/>
       </Account>
   </Switch>
   </BrowserRouter>,
