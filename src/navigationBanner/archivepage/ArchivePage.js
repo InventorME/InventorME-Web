@@ -9,14 +9,15 @@ class ArchivePage extends Component {
       
         return (
             <div>
-            <NavBanner/>
-            
-            <Table/>
-        </div>
-    
+              <NavBanner/>
+              <div style={{overflowY: 'scroll', height: '100vh'}}>
+              <Table/>
+              </div>
+            </div>          
+          )
                
                
-        )
+        
     }
 }
     export default ArchivePage;
