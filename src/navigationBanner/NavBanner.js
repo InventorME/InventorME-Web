@@ -110,16 +110,16 @@ class NavBanner extends Component {
             open={this.state.isOpen}
             onClose={this.toggleMenu}>
                 <div class="side-menu">
-                    <Link style={{ textDecoration: 'none' }}>
+                    <Link to = "/items-page"style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Items</h1></div>
                     </Link>
-                    <Link style={{ textDecoration: 'none' }}>
+                    <Link to = "/collections" style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Collections</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Folders</h1></div>
                     </Link>
-                    <Link style={{ textDecoration: 'none' }}>
+                    <Link to ="/archivepage" style={{ textDecoration: 'none' }}>
                     <div><h1 class="menu-text">Archive</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>

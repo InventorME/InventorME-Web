@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './ItemsPage.css';
+import './ArchivePage.css';
 import NavBanner from '../NavBanner.js';
-import ItemsTable from '../ItemsTable.js'
-class ItemsPage extends Component {
+import Table from '../Table.js'
+class ArchivePage extends Component {
     
 
     render() {
@@ -11,7 +11,7 @@ class ItemsPage extends Component {
             <div>
             <NavBanner/>
             
-            <ItemsTable/>
+            <Table/>
         </div>
     
                
@@ -19,4 +19,4 @@ class ItemsPage extends Component {
         )
     }
 }
-    export default ItemsPage;
+    export default ArchivePage;
