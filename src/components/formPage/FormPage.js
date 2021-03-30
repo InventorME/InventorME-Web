@@ -4,21 +4,21 @@ import UploadButton from '../../images/upload-button.png'
 import ToastMessage from '../toastMessage/ToastMessage';
 import DatePicker from 'react-date-picker';
 import CurrencyInput from 'react-currency-input-field';
+import moment from 'moment'
 
 class FormPage extends Component {
   constructor(props) {
     super(props);
     this.state = {response: {}, barcodeNumber: '', 
-    imageURL: '',
-    name: '', 
+    imageURL: '', userEmail: this.props.userEmail, name: '', 
     category: '', itemLocation: '', 
     itemWorth: '', purchaseAmount: '', sellAmount: '',
     serialNum: '', recurringAmount: '',
     itemReceipt: '', itemManual: '', onlineUrl: '',
     buyDate: '', sellDate: '', 
     tags: [], notes: '',
-    itemCreationDate: '', itemArchived: '', addItem: false, itemFolder: '',
-    showForm: false, loading: false,
+    itemCreationDate: '', itemArchived: '', addItem: this.props.addItem, itemFolder: '',
+    showForm: false, loading: false, itemID: '',
     baseURL: "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"};
     this.hiddenFileInput = React.createRef();
     this.scrollRef = React.createRef()
@@ -27,6 +27,56 @@ class FormPage extends Component {
     this.onChangeSellDate = this.onChangeSellDate.bind(this);
   }
 
+componentDidMount() {
+  if(this.props.item) {
+    let purchaseAmount = "";
+    let sellAmount = "";
+    let reccurAmount = "";
+    let itemWorth = "";
+    let buyDate = "";
+    let sellDate = "";
+    if(this.props.item.itemPurchaseAmount)
+      purchaseAmount = this.props.item.itemPurchaseAmount
+    if(this.props.item.itemSellAmount)
+      sellAmount = this.props.item.itemSellAmount
+    if(this.props.item.itemRecurringPaymentAmount)
+      reccurAmount = this.props.item.itemRecurringPaymentAmount
+    if(this.props.item.itemWorth)
+      itemWorth = this.props.item.itemWorth
+    if(this.props.item.itemBuyDate){
+      buyDate = new Date(this.props.item.itemBuyDate)
+      buyDate.setDate(buyDate.getDate() + 1)
+    }
+    if(this.props.item.itemSellDate){
+      sellDate = new Date(this.props.item.itemSellDate);
+      sellDate.setDate(sellDate.getDate() + 1)
+    }
+console.log(this.props.item.itemBuyDate, buyDate)
+    this.setState({
+      category: this.props.item.itemCategory,
+      name: this.props.item.itemName,
+      imageURL: this.props.item.itemPhotoURL,
+      serialNum: this.props.item.itemSerialNum,
+      purchaseAmount: purchaseAmount,
+      itemWorth: itemWorth,
+      itemReceipt: this.props.item.itemReceiptPhotoURL,
+      itemManual: this.props.item.itemManualURL,
+      sellDate: sellDate,
+      buyDate: buyDate,
+      itemLocation: this.props.item.itemLocation,
+      notes: this.props.item.itemNotes,
+      sellAmount: sellAmount,
+      recurringAmount: reccurAmount,
+      onlineUrl: this.props.item.itemEbayURL,
+      tags: this.props.item.itemTags.split(','),
+      itemFolder: this.props.item.itemFolder,
+      itemID: this.props.item.itemID
+    })
+  }
+  if(!this.props.addItem)
+    this.setState({showForm: true})
+}
+
  searchBarcodeItem() {
       this.getBarcodeItem().then(res => {
         if (Object.keys(res).length === 0) {
@@ -34,7 +84,7 @@ class FormPage extends Component {
         } else {
           this.setState({ response: res, tags: res.tags, name: res.name, category: res.category, 
             imageURL: res.imageURL, serialNum: this.state.barcodeNumber, 
-            itemWorth: res.price, onlineUrl: res.onlineUrl , addItem: true });
+            itemWorth: res.price, onlineUrl: res.onlineUrl }, console.log(res));
           this.showForm(true);
         }
         this.setState({ loading: false})
@@ -92,13 +142,15 @@ onChangeSellDate(event) {
   this.setState({sellDate: event});
 }
 
-showForm(add) {
-  this.setState({showForm: true, addItem: add});
+showForm() {
+  this.setState({showForm: true});
 }
 
 cancelForm() {
   this.scrollRef.current.scrollIntoView()
-  this.setState({showForm: false, addItem: false, imageURL: '', name: '', category: '', itemLocation: '', itemWorth: '', purchaseAmount: '', sellAmount: '',
+  if(!this.state.addItem)
+    this.props.toggleItemMenu();
+  this.setState({showForm: false, imageURL: '', name: '', category: '', itemLocation: '', itemWorth: '', purchaseAmount: '', sellAmount: '',
   serialNum: '', recurringAmount: '', itemReceipt: '', itemManual: '', onlineUrl: '',
   buyDate: '', sellDate: '', tags: [], notes: ''});
 }
@@ -117,42 +169,137 @@ onImageChange = async(event) => {
   }
 }
 
-saveItem() {
-  let POSTitemFORMAT = {
-      userEmail: "'lukelmiller@icloud.com'",
-      itemCategory: this.state.itemCategory,
-      itemName: this.state.name,
-      itemPhotoURL: this.state.imageURL,
-      itemSerialNum: this.state.serialNum,
-      itemPurchaseAmount: this.state.purchaseAmount,
-      itemWorth: this.state.itemWorth,
-      itemReceiptPhotoURL: this.state.itemReceipt,
-      itemManualURL: this.state.itemManual,
-      itemSellDate: this.state.sellDate,
-      itemBuyDate: this.state.buyDate,
-      itemLocation: this.state.itemLocation,
-      itemNotes: "'REALLY good for running and working out and such,Pro version'",
-      itemSellAmount: this.state.sellAmount,
-      itemRecurringPaymentAmount: this.state.recurringAmount,
-      itemEbayURL: this.state.onlineUrl,
-      itemTags: this.state.tags.join(),
-      itemArchived: '0',
-      itemFolder: this.state.itemFolder
+quotes(value) {
+  if(!value || value === "null" || value.length < 1)
+    return null;
+  if(!isNaN(value))
+    return value;
+  return "'" + value + "'";
+}
+
+validatePayload(item){
+  if(item.itemName === null){
+    this.toastMessage("Error: Please Type Item Name");
+  } else if(item.itemCategory === null){
+    this.toastMessage("Error: Please Type Item Collection");
+  } else if(item.itemFolder === null){
+    this.toastMessage("Error: Please Type Item Folder");
   }
-  this.post(POSTitemFORMAT);
+  else{
+    return true;
+  }
+  this.setState({loading: false})
+  return false;
+};
+
+saveItem() {
+  this.setState({loading: true})
+  let buyDate = null;
+  let sellDate = null;
+  if(this.state.buyDate)
+    buyDate = moment(this.state.buyDate).format("YYYY-MM-DD")
+  if(this.state.sellDate)
+    sellDate = moment(this.state.sellDate).format("YYYY-MM-DD")
+  console.log(buyDate)
+  let itemPutPayload = {
+      userEmail: this.quotes(this.state.userEmail),
+      itemID: this.state.itemID,
+      itemCategory: this.quotes(this.state.category),
+      itemName: this.quotes(this.state.name),
+      itemPhotoURL: this.quotes(this.state.imageURL),
+      itemSerialNum: this.state.serialNum,
+      itemPurchaseAmount: this.quotes(this.state.purchaseAmount),
+      itemWorth: this.quotes(this.state.itemWorth),
+      itemReceiptPhotoURL: this.quotes(this.state.itemReceipt),
+      itemManualURL: this.quotes(this.state.itemManual),
+      itemSellDate: this.quotes(sellDate),
+      itemBuyDate: this.quotes(buyDate),
+      itemLocation: this.quotes(this.state.itemLocation),
+      itemNotes: this.quotes(this.state.notes),
+      itemSellAmount: this.quotes(this.state.sellAmount),
+      itemRecurringPaymentAmount: this.quotes(this.state.recurringAmount),
+      itemEbayURL: this.quotes(this.state.onlineUrl),
+      itemTags: this.quotes(this.state.tags.join()),
+      itemArchived: 0,
+      itemFolder: this.quotes(this.state.itemFolder)
+  }
+
+  let itemPostPayload = {
+    userEmail: this.quotes(this.state.userEmail),
+    itemCategory: this.quotes(this.state.category),
+    itemName: this.quotes(this.state.name),
+    itemPhotoURL: this.quotes(this.state.imageURL),
+    itemSerialNum: this.state.serialNum,
+    itemPurchaseAmount: this.quotes(this.state.purchaseAmount),
+    itemWorth: this.quotes(this.state.itemWorth),
+    itemReceiptPhotoURL: this.quotes(this.state.itemReceipt),
+    itemManualURL: this.quotes(this.state.itemManual),
+    itemSellDate: this.quotes(this.state.sellDate),
+    itemBuyDate: this.quotes(this.state.buyDate),
+    itemLocation: this.quotes(this.state.itemLocation),
+    itemNotes: this.quotes(this.state.notes),
+    itemSellAmount: this.quotes(this.state.sellAmount),
+    itemRecurringPaymentAmount: this.quotes(this.state.recurringAmount),
+    itemEbayURL: this.quotes(this.state.onlineUrl),
+    itemTags: this.quotes(this.state.tags.join()),
+    itemArchived: 0,
+    itemFolder: this.quotes(this.state.itemFolder)
+}
+
+console.log(itemPutPayload)
+
+if(this.state.addItem) {
+  if(this.validatePayload(itemPostPayload)){
+      this.post(itemPostPayload).then(res => {
+        if(res === 200) {
+          this.toastMessage("Saved Successfully.")
+          this.reloadPage();
+        } else {
+          this.setState({loading: false})
+          this.toastMessage("Error: Failed to saved.")
+        }
+      });
+    }
+  }
+  else {
+    if(this.validatePayload(itemPutPayload)){
+        this.put(itemPutPayload).then(res => {
+          if(res === 200) {
+            this.toastMessage("Saved Successfully.")
+            this.reloadPage();
+          } else {
+            this.setState({loading: false})
+            this.toastMessage("Error: Failed to saved.")
+          }
+        });
+  }
+}
+}
+
+reloadPage = () => {
+  setInterval(() => {
+    window.location.reload(true)
+  }, 2000); 
 }
 
 post = async(item) => {
-  return new Promise((resolve, reject)=>{
       var postData = {
           method: 'POST',
           body: JSON.stringify(item),
           headers: { 'Content-Type': 'application/json' }
       }
-      fetch(this.state.baseURL,postData)
-      .then(res => resolve(res.json()))
-      .catch(err => reject(err))
-  });
+      const response = await fetch(this.state.baseURL,postData);
+      return response.status;
+}
+
+put = async(item) => {
+    var putData = {
+      method: 'PUT',
+      body: JSON.stringify(item),
+      headers: { 'Content-Type': 'application/json' }
+  }
+  const response = await fetch(this.state.baseURL,putData);
+  return response.status;
 }
 
 render() {
@@ -162,12 +309,15 @@ render() {
       <div className="loading-container"> <div className="form-load-symbol"/></div>
       : null }
       <ToastMessage ref={this.toast}/>
-      { true ? 
+      { this.state.addItem ? 
       <div className="form-header">
         <h2 style={{marginLeft: '40%', width: '48%'}}>Add Item</h2>
         <h2 style={{cursor: 'pointer'}} onClick={()=> this.props.toggleItemMenu()}>X</h2>
       </div> : 
-        <div>Edit</div>
+        <div className="form-header">
+        <h2 style={{marginLeft: '40%', width: '48%'}}>Edit Item</h2>
+        <h2 style={{cursor: 'pointer'}} onClick={()=> this.props.toggleItemMenu()}>X</h2>
+      </div>
       }
       { this.state.showForm ?
       <div className="form-container">
@@ -184,8 +334,8 @@ render() {
 
         <div style={{display: 'inline-flex', width: '100%'}}>
           <div style={{display: 'block'}}>
-            <h2>Category*</h2>
-            <input className="input-box2" name="category" value={this.state.category} onChange={this.onChange} type="text" placeholder="Category"/>
+            <h2>Collection*</h2>
+            <input className="input-box2" name="category" value={this.state.category} onChange={this.onChange} type="text" placeholder="Collection"/>
           </div>
           <div style={{display: 'block', marginLeft: '2em'}}>
             <h2>Item Location</h2>
@@ -240,7 +390,7 @@ render() {
             <h2>Recurring Payment</h2>
             <CurrencyInput
               prefix="$"
-              name="recurringPayment"
+              name="recurringAmount"
               className="input-box3"
               placeholder="$0.00"
               value={this.state.recurringAmount}
@@ -248,7 +398,7 @@ render() {
               onValueChange={(value, name) => this.onDollarChange(value, name)}/>
           </div>
           <div style={{display: 'block', marginLeft: '2em'}}>
-            <h2>Item Folder</h2>
+            <h2>Item Folder*</h2>
             <input type="text" name="itemFolder" className="input-box3" placeholder="Enter folder name"
               onChange={this.onChange} value={this.state.itemFolder} />
           </div>
@@ -298,7 +448,7 @@ render() {
           </div>
         <div style={{marginBottom: "2.5em"}}>
           <h2>Notes</h2>
-          <textarea name="notes" className="input-notes" type="textarea" onChange={this.onChange} placeholder="Notes"/>
+          <textarea name="notes" className="input-notes" value={this.state.notes} type="textarea" onChange={this.onChange} placeholder="Notes"/>
         </div>
         <div style={{paddingTop: '2em', paddingBottom: '2em'}}>
           <button className="save-button" onClick={()=>this.saveItem()}>Save</button>
