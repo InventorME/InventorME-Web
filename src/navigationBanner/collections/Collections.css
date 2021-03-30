@@ -1,0 +1,10 @@
+.area{
+    padding: 100px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+    width: 150px;
+    margin: 40px;
+    
+  }
