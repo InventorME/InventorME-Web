@@ -1,0 +1,37 @@
+#title {
+    margin: margin-top;
+    font-family: arial, sans-serif;
+    text-align: center;
+  }
+ 
+  
+  
+  #Archived_Items {
+    margin: auto;
+    margin:auto;
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 70%;
+    
+  }
+  
+  #Archived_Items td, #Archived_Items th {
+    border: 1px solid #ddd;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    
+  }
+  
+  #Archived_Items tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #Archived_Items tr:hover {background-color: #ddd;}
+  
+  #Archived_Items th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #0e7e92;
+    color: white;
+  }
