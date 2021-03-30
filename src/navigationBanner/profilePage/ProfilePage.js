@@ -19,8 +19,7 @@ class ProfilePage extends Component {
       lastName: '',
       userEmail: '',
       userProfilePic: '',
-      userPhone: '',
-      phoneFormat: ''
+      userPhone: ''
     }
     this.toggleForm = this.toggleForm.bind(this);
     this.saveProfile = this.saveProfile.bind(this);
@@ -71,18 +70,7 @@ class ProfilePage extends Component {
   }
 
   phoneOnChange = (event) => {
-    var cleaned = ('' + event).replace(/\D/g, '');
-    cleaned = '+' + cleaned;
-    cleaned = cleaned.substring(0, 12);
-    this.setState({ userPhone: cleaned });
-    var format = '';
-    if (cleaned.length < 6)
-      format = '+1 (' + cleaned.substring(2, 5);
-    else if (cleaned.length < 9)
-      format = '+1 (' + cleaned.substring(2, 5) + ') ' + cleaned.substring(5, 8);
-    else
-      format = '+1 (' + cleaned.substring(2, 5) + ') ' + cleaned.substring(5, 8) + '-' + cleaned.substring(8, 12);
-    this.setState({ phoneFormat: format });
+    this.setState({userPhone: "+" + event});
   }
 
   onImageChange = async(event) => {
@@ -278,7 +266,7 @@ render() {
             <div style={{display: 'inline-flex', width: '100%', height: '22%'}}>
               <div class = "edit-phone-input2">
               <p class = "edit-phone"> Phone Number: </p>
-              <PhoneInput country='us' countryCodeEditable={false} withCountryCallingCode={true} class="phone-input"  value={this.state.phoneFormat} onChange={this.phoneOnChange}/>
+              <PhoneInput country='us' countryCodeEditable={false} withCountryCallingCode={true} class="phone-input"  value={this.state.userPhone} onChange={this.phoneOnChange}/>
               </div>
             </div>
             
