@@ -1,76 +1,74 @@
 import React, { Component } from 'react';
 import archived from '../images/archived.png'
-
+import { AccountContext } from '../util/Accounts';
 import './Table.css'
 
 
 
 class Table extends Component {
-    
+    static contextType = AccountContext
     constructor(props){
         super(props)
         this.state = {
-            
-    
-            Archived_Items:[
-                {Name:"Inventory", Collections: "Electronics", Notes: "Los Angeles",Archived:<img src={archived} width="40" height="20"/>  },
-                {Name:"InventorME",  Collections: "Internet", Notes: "New York City", Archived:<img src={archived} width="40" height="20"/> }
-            ]
+            Archived_Items: [],
+            Headers: ['Name', 'Category', 'Notes', 'Archived'],
         }
     }
-    renderTableData(){
-    
-        return this.state.Archived_Items.map((Archived_Item,index) => {
-            
-            const {Name,Collections,Notes,Archived} = Archived_Item
-            return(
-                <tr key = {Name}>
-                <td>{Name}</td> 
-                <td>{Collections}</td>
-                <td>{Notes}</td>
-                <td>{Archived}</td>   
-                </tr>
-            )
-        })
-    
+
+    componentDidMount(){
+        const { getSession } = this.context;
+        getSession()
+            .then((data) => {
+                this.getItems(data.email).then(data => this.setState({ Archived_Items: data}))
+            })
+            .catch(err =>{
+            console.log(err);
+            });
     }
-    
-    getJSON = function(url,callback){
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET',url,true);
-        xhr.responseType = 'json';
-        xhr.oonload = function(){
-            var status = xhr.status;
-            if(status === 200){
-                callback(null,xhr.response);
-            }else{
-                callback(status,xhr.response)
-            }
-        };
-        xhr.send();
-    };
-    
+    getItems = async (email) => {
+        let queryURL = 'https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items?userEmail="' + email + '"';
+        const response = await fetch(queryURL.toString());
+        const body = await response.json();
+       let archivedItems = [];
+       if(body.items.length > 0)
+         archivedItems = body.items.filter(item => item.itemArchived === 1)
+        console.log(archivedItems)
+           if (response.status !== 200) throw Error(body.message);
+        return archivedItems;
+    }
+
     renderTableHeader(){
-        let header = Object.keys(this.state.Archived_Items[0])
-        return header.map((key,index) => {
+        return this.state.Headers.map((key,index) => {
             return <th key={index}>{key.toUpperCase()}</th>
         })
     }
+
+
+
+
+
     render() {
       
         return (
-        <div>
+            <div>
                 <h1 id = 'title'>Archived Items</h1>
-                <table id= 'Archived_Items'>
+                <table id= 'Archived_Items' style={{ marginBottom: '12em'}}>
                 <tbody>
                 <tr>{this.renderTableHeader()}</tr>
-                {this.renderTableData()}
-            
+                { this.state.Archived_Items ? this.state.Archived_Items.map((Archived_Item) => (
+                <tr key = {Archived_Item.itemName}>
+                <td>{Archived_Item.itemName}</td> 
+                <td>{Archived_Item.itemCategory}</td>
+                <td>{Archived_Item.itemNotes}</td>
+                <td>{ Archived_Item.itemPhotoURL ?  <img src={Archived_Item.itemPhotoURL} alt="" width="40" height="30"/> :
+                    <img src={archived} alt="" width="40" height="20"/>}</td>   
+                </tr>
+                )): null}
                 </tbody>
                 </table>
-               
-                </div>
+            </div>
         )
     }
+    
 }
     export default Table;

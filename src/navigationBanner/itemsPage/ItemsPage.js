@@ -6,17 +6,14 @@ class ItemsPage extends Component {
     
 
     render() {
-      
         return (
-            <div>
+          <div>
             <NavBanner/>
-            
+            <div style={{overflowY: 'scroll', height: '100vh'}}>
             <ItemsTable/>
-        </div>
-    
-               
-               
+            </div>
+          </div>          
         )
     }
 }
-    export default ItemsPage;
+export default ItemsPage;
