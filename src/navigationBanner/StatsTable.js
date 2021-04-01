@@ -1,45 +1,39 @@
 import React, { Component } from 'react';
 import './StatsTable.css'
-import upload from '../images/upload-button.png'
 import { AccountContext } from '../util/Accounts'
-import Collapsible from 'react-collapsible'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import {buildStyles} from 'react-circular-progressbar';
 
 
 // The order of the circles starts at the top and goes right then down
 // So, for example, Circle1 = top left corner, circle4 = top right corner, 
 // circle8 = bottom left corner, etc
-
-
-
 class StatsTable extends Component {
   static contextType = AccountContext
   constructor(props){
       super(props)
       this.state = {
-          Archived_Items: [],
-          Headers: ['Name', 'Category', 'Notes', 'Archived'],
+          Archived_Items: [], loading: false
       }
   }
 
   componentDidMount(){
+    this.setState({loading: true})
       const { getSession } = this.context;
       getSession()
           .then((data) => {
-              this.getItems(data.email).then(data => this.setState({ Archived_Items: data}))
+              this.getItems(data.email).then(data => this.setState({ Archived_Items: data, loading: false}))
           })
           .catch(err =>{
           console.log(err);
           });
   }
+
   getItems = async (email) => {
       let queryURL = 'https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items?userEmail="' + email + '"';
       const response = await fetch(queryURL.toString());
       const body = await response.json();
-    console.log(body)
      if(body.items.length > 0)
 
       if(body.items.filter(item => item.itemArchived === 1)){
@@ -102,19 +96,12 @@ class StatsTable extends Component {
 
 
       if(body.items.filter(item => item.itemRecurringPaymentAmount !== null)){
-        let payItems = [];
-        payItems = body.items.filter(item => item.itemSellAmount !== null)
-      if (response.status !== 200) throw Error(body.message)
+       if (response.status !== 200) throw Error(body.message)
       this.setState({Costper:output.itemRecurringPaymentAmount.toFixed(2)})
         
       }
     }
-
-
-
-
   }
-
 
   renderTableHeader(){
       return this.state.Headers.map((key,index) => {
@@ -122,14 +109,14 @@ class StatsTable extends Component {
       })
   }
 
-
     render() {
      
       const percentage = 100;
         return (
-
-
    <div> 
+      { this.state.loading ?
+        <div className="loading-container-stats"> <div className="form-load-symbol"/></div>
+          : null }
   <p className = "Circle_1"> Net Worth </p>
   <div className = "Circle1"style={{ width: 200, height: 200 }}>       
   <CircularProgressbar
@@ -328,12 +315,7 @@ class StatsTable extends Component {
   })}
 />
 </div>
-
-
 </div>
-
-
-
         )
     }
 }

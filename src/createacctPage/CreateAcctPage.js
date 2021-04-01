@@ -136,36 +136,36 @@ class CreateAcctPage extends Component{
 
     render(){
     return (
-      <div class="createacct-title">
+      <div className="createacct-title">
         { this.state.loading ?
       <div className="loading-container-sign"> <div className="form-load-symbol-sign"/></div>
       : null }
-      <div class="createacct-inventor-title">
+      <div className="createacct-inventor-title">
       <h2>InventorME</h2>
       </div>
 
       <Link to="/signin-page" style={{ textDecoration: 'none' }}>
-          <img src={BackButton} class="backwards" alt="back" />
+          <img src={BackButton} className="backwards" alt="back" />
       </Link> 
       <ToastMessage ref={this.toast}/>
 
     <p className ="Email2"> Email: </p>
-    <input type="text"  input class = "email2" value={this.state.email} onChange={this.setEmail}/>
+    <input type="text"  input className = "email2" value={this.state.email} onChange={this.setEmail}/>
 
     <p className = "Fname"> First Name: </p>
-    <input type="text"  input class = "first" value={this.state.name} onChange={this.setName}/>
+    <input type="text"  input className = "first" value={this.state.name} onChange={this.setName}/>
 
     <p className = "Lname"> Last Name: </p>
-    <input type="text"  input class = "last" value={this.state.family_name} onChange={this.setFamilyName}/>
+    <input type="text"  input className = "last" value={this.state.family_name} onChange={this.setFamilyName}/>
 
     <p className = "Phone"> Phone Number: </p>
-    <input type = "text" input class = "phone" value={this.state.phone_number} onChange={this.setPhone}/>
+    <input type = "text" input className = "phone" value={this.state.phone_number} onChange={this.setPhone}/>
 
     <p className = "Password2"> Password: </p>
-    <input type="password"  input class = "password2" value={this.state.password} onChange={this.setPassword}/>
+    <input type="password"  input className = "password2" value={this.state.password} onChange={this.setPassword}/>
 
     <button className="goto-account" onClick={this.validateUser}>Create Account </button>
-    <img src={InventorLogo} class="calogo" alt="" />
+    <img src={InventorLogo} className="calogo" alt="" />
 
 </div>     
     
