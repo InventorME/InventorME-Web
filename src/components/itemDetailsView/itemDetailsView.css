@@ -1,0 +1,54 @@
+.archive-button {
+    border-radius: 8px;
+    border-color: #0e7e92;
+    background-color: #0e7e92;
+    color: white;
+    margin-left: 6em;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 4.5em;
+    height: 2em;
+}
+
+.check-box {
+    border: 0.3em;
+    border-radius: 2.5em;
+    border-style: solid;
+    width: 40%;
+    height: 20%;
+    border-color: #0e7e92;
+    background-color: white;
+    position: absolute;
+    margin-top: 19em;
+    margin-left: 26%;
+}
+
+.check-title {
+    color: #0e7e92;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.yes-button {
+    border-radius: 8px;
+    border-color: #0e7e92;
+    background-color: #0e7e92;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    width: 4.5em;
+    height: 2em;
+}
+
+.no-button {
+    border-radius: 8px;
+    border-color: #0e7e92;
+    background-color: #0e7e92;
+    color: white;
+    margin-left: 2em;
+    cursor: pointer;
+    font-size: 1em;
+    width: 4.5em;
+    height: 2em;
+}

@@ -43,7 +43,7 @@ class ProfilePage extends Component {
       })
       .catch(err =>{
         console.log(err);
-        this.toastMessage("Error: No user found, please sign in again");
+        window.location.href="/signin-page";
     });
   }
   
@@ -148,8 +148,6 @@ class ProfilePage extends Component {
 
   saveProfile=(event) => {
     const { getSession } = this.context;
-    let phone = "+" + this.state.userPhone;
-    this.setState({userPhone: phone});
     if(!this.validateUser()){   
       event.preventDefault();
     } else {
@@ -197,11 +195,11 @@ render() {
     return (
       <div>
         { this.state.loading ?
-        <div class="load-container"> <div class="load-symbol"/></div>
+        <div className="load-container"> <div className="load-symbol"/></div>
         : null }
-        <div class="profile-banner">
+        <div className="profile-banner">
         <Link to="/items-page" style={{ textDecoration: 'none' }}>
-          <img src={BackButton} class="profile-back" alt="back" />
+          <img src={BackButton} className="profile-back" alt="back" />
         </Link> 
         <h2>InventorME</h2>   
       </div>
@@ -210,7 +208,7 @@ render() {
           { this.state.profile ?
             <div>
               <div style={{display: 'block', width: '100%', height: '20%'}}>
-                <div class="profile-image-container">
+                <div className="profile-image-container">
                 <ReactRoundedImage 
                 roundedColor="#66A5CC"
                 imageWidth="170"
@@ -218,29 +216,29 @@ render() {
                 roundedSize="1"
                 image={this.state.userProfilePic} />
                 </div>
-                <h1 class="profile-name" style={{display: 'inline-flex'}}>
+                <h1 className="profile-name" style={{display: 'inline-flex'}}>
                   <div style={{paddingRight: '1em'}}>{this.state.firstName}</div> 
                   <div>{this.state.lastName}</div>
                 </h1>
               </div>
               
               <div style={{display: 'inline-flex', marginTop: '2%', width: '100%', height: '25%'}}>
-                <div class ="edit-email-input">
-                  <h3 class ="edit-email"> Email: </h3>
-                  <p class="user-email-value">{this.state.userEmail}</p>
+                <div className ="edit-email-input">
+                  <h3 className ="edit-email"> Email: </h3>
+                  <p className="user-email-value">{this.state.userEmail}</p>
                 </div>
-                <div class = "edit-phone-input">
-                  <h3 class = "edit-phone"> Phone Number: </h3>
-                  <p class="phone-number-value">{this.formatPhoneNumber(this.state.userPhone)}</p>
+                <div className = "edit-phone-input">
+                  <h3 className = "edit-phone"> Phone Number: </h3>
+                  <p className="phone-number-value">{this.formatPhoneNumber(this.state.userPhone)}</p>
                 </div>
               </div>
 
-              <button class="update-profile" onClick={() => this.toggleForm()}>UPDATE PROFILE</button>
+              <button className="update-profile" onClick={() => this.toggleForm()}>UPDATE PROFILE</button>
             </div>
             : 
           <form style={{height: '100vh'}}>
             <div style={{display: 'inline-flex', width: '100%', height: '20%'}}>
-              <div class="profile-image-container">
+              <div className="profile-image-container">
               <input type="file" ref={this.hiddenFileInput} onChange={this.onImageChange} style={{display: 'none'}}/>
                 <ReactRoundedImage 
                 roundedColor="#66A5CC"
@@ -253,28 +251,28 @@ render() {
             </div>
 
             <div style={{display: 'inline-flex', width: '100%', height: '20%', marginLeft: '31%', paddingTop: '2em'}}>
-              <div class="edit-first-input">
-              <p class="edit-first"> First Name: </p>
-              <input class="first-input" type="text" onChange={this.firstNameOnChange} value={this.state.firstName} />
+              <div className="edit-first-input">
+              <p className="edit-first"> First Name: </p>
+              <input className="first-input" type="text" onChange={this.firstNameOnChange} value={this.state.firstName} />
               </div>
-              <div class="edit-last-input">
-              <p class="edit-last"> Last Name: </p>  
-              <input type="text" class="last-input" value={this.state.lastName} onChange={this.lastNameOnChange}/>
+              <div className="edit-last-input">
+              <p className="edit-last"> Last Name: </p>  
+              <input type="text" className="last-input" value={this.state.lastName} onChange={this.lastNameOnChange}/>
               </div>
             </div>
             
             <div style={{display: 'inline-flex', width: '100%', height: '22%'}}>
-              <div class = "edit-phone-input2">
-              <p class = "edit-phone"> Phone Number: </p>
-              <PhoneInput country='us' countryCodeEditable={false} withCountryCallingCode={true} class="phone-input"  value={this.state.userPhone} onChange={this.phoneOnChange}/>
+              <div className = "edit-phone-input2">
+              <p className = "edit-phone"> Phone Number: </p>
+              <PhoneInput country='us' countryCodeEditable={false} withCountryCallingCode={true} className="phone-input"  value={this.state.userPhone} onChange={this.phoneOnChange}/>
               </div>
             </div>
             
             {/* <p class = "Password2"> Password: </p>
             <input type="password"  input class = "password2" onChange={this.handleChange}/> */}
             <div style={{display: 'inline-flex', width: '100%', height: '5%'}}>
-              <button type='submit' class="save-profile" onClick={this.saveProfile}>SAVE</button>
-              <button class="cancel-profile" onClick={() => window.location.reload(true)}>CANCEL</button>
+              <button type='submit' className="save-profile" onClick={this.saveProfile}>SAVE</button>
+              <button className="cancel-profile" onClick={() => window.location.reload(true)}>CANCEL</button>
             </div>
           </form> 
             }

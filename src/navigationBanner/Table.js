@@ -35,21 +35,6 @@ class Table extends Component {
     
     }
     
-    getJSON = function(url,callback){
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET',url,true);
-        xhr.responseType = 'json';
-        xhr.oonload = function(){
-            var status = xhr.status;
-            if(status === 200){
-                callback(null,xhr.response);
-            }else{
-                callback(status,xhr.response)
-            }
-        };
-        xhr.send();
-    };
-    
     renderTableHeader(){
         let header = Object.keys(this.state.Archived_Items[0])
         return header.map((key,index) => {
@@ -57,19 +42,16 @@ class Table extends Component {
         })
     }
     render() {
-      
         return (
-        <div>
+            <div>
                 <h1 id = 'title'>Archived Items</h1>
                 <table id= 'Archived_Items'>
                 <tbody>
                 <tr>{this.renderTableHeader()}</tr>
                 {this.renderTableData()}
-            
                 </tbody>
                 </table>
-               
-                </div>
+            </div>
         )
     }
 }
