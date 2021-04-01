@@ -11,11 +11,13 @@ class ItemsPage extends Component {
         this.state = {
             Current_Items: [],
             Headers: ['Name', 'Category', 'Notes', 'Image'],
-            editItem: false, item: null
+            editItem: false, item: null, loading: false
         }
+        this.toggleDetailsView = this.toggleDetailsView.bind(this);
     }
 
     componentDidMount(){
+      this.setState({loading: true})
         const { getSession } = this.context;
         getSession()
             .then((data) => {
@@ -24,6 +26,7 @@ class ItemsPage extends Component {
             .catch(err =>{
             console.log(err);
             });
+      this.setState({loading: false})
     }
   
     getItems = async (email) => {
@@ -41,6 +44,10 @@ class ItemsPage extends Component {
       this.setState({item: this.state.Current_Items.filter(item => item.itemID === ID), editItem: true});
     }
 
+    toggleDetailsView() {
+      this.setState({ editItem: !this.state.editItem });
+    }
+
     renderTableHeader(){
         return this.state.Headers.map((key,index) => {
             return <th key={index}>{key.toUpperCase()}</th>
@@ -51,8 +58,11 @@ class ItemsPage extends Component {
         return (
             <div>
               <NavBanner/>
+              { this.state.loading ?
+              <div className="loading-container"> <div className="form-load-symbol"/></div>
+              : null }
               { this.state.editItem ? 
-                <ItemDetailsView editItem = {this.state.item}/> :
+                <ItemDetailsView toggleDetailsView = {this.toggleDetailsView} editItem = {this.state.item}/> :
                 null }
               <div style={{overflowY: 'scroll', height: '100vh'}}>
                 <h1 id = 'Title'>Current Items</h1>

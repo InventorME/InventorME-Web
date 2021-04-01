@@ -4,7 +4,7 @@ import UploadButton from '../../images/upload-button.png'
 import ToastMessage from '../toastMessage/ToastMessage';
 import DatePicker from 'react-date-picker';
 import CurrencyInput from 'react-currency-input-field';
-import moment from 'moment'
+import moment from 'moment';
 
 class FormPage extends Component {
   constructor(props) {
@@ -29,20 +29,16 @@ class FormPage extends Component {
 
 componentDidMount() {
   if(this.props.item) {
-    let purchaseAmount = "";
-    let sellAmount = "";
-    let reccurAmount = "";
-    let itemWorth = "";
     let buyDate = "";
     let sellDate = "";
     if(this.props.item.itemPurchaseAmount)
-      purchaseAmount = this.props.item.itemPurchaseAmount
+      this.setState({purchaseAmount: this.props.item.itemPurchaseAmount})
     if(this.props.item.itemSellAmount)
-      sellAmount = this.props.item.itemSellAmount
+      this.setState({sellAmount: this.props.item.itemSellAmount})
     if(this.props.item.itemRecurringPaymentAmount)
-      reccurAmount = this.props.item.itemRecurringPaymentAmount
+      this.setState({recurringAmount: this.props.item.itemRecurringPaymentAmount})
     if(this.props.item.itemWorth)
-      itemWorth = this.props.item.itemWorth
+      this.setState({itemWorth: this.props.item.itemWorth})
     if(this.props.item.itemBuyDate){
       buyDate = new Date(this.props.item.itemBuyDate)
       buyDate.setDate(buyDate.getDate() + 1)
@@ -51,24 +47,28 @@ componentDidMount() {
       sellDate = new Date(this.props.item.itemSellDate);
       sellDate.setDate(sellDate.getDate() + 1)
     }
-console.log(this.props.item.itemBuyDate, buyDate)
+    if(this.props.item.itemTags)
+      this.setState({tags: this.props.item.itemTags.split(',')})
+    if(this.props.item.itemPhotoURL)
+      this.setState({imageURL: this.props.item.itemPhotoURL})
+    if(this.props.item.itemSerialNum)
+      this.setState({serialNum: this.props.item.itemSerialNum})
+    if(this.props.item.itemReceiptPhotoURL)
+      this.setState({itemReceipt: this.props.item.itemReceiptPhotoURL})
+    if(this.props.item.itemManualURL)
+      this.setState({itemManual: this.props.item.itemManualURL})
+    if(this.props.item.itemLocation)
+      this.setState({itemLocation: this.props.item.itemLocation})
+    if(this.props.item.itemNotes)
+      this.setState({notes: this.props.item.itemNotes})
+    if(this.props.item.itemEbayURL)
+      this.setState({onlineUrl: this.props.item.itemEbayURL})
+
     this.setState({
       category: this.props.item.itemCategory,
       name: this.props.item.itemName,
-      imageURL: this.props.item.itemPhotoURL,
-      serialNum: this.props.item.itemSerialNum,
-      purchaseAmount: purchaseAmount,
-      itemWorth: itemWorth,
-      itemReceipt: this.props.item.itemReceiptPhotoURL,
-      itemManual: this.props.item.itemManualURL,
       sellDate: sellDate,
       buyDate: buyDate,
-      itemLocation: this.props.item.itemLocation,
-      notes: this.props.item.itemNotes,
-      sellAmount: sellAmount,
-      recurringAmount: reccurAmount,
-      onlineUrl: this.props.item.itemEbayURL,
-      tags: this.props.item.itemTags.split(','),
       itemFolder: this.props.item.itemFolder,
       itemID: this.props.item.itemID
     })
@@ -84,7 +84,7 @@ console.log(this.props.item.itemBuyDate, buyDate)
         } else {
           this.setState({ response: res, tags: res.tags, name: res.name, category: res.category, 
             imageURL: res.imageURL, serialNum: this.state.barcodeNumber, 
-            itemWorth: res.price, onlineUrl: res.onlineUrl }, console.log(res));
+            itemWorth: res.price, onlineUrl: res.onlineUrl });
           this.showForm(true);
         }
         this.setState({ loading: false})
@@ -151,7 +151,7 @@ cancelForm() {
   if(!this.state.addItem)
     this.props.toggleItemMenu();
   this.setState({showForm: false, imageURL: '', name: '', category: '', itemLocation: '', itemWorth: '', purchaseAmount: '', sellAmount: '',
-  serialNum: '', recurringAmount: '', itemReceipt: '', itemManual: '', onlineUrl: '',
+  serialNum: '', recurringAmount: '', itemReceipt: '', itemManual: '', onlineUrl: '', barcodeNumber: '',
   buyDate: '', sellDate: '', tags: [], notes: ''});
 }
 
@@ -200,7 +200,7 @@ saveItem() {
     buyDate = moment(this.state.buyDate).format("YYYY-MM-DD")
   if(this.state.sellDate)
     sellDate = moment(this.state.sellDate).format("YYYY-MM-DD")
-  console.log(buyDate)
+  
   let itemPutPayload = {
       userEmail: this.quotes(this.state.userEmail),
       itemID: this.state.itemID,
@@ -234,8 +234,8 @@ saveItem() {
     itemWorth: this.quotes(this.state.itemWorth),
     itemReceiptPhotoURL: this.quotes(this.state.itemReceipt),
     itemManualURL: this.quotes(this.state.itemManual),
-    itemSellDate: this.quotes(this.state.sellDate),
-    itemBuyDate: this.quotes(this.state.buyDate),
+    itemSellDate: this.quotes(sellDate),
+    itemBuyDate: this.quotes(buyDate),
     itemLocation: this.quotes(this.state.itemLocation),
     itemNotes: this.quotes(this.state.notes),
     itemSellAmount: this.quotes(this.state.sellAmount),
@@ -245,8 +245,6 @@ saveItem() {
     itemArchived: 0,
     itemFolder: this.quotes(this.state.itemFolder)
 }
-
-console.log(itemPutPayload)
 
 if(this.state.addItem) {
   if(this.validatePayload(itemPostPayload)){
@@ -297,7 +295,8 @@ put = async(item) => {
       method: 'PUT',
       body: JSON.stringify(item),
       headers: { 'Content-Type': 'application/json' }
-  }
+}
+
   const response = await fetch(this.state.baseURL,putData);
   return response.status;
 }
@@ -337,7 +336,7 @@ render() {
             <h2>Collection*</h2>
             <input className="input-box2" name="category" value={this.state.category} onChange={this.onChange} type="text" placeholder="Collection"/>
           </div>
-          <div style={{display: 'block', marginLeft: '2em'}}>
+          <div style={{display: 'block', marginLeft: '18.5em'}}>
             <h2>Item Location</h2>
             <input type="text" name="itemLocation" className="input-box2" placeholder="Enter item location"
               onChange={this.onChange} value={this.state.itemLocation}/>
@@ -356,7 +355,7 @@ render() {
               decimalsLimit={2}
               onValueChange={(value, name) => this.onDollarChange(value, name)}/>
           </div>
-          <div style={{display: 'block', marginLeft: '2em'}}>
+          <div style={{display: 'block', marginLeft: '5em'}}>
             <h2>Purchase Amount</h2>
             <CurrencyInput
               prefix="$"
@@ -367,7 +366,7 @@ render() {
               decimalsLimit={2}
               onValueChange={(value, name) => this.onDollarChange(value, name)}/>
           </div>
-          <div style={{display: 'block', marginLeft: '2em'}}>
+          <div style={{display: 'block', marginLeft: '7em'}}>
             <h2>Sell Amount</h2>
             <CurrencyInput
               prefix="$"
@@ -386,7 +385,7 @@ render() {
             <input type="text" pattern="[0-9]*" name="serialNum" className="input-box3" placeholder="123456789"
               onChange={this.onNumberChange} value={this.state.serialNum} />
           </div>
-          <div style={{display: 'block', marginLeft: '2em'}}>
+          <div style={{display: 'block', marginLeft: '5em'}}>
             <h2>Recurring Payment</h2>
             <CurrencyInput
               prefix="$"
@@ -397,7 +396,7 @@ render() {
               decimalsLimit={2}
               onValueChange={(value, name) => this.onDollarChange(value, name)}/>
           </div>
-          <div style={{display: 'block', marginLeft: '2em'}}>
+          <div style={{display: 'block', marginLeft: '7em'}}>
             <h2>Item Folder*</h2>
             <input type="text" name="itemFolder" className="input-box3" placeholder="Enter folder name"
               onChange={this.onChange} value={this.state.itemFolder} />
@@ -410,12 +409,12 @@ render() {
             <input type="text" name="itemReceipt" className="input-box3" placeholder="Enter receipt url"
               onChange={this.onChange} value={this.state.itemReceipt} />
           </div>
-          <div style={{display: 'block', marginLeft: '2em'}}>
+          <div style={{display: 'block', marginLeft: '5em'}}>
             <h2>Item Manual Url</h2>
             <input type="text" name="itemManual" className="input-box3" placeholder="Enter manual url"
               onChange={this.onChange} value={this.state.itemManual} />
           </div>
-          <div style={{display: 'block', marginLeft: '2em'}}>
+          <div style={{display: 'block', marginLeft: '7em'}}>
             <h2>Online Url</h2>
             <input type="text" name="onlineUrl" className="input-box4" placeholder="Enter online url"
               onChange={this.onChange} value={this.state.onlineUrl} />
@@ -428,7 +427,7 @@ render() {
             <DatePicker onChange={this.onChangeBuyDate}
             value={this.state.buyDate}/>
           </div>
-          <div style={{display: 'block', marginLeft: '2em'}}>
+          <div style={{display: 'block', marginLeft: '5em'}}>
             <h2>Sell Date</h2>
             <DatePicker onChange={this.onChangeSellDate}
             value={this.state.sellDate}/>
@@ -458,11 +457,11 @@ render() {
       </div>
       :
       <div>
-        <div style={{marginTop: '14em', marginLeft: '30%', width: '60%'}}>
+        <div style={{marginTop: '19em', marginLeft: '30%', width: '60%'}}>
           <input type="text" name="barcodeNumber" className="searchCode-box" placeholder="Enter barcode" onChange={this.onChange} value={this.state.barcodeNumber}/>
           <button className="searchCode-button" onClick={()=>this.searchBarcodeItem()} ref={this.hiddenInput}>Search</button>
           <p style={{marginLeft: "33%", fontSize: '1.3em'}}>or</p>
-          <div className="enter-manually" onClick={()=> this.showForm(true)}><p>Enter manually</p></div>
+          <button className="enter-manually" onClick={()=> this.showForm(true)}>Enter manually</button>
         </div>
       </div>
       }
