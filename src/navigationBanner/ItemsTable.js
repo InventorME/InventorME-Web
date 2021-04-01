@@ -30,6 +30,9 @@ class ItemsTable extends Component {
         let queryURL = 'https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items?userEmail="' + email + '"';
         const response = await fetch(queryURL.toString());
         const body = await response.json();
+
+
+        
         if (response.status !== 200) throw Error(body.message);
         return body;
     }
