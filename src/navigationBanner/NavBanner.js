@@ -6,6 +6,7 @@ import OverlayMenu from 'react-overlay-menu';
 import { Link } from "react-router-dom";
 import FormPage from '../components/formPage/FormPage';
 import { AccountContext } from '../util/Accounts';
+import ToastMessage from '../components/toastMessage/ToastMessage';
 
 class NavBanner extends Component {
     static contextType = AccountContext
@@ -24,6 +25,7 @@ class NavBanner extends Component {
        this.showProfileMenu = this.showProfileMenu.bind(this);
        this.closeProfileMenu = this.closeProfileMenu.bind(this);
        this.logoutUser = this.logoutUser.bind(this);
+       this.toast = React.createRef();
     }
 
     componentDidMount() {
@@ -36,7 +38,8 @@ class NavBanner extends Component {
           })
           .catch(err =>{
             console.log(err);
-            window.location.href="/signin-page";
+            alert("Error: No user found, please sign in again");
+            window.location.href = "/signin-page";
         });
     }
 
@@ -79,6 +82,10 @@ class NavBanner extends Component {
         logout();
         window.location.href="/signin-page";
     }
+
+    toastMessage = (message) => {
+        this.toast.current.openToast(message);
+      };
 
     render() {
         return (
