@@ -10,7 +10,7 @@ class ItemsPage extends Component {
         super(props)
         this.state = {
             Current_Items: [],
-            Headers: ['Name', 'Category', 'Notes', 'Image'],
+            Headers: ['Name', 'Collection', 'Notes', 'Image'],
             editItem: false, item: null, loading: false
         }
         this.toggleDetailsView = this.toggleDetailsView.bind(this);
