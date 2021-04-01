@@ -6,7 +6,6 @@ import OverlayMenu from 'react-overlay-menu';
 import { Link } from "react-router-dom";
 import FormPage from '../components/formPage/FormPage';
 import { AccountContext } from '../util/Accounts';
-import ToastMessage from '../components/toastMessage/ToastMessage';
 
 class NavBanner extends Component {
     static contextType = AccountContext
