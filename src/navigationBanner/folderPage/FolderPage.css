@@ -1,0 +1,13 @@
+.create-folder {
+    position: absolute;
+    top: 6em;
+    left: 29.6em;
+    padding: 0.8em;
+    font-size: 1.3em;
+    color: white;
+    background-color: #0e7e92;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}

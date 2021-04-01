@@ -22,11 +22,11 @@ class ItemsPage extends Component {
         getSession()
             .then((data) => {
                 this.getItems(data.email).then(data => this.setState({ Current_Items: data}))
+                this.setState({loading: false})
             })
             .catch(err =>{
             console.log(err);
             });
-      this.setState({loading: false})
     }
   
     getItems = async (email) => {

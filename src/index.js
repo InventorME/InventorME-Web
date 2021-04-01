@@ -12,6 +12,8 @@ import CreateAcctPage from './createacctPage/CreateAcctPage';
 import { Account } from './util/Accounts';
 import Collections from './navigationBanner/collections/Collections';
 import ArchivePage from './navigationBanner/archivepage/ArchivePage';
+import FolderPage from './navigationBanner/folderPage/FolderPage';
+import StatsPage from './navigationBanner/statsPage/StatsPage';
 
 ReactDOM.render(
    <BrowserRouter>
@@ -25,6 +27,9 @@ ReactDOM.render(
       <Route path = "/createacct-page" component = {CreateAcctPage}/>
       <Route path="/collections" component={Collections}/>
       <Route path = "/archivepage" component = {ArchivePage}/>
+      <Route path = "/folderpage" component = {FolderPage}/>
+      <Route path = "/statspage" component = {StatsPage}/>
+      
       </Account>
   </Switch>
   </BrowserRouter>,
