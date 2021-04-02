@@ -5,11 +5,16 @@ import './NavBanner.css';
 import OverlayMenu from 'react-overlay-menu';
 import { Link } from "react-router-dom";
 import FormPage from '../components/formPage/FormPage';
+<<<<<<< Updated upstream
 import { AccountContext } from '../util/Accounts';
 import ToastMessage from '../components/toastMessage/ToastMessage';
+=======
+import { Auth } from 'aws-amplify';
+
+>>>>>>> Stashed changes
 
 class NavBanner extends Component {
-    static contextType = AccountContext
+
     constructor(props) {
        super(props);
        this.state = { response: '', isOpen: false, showItemMenu: false, showProfileMenu: false, show: true, 
@@ -28,8 +33,9 @@ class NavBanner extends Component {
        this.toast = React.createRef();
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
+<<<<<<< Updated upstream
         const { getSession } = this.context;
         getSession()
           .then((data) => {
@@ -38,9 +44,17 @@ class NavBanner extends Component {
           })
           .catch(err =>{
             console.log(err);
+=======
+        try{
+            const data = await Auth.currentUserInfo();
+            this.setState({ firstName: data.attributes.name })
+            this.setState({ userEmail: data.attributes.email })
+        }catch(error){
+            console.log(error);
+>>>>>>> Stashed changes
             alert("Error: No user found, please sign in again");
             window.location.href = "/signin-page";
-        });
+        }
     }
 
     componentWillUnmount() {

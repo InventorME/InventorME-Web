@@ -3,8 +3,7 @@ import './CreateAcctPage.css';
 import InventorLogo from '../images/InventorMeLogo.png';
 import { Link } from "react-router-dom";
 import BackButton from '../images/back-button.png';
-import UserPool from "../util/UserPool";
-import { CognitoUserAttribute } from "amazon-cognito-identity-js";
+import { Auth } from "aws-amplify";
 import ToastMessage from '../components/toastMessage/ToastMessage';
 
 
@@ -53,34 +52,50 @@ class CreateAcctPage extends Component {
     this.setState({ phoneFormat: format });
   }
 
-  submit(event) {
+  async submit(event) {
     this.setState({ loading: true })
-    const attributeList = [];
-    attributeList.push(new CognitoUserAttribute({
-      Name: 'name',
-      Value: this.state.name
-    }));
-    attributeList.push(new CognitoUserAttribute({
-      Name: 'phone_number',
-      Value: this.state.phone_number
-    }));
-    attributeList.push(new CognitoUserAttribute({
-      Name: 'family_name',
-      Value: this.state.family_name
-    }));
+    const attributeList = {
+      'name': this.state.name,
+      'phone_number': this.state.phone_number,
+      'family_name': this.state.family_name,
+      'email': this.state.email
+      // ,'photo': 'https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg'
+    }; 
 
-    UserPool.signUp(this.state.email, this.state.password, attributeList, null, (err, data) => {
-      if (err) {
-        console.log("err", err);
-        // this.setState({ loading: true })
-        // this.toastMessage("Error creating account")
-      }
-      //If no errors new user is created here
-      else {
-        window.location.href = "/signin-page";
-      }
+    try {
+      await Auth.signUp({ username: this.state.email, password: this.state.password, attributes: attributeList });
+      alert("NOTE: Please confirm account by clicking on the link sent to your email, then sign in");
+      window.location.href="/signin-page";
+    } catch (error) {
+      alert("Error: There was an error creating your account. Please try again.");
+      console.log('create user error: ', error);
+    }
+    // const attributeList = [];
+    // attributeList.push(new CognitoUserAttribute({
+    //   Name: 'name',
+    //   Value: this.state.name
+    // }));
+    // attributeList.push(new CognitoUserAttribute({
+    //   Name: 'phone_number',
+    //   Value: this.state.phone_number
+    // }));
+    // attributeList.push(new CognitoUserAttribute({
+    //   Name: 'family_name',
+    //   Value: this.state.family_name
+    // }));
 
-    });
+    // UserPool.signUp(this.state.email, this.state.password, attributeList, null, (err, data) => {
+    //   if (err) {
+    //     console.log("err", err);
+    //     // this.setState({ loading: true })
+    //     // this.toastMessage("Error creating account")
+    //   }
+    //   //If no errors new user is created here
+    //   else {
+    //     window.location.href = "/signin-page";
+    //   }
+
+    // });
 
   }
   upperCheck(str) {

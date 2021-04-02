@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './SignInPage.css';
-import ProfileBox from '../images/profile-box.png';
-import { AccountContext } from '../util/Accounts';
+// import ProfileBox from '../images/profile-box.png';
 import ToastMessage from '../components/toastMessage/ToastMessage';
+import { Auth } from 'aws-amplify';
 
 
 
 class SignInPage extends Component{
-  static contextType = AccountContext
+
     constructor(props) {
         super(props);
         this.state = { response: '', post: '', email: '', password: '', loading: false };
@@ -18,16 +18,26 @@ class SignInPage extends Component{
         this.toast = React.createRef();
       }
       
-      componentDidMount() {
-        const { getSession } = this.context;
-        getSession()
-        .then(session => {
-          console.log('Signed In:', "user found");
-          console.log('Session:', session);
+      async componentDidMount() {
+
+        try{
+          await Auth.currentSession();
+          // console.log('user found!');
           window.location.href="/items-page";
-        }).catch(err => {
-          console.log('err:', "no user found");
-        });
+        }
+        catch(error){
+          console.log('could not find user :(', error);
+        }
+
+        // const { getSession } = this.context;
+        // getSession()
+        // .then(session => {
+        //   console.log('Signed In:', "user found");
+        //   console.log('Session:', session);
+        //   window.location.href="/items-page";
+        // }).catch(err => {
+        //   console.log('err:', "no user found");
+        // });
       }
 
       setEmail(event){
@@ -47,17 +57,29 @@ class SignInPage extends Component{
           this.submit();
       };
 
-      submit(event){
+      submit = async () =>{
         this.setState({ loading: true})
-        const { authenticate } = this.context;
-        authenticate(this.state.email, this.state.password)
-          .then(data =>{
-            window.location.href="/items-page";
-          })
-          .catch(err =>{
-            this.setState({ loading: false})
-            this.toastMessage('Error: Password or Email is incorrect');
-          })
+        try{
+          const user = await Auth.signIn(this.state.email, this.state.password);
+          console.log('Logged in!', user);
+          window.location.href="/items-page";
+        }catch(error){
+          // console.log(error);
+          this.setState({ loading: false});
+          alert("Sign In Error", "Please Make Sure Account Is Confirmed. Please Check Email or Password Are Correct");
+        }
+
+
+
+        // const { authenticate } = this.context;
+        // authenticate(this.state.email, this.state.password)
+        //   .then(data =>{
+        //     window.location.href="/items-page";
+        //   })
+        //   .catch(err =>{
+        //     this.setState({ loading: false})
+        //     this.toastMessage('Error: Password or Email is incorrect');
+        //   })
       };
 
       toastMessage = (message) => {

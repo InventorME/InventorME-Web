@@ -4,13 +4,13 @@ import ReactRoundedImage from "react-rounded-image"
 import UploadButton from '../../images/upload-button.png'
 import PhoneInput from 'react-phone-input-2'
 import ToastMessage from '../../components/toastMessage/ToastMessage';
-import { CognitoUserAttribute } from "amazon-cognito-identity-js";
-import { AccountContext } from '../../util/Accounts';
 import BackButton from '../../images/back-button.png'
 import { Link } from "react-router-dom";
+import { Auth } from 'aws-amplify';
+
 
 class ProfilePage extends Component {
-  static contextType = AccountContext
+
   constructor(props) {
     super(props);
     this.state = { loading: false, profile: true,
@@ -29,23 +29,52 @@ class ProfilePage extends Component {
     this.toast = React.createRef();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ loading: true });
-    const { getSession } = this.context;
-    getSession()
-      .then((data) => { 
-        this.setState({ response: data.user })
-        this.setState({ firstName: data.name })
-        this.setState({ lastName: data.family_name })
-        this.setState({ userEmail: data.email })
-        this.setState({ userPhone: data.phone_number })
+
+    try{
+      const data = await Auth.currentUserInfo();
+      console.log()
+        this.setState({ response: data })
+        this.setState({ firstName: data.attributes.name })
+        this.setState({ lastName: data.attributes.family_name })
+        this.setState({ userEmail: data.attributes.email })
+        this.setState({ userPhone: data.attributes.phone_number })
+        this.setState({ phoneFormat: this.formatPhoneNumber(data.attributes.phone_number)})
         // this.setState({ userProfilePic: res.userProfilePicURL }) 
+<<<<<<< Updated upstream
         this.setState({ loading: false });       
       })
       .catch(err =>{
         console.log(err);
         this.toastMessage("Error: No user found, please sign in again");
     });
+=======
+        this.setState({ loading: false }); 
+    }  
+    catch (error) {
+      console.log('could not find user :(', error);
+      alert("Error: No user found, please sign in again");
+      window.location.href="/signin-page";
+    }
+
+
+    // const { getSession } = this.context;
+    // getSession()
+    //   .then((data) => { 
+    //     this.setState({ response: data.user })
+    //     this.setState({ firstName: data.name })
+    //     this.setState({ lastName: data.family_name })
+    //     this.setState({ userEmail: data.email })
+    //     this.setState({ userPhone: data.phone_number })
+    //     // this.setState({ userProfilePic: res.userProfilePicURL }) 
+    //     this.setState({ loading: false });       
+    //   })
+    //   .catch(err =>{
+    //     console.log(err);
+    //     window.location.href="/signin-page";
+    // });
+>>>>>>> Stashed changes
   }
   
   formatPhoneNumber(phoneNumberString) {
@@ -158,41 +187,60 @@ class ProfilePage extends Component {
     }, 2000); 
   }
 
+<<<<<<< Updated upstream
   saveProfile=(event) => {
     const { getSession } = this.context;
     let phone = "+" + this.state.userPhone;
     this.setState({userPhone: phone});
+=======
+  saveProfile= async (event) => {
+    // const { getSession } = this.context;
+>>>>>>> Stashed changes
     if(!this.validateUser()){   
       event.preventDefault();
     } else {
       this.setState({ loading: true });
       event.preventDefault();
-        getSession().then(({ user }) => {
-          const attributes = [];
-          attributes.push(new CognitoUserAttribute({
-            Name: 'name',
-            Value: this.state.firstName
-          }));
-          attributes.push(new CognitoUserAttribute({
-            Name: 'phone_number',
-            Value: this.state.userPhone
-          }));
-          attributes.push(new CognitoUserAttribute({
-            Name: 'family_name',
-            Value: this.state.lastName
-          }));
+      const attributes = {
+        'name': this.state.firstName,
+        'phone_number': this.state.userPhone,
+        'family_name': this.state.lastName
+      }
+      try{
+        const user = await Auth.currentAuthenticatedUser();
+        await Auth.updateUserAttributes(user, attributes);
+        this.setState({ loading: false });
+        this.toastMessage('Saved Successfully! ㋡');
+        this.reloadPage();
+      }catch (error) {
+        console.log("error saving user", error);
+      }
+        // getSession().then(({ user }) => {
+        //   const attributes = [];
+        //   attributes.push(new CognitoUserAttribute({
+        //     Name: 'name',
+        //     Value: this.state.firstName
+        //   }));
+        //   attributes.push(new CognitoUserAttribute({
+        //     Name: 'phone_number',
+        //     Value: this.state.userPhone
+        //   }));
+        //   attributes.push(new CognitoUserAttribute({
+        //     Name: 'family_name',
+        //     Value: this.state.lastName
+        //   }));
     
-          user.updateAttributes(attributes, (err, result) => {
-            if (err) {
-              console.error(err);
-              this.setState({ loading: false });
-              this.toastMessage('Error: Failed to save profile.');
-            } else {
-              this.toastMessage('Saved Successfully! ㋡');
-              this.reloadPage();
-            }
-          });
-        });
+        //   user.updateAttributes(attributes, (err, result) => {
+        //     if (err) {
+        //       console.error(err);
+        //       this.setState({ loading: false });
+        //       this.toastMessage('Error: Failed to save profile.');
+        //     } else {
+        //       this.toastMessage('Saved Successfully! ㋡');
+        //       this.reloadPage();
+        //     }
+        //   });
+        // });
       
     }
   }
