@@ -8,44 +8,42 @@
 }
 
 .Circle1{
-    margin-left: 12em;
-    margin-top: 3em;
-    
-    
+    margin-left: 20%;
+    margin-top: 9em;
 }
 
 .Circle2{
-    margin-left: 32em;
+    margin-left: 36%;
     margin-top: -12.5em;
 }
 
 .Circle3{
-    margin-left: 52em;
+    margin-left: 52%;
     margin-top: -12.5em;
 }
 
 .Circle4{
-    margin-left: 72em;
+    margin-left: 68%;
     margin-top: -12.5em;
 }
 
 .Circle5{
-    margin-left: 12em;
-    margin-top: 7.5em;
+    margin-left: 20%;
+    margin-top: 10.5em;
 }
 
 .Circle6{
-    margin-left: 32em;
+    margin-left: 36%;
     margin-top: -12.5em;
 }
 
 .Circle7{
-    margin-left: 52em;
+    margin-left: 52%;
     margin-top: -12.5em;
 }
 
 .Circle8{
-    margin-left: 72em;
+    margin-left: 68%;
     margin-top: -12.5em;
 }
 
@@ -53,8 +51,8 @@
 .Circle_1{
     font-weight: bold;
     position: absolute;
-    margin-top: 9.5em;
-    margin-left: 9.2em;
+    margin-top: 1.7em;
+    margin-left: 1.3em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -63,7 +61,7 @@
     font-weight: bold;
     position: absolute;
     margin-top: 1.7em;
-    margin-left: 21.2em;
+    margin-left: 1.1em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -72,7 +70,7 @@
     font-weight: bold;
     position: absolute;
     margin-top: 1.7em;
-    margin-left: 33em;
+    margin-left: 0.6em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -81,7 +79,7 @@
     font-weight: bold;
     position: absolute;
     margin-top: 1.7em;
-    margin-left: 46.5em;
+    margin-left: 1.3em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -89,8 +87,8 @@
 .Circle_5{
     font-weight: bold;
     position: absolute;
-    margin-top: 13.7em;
-    margin-left: 7.9em;
+    margin-top: 1.7em;
+    margin-left: 0.4em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -98,8 +96,8 @@
 .Circle_6{
     font-weight: bold;
     position: absolute;
-    margin-top: 1.2em;
-    margin-left: 21.2em;
+    margin-top: 1.7em;
+    margin-left: 1.6em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -107,8 +105,8 @@
 .Circle_7{
     font-weight: bold;
     position: absolute;
-    margin-top: 1.2em;
-    margin-left: 33em;
+    margin-top: 1.7em;
+    margin-left: 1em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -116,8 +114,8 @@
 .Circle_8{
     font-weight: bold;
     position: absolute;
-    margin-top: 1.2em;
-    margin-left: 43.5em;
+    margin-top: 1.7em;
+    margin-left: -0.7em;
     font-size: 1.6em;
     color: var(--label);
 }

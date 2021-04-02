@@ -89,7 +89,6 @@ class StatsTable extends Component {
         { this.state.loading ?
           <div className="loading-container-stats"> <div className="form-load-symbol" /></div>
           : null}
-        <p className="Circle_1"> Net Worth </p>
         <div className="Circle1" style={{ width: 200, height: 200 }}>
           <CircularProgressbar
             value={percentage}
@@ -113,8 +112,8 @@ class StatsTable extends Component {
               backgroundColor: colors.background,
             })}
           />
+          <p className="Circle_1"> Net Worth </p>
         </div>
-        <p className="Circle_2"> Depreciation </p>
         <div className="Circle2" style={{ width: 200, height: 200 }}>
           <CircularProgressbar
             value={(this.state.depreciation - this.state.currentWorth) / 100}
@@ -138,10 +137,11 @@ class StatsTable extends Component {
               backgroundColor: colors.background,
             })}
           />
+          <p className="Circle_2"> Depreciation </p>
         </div>
 
 
-        <p className="Circle_3">Archived Items </p>
+        
         <div className="Circle3" style={{ width: 200, height: 200 }}>
           <CircularProgressbar
             value={(this.state.archiveLength / this.state.allLength) * 100}
@@ -165,9 +165,9 @@ class StatsTable extends Component {
               backgroundColor: colors.background,
             })}
           />
+          <p className="Circle_3">Archived Items </p>
         </div>
 
-        <p className="Circle_4"> # All Items </p>
         <div className="Circle4" style={{ width: 200, height: 200 }}>
           <CircularProgressbar
             value={100}
@@ -191,8 +191,8 @@ class StatsTable extends Component {
               backgroundColor: colors.background,
             })}
           />
+          <p className="Circle_4"> # All Items </p>
         </div>
-        <p className="Circle_5"> Money Invested </p>
         <div className="Circle5" style={{ width: 200, height: 200 }}>
           <CircularProgressbar
             value={percentage}
@@ -216,9 +216,9 @@ class StatsTable extends Component {
               backgroundColor: colors.background,
             })}
           />
+          <p className="Circle_5"> Money Invested </p>
         </div>
 
-        <p className="Circle_6"> Items Sold </p>
         <div className="Circle6" style={{ width: 200, height: 200 }}>
           <CircularProgressbar
             value={this.state.soldLength}
@@ -242,8 +242,9 @@ class StatsTable extends Component {
               backgroundColor: colors.background,
             })}
           />
+          <p className="Circle_6"> Items Sold </p>
         </div>
-        <p className="Circle_7"> % Money Lost </p>
+
         <div className="Circle7" style={{ width: 200, height: 200 }}>
           <CircularProgressbar
             value={this.state.Lost * 100}
@@ -269,8 +270,9 @@ class StatsTable extends Component {
 
             })}
           />
+          <p className="Circle_7"> % Money Lost </p>
         </div>
-        <p className="Circle_8"> Monthly Recurring Cost </p>
+        
         <div className="Circle8" style={{ width: 200, height: 200 }}>
           <CircularProgressbar
             value={this.state.Costper}
@@ -294,6 +296,7 @@ class StatsTable extends Component {
               backgroundColor: colors.background,
             })}
           />
+          <p className="Circle_8"> Monthly Recurring Cost </p>
         </div>
       </div>
     )
