@@ -4,6 +4,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { buildStyles } from 'react-circular-progressbar';
 import { Database } from '../util/Database';
+import { colors } from '../util/objectColors';
 
 class StatsTable extends Component {
   constructor(props) {
@@ -105,10 +106,11 @@ class StatsTable extends Component {
               // Can specify path transition in more detail, or remove it entirely
               // pathTransition: 'none',
               // Colors
-              pathColor: `rgba(14, 126, 146, ${percentage / 100})`,
-              textColor: '#000000',
-              trailColor: '#d6d6d6',
-              backgroundColor: '#0e7e92',
+              // pathColor: `rgba(14, 126, 146, ${percentage / 100})`,
+              pathColor: colors.object[0],
+              textColor: colors.label,
+              trailColor: colors.fill,
+              backgroundColor: colors.background,
             })}
           />
         </div>
@@ -129,10 +131,11 @@ class StatsTable extends Component {
               // Can specify path transition in more detail, or remove it entirely
               // pathTransition: 'none',
               // Colors
-              pathColor: `rgba(14, 126, 146, ${(this.state.depreciation - this.state.currentWorth) / 100})`,
-              textColor: '#000000',
-              trailColor: '#d6d6d6',
-              backgroundColor: '#0e7e92',
+              // pathColor: `rgba(200, 200, 200, ${(this.state.depreciation - this.state.currentWorth) / 100})`,
+              pathColor: colors.object[1],
+              textColor: colors.label,
+              trailColor: colors.fill,
+              backgroundColor: colors.background,
             })}
           />
         </div>
@@ -155,10 +158,11 @@ class StatsTable extends Component {
               // Can specify path transition in more detail, or remove it entirely
               // pathTransition: 'none',
               // Colors
-              pathColor: `rgba(14, 126, 146, ${(this.state.archiveLength / this.state.allLength) * 100})`,
-              textColor: '#000000',
-              trailColor: '#d6d6d6',
-              backgroundColor: '#0e7e92',
+              // pathColor: `rgba(14, 126, 146, ${(this.state.archiveLength / this.state.allLength) * 100})`,
+              pathColor: colors.object[2],
+              textColor: colors.label,
+              trailColor: colors.fill,
+              backgroundColor: colors.background,
             })}
           />
         </div>
@@ -180,10 +184,11 @@ class StatsTable extends Component {
               // Can specify path transition in more detail, or remove it entirely
               // pathTransition: 'none',
               // Colors
-              pathColor: `rgba(14, 126, 146, ${this.state.allLength})`,
-              textColor: '#000000',
-              trailColor: '#d6d6d6',
-              backgroundColor: '#0e7e92',
+              // pathColor: `rgba(14, 126, 146, ${this.state.allLength})`,
+              pathColor: colors.object[3],
+              textColor: colors.label,
+              trailColor: colors.fill,
+              backgroundColor: colors.background,
             })}
           />
         </div>
@@ -204,10 +209,11 @@ class StatsTable extends Component {
               // Can specify path transition in more detail, or remove it entirely
               // pathTransition: 'none',
               // Colors
-              pathColor: `rgba(14, 126, 146, ${percentage / 100})`,
-              textColor: '#000000',
-              trailColor: '#d6d6d6',
-              backgroundColor: '#0e7e92',
+              // pathColor: `rgba(14, 126, 146, ${percentage / 100})`,
+              pathColor: colors.object[4],
+              textColor: colors.label,
+              trailColor: colors.fill,
+              backgroundColor: colors.background,
             })}
           />
         </div>
@@ -229,10 +235,11 @@ class StatsTable extends Component {
               // Can specify path transition in more detail, or remove it entirely
               // pathTransition: 'none',
               // Colors
-              pathColor: `rgba(14, 126, 146, ${percentage / 100})`,
-              textColor: '#000000',
-              trailColor: '#d6d6d6',
-              backgroundColor: '#0e7e92',
+              // pathColor: `rgba(14, 126, 146, ${percentage / 100})`,
+              pathColor: colors.object[5],
+              textColor: colors.label,
+              trailColor: colors.fill,
+              backgroundColor: colors.background,
             })}
           />
         </div>
@@ -253,10 +260,11 @@ class StatsTable extends Component {
               // Can specify path transition in more detail, or remove it entirely
               // pathTransition: 'none',
               // Colors
-              pathColor: `rgba(14, 126, 146, ${percentage / 100})`,
-              textColor: '#000000',
-              trailColor: '#d6d6d6',
-              backgroundColor: '#0e7e92',
+              // pathColor: `rgba(14, 126, 146, ${percentage / 100})`,
+              pathColor: colors.object[6],
+              textColor: colors.label,
+              trailColor: colors.fill,
+              backgroundColor: colors.background,
 
 
             })}
@@ -279,10 +287,11 @@ class StatsTable extends Component {
               // Can specify path transition in more detail, or remove it entirely
               // pathTransition: 'none',
               // Colors
-              pathColor: `rgba(14, 126, 146, ${percentage / 100})`,
-              textColor: '#000000',
-              trailColor: '#d6d6d6',
-              backgroundColor: '#0e7e92',
+              // pathColor: `rgba(14, 126, 146, ${percentage / 100})`,
+              pathColor: colors.object[7],
+              textColor: colors.label,
+              trailColor: colors.fill,
+              backgroundColor: colors.background,
             })}
           />
         </div>

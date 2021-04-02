@@ -1,3 +1,4 @@
+@import "../util/colors.css";
 .loading-container-stats{
     position: relative;
     background-color: rgb(255, 255, 255);
@@ -9,6 +10,8 @@
 .Circle1{
     margin-left: 12em;
     margin-top: 3em;
+    
+    
 }
 
 .Circle2{
@@ -53,7 +56,7 @@
     margin-top: 9.5em;
     margin-left: 9.2em;
     font-size: 1.6em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .Circle_2{
@@ -62,7 +65,7 @@
     margin-top: 1.7em;
     margin-left: 21.2em;
     font-size: 1.6em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .Circle_3{
@@ -71,7 +74,7 @@
     margin-top: 1.7em;
     margin-left: 33em;
     font-size: 1.6em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .Circle_4{
@@ -80,7 +83,7 @@
     margin-top: 1.7em;
     margin-left: 46.5em;
     font-size: 1.6em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .Circle_5{
@@ -89,7 +92,7 @@
     margin-top: 13.7em;
     margin-left: 7.9em;
     font-size: 1.6em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .Circle_6{
@@ -98,7 +101,7 @@
     margin-top: 1.2em;
     margin-left: 21.2em;
     font-size: 1.6em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .Circle_7{
@@ -107,7 +110,7 @@
     margin-top: 1.2em;
     margin-left: 33em;
     font-size: 1.6em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .Circle_8{
@@ -116,5 +119,5 @@
     margin-top: 1.2em;
     margin-left: 43.5em;
     font-size: 1.6em;
-    color: #0e7e92;
+    color: var(--label);
 }

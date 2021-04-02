@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './ItemsPage.css';
 import NavBanner from '../NavBanner.js';
-import { Auth } from 'aws-amplify';
+import { Database } from '../../util/Database';
 import upload from '../../images/upload-button.png'
 import ItemDetailsView from '../../components/itemDetailsView/itemDetailsView';
 class ItemsPage extends Component {
@@ -18,26 +18,32 @@ class ItemsPage extends Component {
 
     componentDidMount(){
       this.setState({loading: true})
-        
-      this.setState({loading: false})
+      this.getItems();
     }
   
     getItems = async () => {
-        try{
-          const data = await Auth.currentUserInfo();
-          var email = data.attributes.email;
-        }
-        catch(error){
-          console.log('could not find user :(', error);
-        }
-        let queryURL = 'https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items?userEmail="' + email + '"';
-        const response = await fetch(queryURL.toString());
-        const body = await response.json();
-        let items = [];
-        if(body.items.length > 0)
-          items = body.items.filter(item => item.itemArchived === 0)
-          if (response.status !== 200) throw Error(body.message);
-        return items;
+      const db = new Database();
+      try {
+          const body = await db.get();
+          let items = [];
+          if(body.items.length > 0)
+            items = body.items.filter(item => item.itemArchived === 0)
+            
+          this.setState({ Current_Item: items});
+          this.render();
+          this.setState({loading: false});
+      }
+      catch (error) {
+          console.log('Error pulling data', error);
+      }
+        // let queryURL = 'https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items?userEmail="' + email + '"';
+        // const response = await fetch(queryURL.toString());
+        // const body = await response.json();
+        // let items = [];
+        // if(body.items.length > 0)
+        //   items = body.items.filter(item => item.itemArchived === 0)
+        //   if (response.status !== 200) throw Error(body.message);
+        // return items;
     }
 
     filterItemByID(ID) {
