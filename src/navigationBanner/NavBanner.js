@@ -75,10 +75,18 @@ class NavBanner extends Component {
         const style = { width : 150, height: 0 };
         this.setState({ style });
     }
-    logoutUser(){
-        const { logout } = this.context;
-        logout();
-        window.location.href="/signin-page";
+    async logoutUser(){
+        try {
+            await Auth.signOut();
+            console.log("User Signed Out");
+            window.location.href="/signin-page";
+          }
+          catch (error) {
+            console.log("user sign out error");
+            alert("ERROR: Could Not Sign Out, Please Try Again...");
+          }
+        
+        
     }
 
     toastMessage = (message) => {

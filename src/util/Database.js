@@ -1,7 +1,6 @@
-//one of these should work probably?
-const fetch = require('node-fetch');
 import { Auth } from 'aws-amplify';
-// import {fetch} from "node-fetch";
+const fetch = require('node-fetch');
+
 
 
 var urly = "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items";
@@ -12,12 +11,12 @@ export class Database{
             const data = await Auth.currentUserInfo();
             var email = data.attributes.email;
         }
-        catch{
+        catch(error){
             console.log('could not find user :(', error);
         }
         let queryURL = urly + "?userEmail='" + email +"'";
         return new Promise((resolve, reject)=>{
-            fetch(queryURL)
+            fetch(queryURL,{method: 'GET', mode: 'no-cors'})
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
@@ -63,7 +62,7 @@ export class Database{
             const data = await Auth.currentUserInfo();
             var email = data.attributes.email;
         }
-        catch{
+        catch(error){
             console.log('could not find user :(', error);
         }
         return new Promise((resolve, reject)=>{
