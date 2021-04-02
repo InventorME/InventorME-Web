@@ -33,8 +33,7 @@ class Table extends Component {
             let archivedItems = [];
             if (body.items.length > 0)
                 archivedItems = body.items;
-                // .filter(item => item.itemArchived === 1)
-            this.setState({ Archived_Items: archivedItems});
+            this.setState({ Archived_Items: archivedItems.filter(item => item.itemArchived === 1)});
             this.render();
             this.setState({loading: false});
         }
