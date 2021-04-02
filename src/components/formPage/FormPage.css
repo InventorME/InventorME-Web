@@ -98,8 +98,8 @@
     border-style: solid; 
     width: 100.1%;
     margin-top: -0.1%;
-    color: white;
-    background-color: #0e7e92;
+    color: var(--title);
+    background-color: var(--theme);
     border-top-left-radius: 2em;
     border-top-right-radius: 2em;
 }

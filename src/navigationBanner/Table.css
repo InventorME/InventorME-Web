@@ -3,6 +3,7 @@
     margin: margin-top;
     font-family: arial, sans-serif;
     text-align: center;
+    color: var(--label);
   }
  
   
@@ -13,7 +14,7 @@
     text-align: center;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    border: 3px solid var(--text);
+    border: 2px solid var(--text);
     width: 70%;
     
   }
@@ -25,7 +26,7 @@
     
   }
   
-  #Archived_Items tr:nth-child(even){background-color: #f2f2f2;}
+  #Archived_Items tr:nth-child(even){background-color: var(--background);}
   
   #Archived_Items tr:hover {background-color: var(--hover);}
   
@@ -34,5 +35,5 @@
     padding-bottom: 12px;
     text-align: center;
     background-color: var(--theme);
-    color: var(--label);
+    color: var(--title);
   }

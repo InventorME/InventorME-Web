@@ -9,7 +9,7 @@
 }
 
 .title {
-    color: var(--label);
+    color: var(--title);
     font-weight: bold;
     margin: auto;
     display: inline-flex;
@@ -47,7 +47,7 @@
     margin-right: 6%;
     margin-bottom: auto;
     display: inline-flex;
-    color: white;
+    color: var(--title);
     cursor: pointer;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .side-menu h1:hover, .side-menu h1:focus {
-    outline-color: var(--label);
+    outline-color: var(--title);
     outline-width: 0.5px;
     outline-style: double;
 }
@@ -86,7 +86,7 @@
 }
 
 .menu-text {
-    color: var(--label);
+    color: var(--title);
     font-size: 1.1em;
     padding: 1em;
 }
@@ -98,7 +98,7 @@
     background-color: var(--theme);
     overflow: hidden;
     transition: 0.2s;
-    border-top: 2px solid var(--theme);
+    border-top: 2px solid var(--background);
 }
 
 .overlay div {
@@ -108,7 +108,7 @@
 }
 
 .overlay p {
-    color: var(--label);
+    color: var(--title);
     background-color: var(--theme);
     font-size: 1.2em;
     text-align: center;
@@ -119,7 +119,7 @@
 }
 
 .overlay p:hover, .overlay p:focus {
-    outline-color: var(--label);
+    outline-color: var(--title);
     outline-width: 0.5px;
     outline-style: double;
 }

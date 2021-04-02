@@ -4,7 +4,10 @@
     margin: margin-top;
     font-family: arial, sans-serif;
     text-align: center;
+    color: var(--label)
   }
+
+
  
   
   
@@ -26,14 +29,14 @@
     
   }
   
-  #Current_Items tr:nth-child(even){background-color: var(--label);}
+  #Current_Items tr:nth-child(even){background-color: var(--title);}
   
-  #Current_Items tr:hover {background-color: var(--accent);}
+  #Current_Items tr:hover {background-color: var(--hover);}
   
   #Current_Items th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
     background-color: var(--theme);
-    color: var(--label);
+    color: var(--title);
   }

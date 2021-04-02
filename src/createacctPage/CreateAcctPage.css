@@ -27,6 +27,7 @@
     width: 17em;
     height: 1.6em;
     color: var(--text);
+    border-radius: 8px;
     background-color: var(--background);
     
     
@@ -40,6 +41,7 @@
     width: 17em;
     height: 1.6em;
     color: var(--text);
+    border-radius: 8px;
     background-color: var(--background);
 }
 
@@ -50,6 +52,7 @@
     width: 17em;
     height: 1.6em;
     color: var(--text);
+    border-radius: 8px;
     background-color: var(--background);
 }
 .phone{
@@ -59,6 +62,7 @@
     width: 17em;
     height: 1.6em;
     color: var(--text);
+    border-radius: 8px;
     background-color: var(--background);
 }
 .password2{
@@ -68,6 +72,7 @@
     width: 17em;
     height: 1.6em;
     color: var(--text);
+    border-radius: 8px;
     background-color: var(--background);
     
 }
