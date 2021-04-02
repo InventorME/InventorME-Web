@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import './ItemsPage.css';
-<<<<<<< Updated upstream
-import NavBanner from '../NavBanner.js'
-=======
 import NavBanner from '../NavBanner.js';
 import { Auth } from 'aws-amplify';
 import upload from '../../images/upload-button.png'
@@ -46,13 +43,8 @@ class ItemsPage extends Component {
     filterItemByID(ID) {
       this.setState({item: this.state.Current_Items.filter(item => item.itemID === ID), editItem: true});
     }
->>>>>>> Stashed changes
 
-class ItemsPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { response: '' };
- }
+
 
 render() {
     return (

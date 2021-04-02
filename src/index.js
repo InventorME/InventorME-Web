@@ -10,8 +10,6 @@ import SignInPage from './signinPage/SignInPage';
 import AboutPage from './navigationBanner/aboutPage/AboutPage';
 import CreateAcctPage from './createacctPage/CreateAcctPage';
 import Collections from './navigationBanner/collections/Collections';
-<<<<<<< Updated upstream
-=======
 import ArchivePage from './navigationBanner/archivepage/ArchivePage';
 import Amplify from 'aws-amplify';
 import config from './config.json';
@@ -24,7 +22,6 @@ Amplify.configure({
     userPoolWebClientId: config.cognito.APP_CLIENT_ID
   }
 });
->>>>>>> Stashed changes
 
 ReactDOM.render(
    <BrowserRouter>
@@ -36,11 +33,7 @@ ReactDOM.render(
       <Route path = "/signin-page" component = {SignInPage}/>
       <Route path = "/createacct-page" component = {CreateAcctPage}/>
       <Route path="/collections" component={Collections}/>
-<<<<<<< Updated upstream
-      </Account>
-=======
       <Route path = "/archivepage" component = {ArchivePage}/>
->>>>>>> Stashed changes
   </Switch>
   </BrowserRouter>,
   document.getElementById('root')
