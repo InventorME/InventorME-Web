@@ -1,0 +1,94 @@
+.create-folder {
+    position: absolute;
+    top: 6em;
+    left: 29.6em;
+    padding: 0.8em;
+    font-size: 1.3em;
+    color: white;
+    background-color: #0e7e92;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+#Folder-Title {
+    margin: margin-top;
+    font-family: arial, sans-serif;
+    text-align: center;
+  }
+
+  .Collapsible {
+    padding-bottom: 2em;
+    width: 80%;
+  }
+ 
+  .Collapsible__trigger{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    font-weight: bold;
+    font-family: arial, sans-serif;
+    background-color: white;
+    color: #0e7e92;
+    border-collapse: collapse;
+    cursor: pointer;
+    border: 3px solid gray;
+    display: block;
+    margin-left: 227px;
+    margin-right: 227px;
+    margin-top: 12px;
+  }
+  
+  .Collapsible__trigger.is-closed:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color:white;
+    border: 3px solid ;
+    float: right;
+    margin-left: 1px;
+    margin-right: 1px;
+  }
+  
+  .Collapsible__trigger.is-open:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+    font-size: 13px;
+    color: white;
+    border: 3px solid ;
+    float: right;
+    margin-left: 1px;
+    margin-right: 1px;
+  }
+  
+ 
+  
+  
+  #Folder_Items {
+    margin: auto;
+    margin:auto;
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 70%;
+    
+  }
+  
+  #Folder_Items td, #Folder_Items th {
+    border: 1px solid #ddd;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    
+  }
+  
+  #Folder_Items tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #Folder_Items tr:hover {background-color: #ddd;}
+  
+  #Folder_Items th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #0e7e92;
+    color: white;
+  }

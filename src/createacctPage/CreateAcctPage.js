@@ -162,7 +162,7 @@ class CreateAcctPage extends Component {
 
   render() {
     return (
-      <div class="createacct-title">
+      <div className="createacct-title">
         { this.state.loading ?
           <div className="loading-container-sign"> <div className="form-load-symbol-sign" /></div>
           : null}

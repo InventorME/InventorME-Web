@@ -22,6 +22,8 @@ Amplify.configure({
     userPoolWebClientId: config.cognito.APP_CLIENT_ID
   }
 });
+import FolderPage from './navigationBanner/folderPage/FolderPage';
+import StatsPage from './navigationBanner/statsPage/StatsPage';
 
 ReactDOM.render(
    <BrowserRouter>
@@ -34,6 +36,8 @@ ReactDOM.render(
       <Route path = "/createacct-page" component = {CreateAcctPage}/>
       <Route path="/collections" component={Collections}/>
       <Route path = "/archivepage" component = {ArchivePage}/>
+      <Route path = "/folderpage" component = {FolderPage}/>
+      <Route path = "/statspage" component = {StatsPage}/>
   </Switch>
   </BrowserRouter>,
   document.getElementById('root')

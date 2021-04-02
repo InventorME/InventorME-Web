@@ -89,11 +89,11 @@ class SignInPage extends Component{
 
    render(){
        return(
-    <div class="signin-title">
+    <div className="signin-title">
       { this.state.loading ?
       <div className="loading-container-sign"> <div className="form-load-symbol-sign"/></div>
       : null }
-    <div class="signin-inventor-title">
+    <div className="signin-inventor-title">
     <h2>InventorME</h2>
     </div>
     <ToastMessage ref={this.toast}/>
@@ -104,14 +104,14 @@ class SignInPage extends Component{
       input className = "password" 
       value={this.state.password} 
       onChange={this.setPassword}/>
-    <p class ="Email"> Email: </p>
+    <p className ="Email"> Email: </p>
     <input type="text" 
      input className = "email" 
      value={this.state.email} 
      onChange={this.setEmail}/>
-        <button class="login-account" onClick={this.validateUser}>Log in</button>
-        <p class ="or-message"> Don't have an account?</p>
-        <button class="create-account" onClick={event =>  window.location.href="/createacct-page"}>Create an Account</button>
+        <button className="login-account" onClick={this.validateUser}>Log in</button>
+        <p className ="or-message"> Don't have an account?</p>
+        <button className="create-account" onClick={event =>  window.location.href="/createacct-page"}>Create an Account</button>
       </div>
       </div>      
        );
