@@ -8,7 +8,7 @@ class ItemDetailsView extends Component{
     constructor(props) {
         super(props);
         this.state = { item: this.props.editItem[0], detailsView: true, itemName: '', buyDate: null, sellDate: null, checkForm: false,
-        baseURL: "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items" }
+        baseURL: "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items", archive: true }
         this.toggleItemMenu = this.toggleItemMenu.bind(this);
         this.toast = React.createRef();
     }
@@ -18,6 +18,8 @@ class ItemDetailsView extends Component{
             this.setState({sellDate: moment.utc(this.state.item.itemSellDate).format("MMMM Do YYYY")})
         if(this.state.item.itemBuyDate)
             this.setState({buyDate: moment.utc(this.state.item.itemBuyDate).format("MMMM Do YYYY")})
+        if(this.props.archive)
+            this.setState({archive: false})
         this.setState({itemName: this.state.item.itemName})
     }
 
@@ -228,8 +230,10 @@ class ItemDetailsView extends Component{
                 </div>
             </div>
             <div style={{paddingTop: '0em', paddingBottom: '2em', paddingLeft: '5em'}}>
+                { this.state.archive ?
+                <div>
                 <button className="save-button" onClick={() => this.toggleItemMenu()}>Edit</button>
-                <button className="archive-button" onClick={()=>this.checkForm()}>Archive</button>
+                <button className="archive-button" onClick={()=>this.checkForm()}>Archive</button></div> : null }
             </div></div>
             </div>
             </div> : 
