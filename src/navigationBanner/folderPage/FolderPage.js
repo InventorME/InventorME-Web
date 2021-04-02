@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import './FolderPage.css'
 import NavBanner from '../NavBanner.js'
 import upload from '../../images/upload-button.png'
-import { AccountContext } from '../../util/Accounts';
+import {Auth} from 'aws-amplify';
 import ItemDetailsView from '../../components/itemDetailsView/itemDetailsView';
 import Collapsible from 'react-collapsible';
 class FolderPage extends Component {
-    static contextType = AccountContext
+
     constructor(props){
         super(props)
         this.state = {
@@ -17,14 +17,7 @@ class FolderPage extends Component {
     }
 
     componentDidMount(){
-        const { getSession } = this.context;
-        getSession()
-            .then((data) => {
-                this.getItems(data.email).then(data => this.setState({ Folder_Items: data.items}))
-            })
-            .catch(err =>{
-            console.log(err);
-            });
+        
     }
 
     toggleDetailsView() {
@@ -35,7 +28,14 @@ class FolderPage extends Component {
         this.setState({item: this.state.items[foldername].filter(item => item.itemID === ID), editItem: true});
     }
   
-    getItems = async (email) => {
+    getItems = async () => {
+        try{
+            const data = await Auth.currentUserInfo();
+            var email = data.attributes.email;
+        }
+        catch(error){
+            console.log('could not find user :(', error);
+        }
         let queryURL = 'https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items?userEmail="' + email + '"';
         const response = await fetch(queryURL.toString());
         const body = await response.json();

@@ -1,14 +1,22 @@
-//one of these should work probably?
+import { Auth } from 'aws-amplify';
 const fetch = require('node-fetch');
-// import {fetch} from "node-fetch";
+
+
 
 var urly = "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items";
 
 export class Database{
-    get(userEmail){
-        let queryURL = urly + "?userEmail='" + userEmail +"'";
+    async get(){
+        try{
+            const data = await Auth.currentUserInfo();
+            var email = data.attributes.email;
+        }
+        catch(error){
+            console.log('could not find user :(', error);
+        }
+        let queryURL = urly + "?userEmail='" + email +"'";
         return new Promise((resolve, reject)=>{
-            fetch(queryURL)
+            fetch(queryURL,{method: 'GET', mode: 'no-cors'})
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
@@ -49,7 +57,14 @@ export class Database{
             .catch(err => reject(err))
         });
     }
-    deleteUser(email){
+    async deleteUser(){
+        try{
+            const data = await Auth.currentUserInfo();
+            var email = data.attributes.email;
+        }
+        catch(error){
+            console.log('could not find user :(', error);
+        }
         return new Promise((resolve, reject)=>{
             var deleteData = {
                 method: 'DELETE',

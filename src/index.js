@@ -9,16 +9,26 @@ import ItemsPage from './navigationBanner/itemsPage/ItemsPage';
 import SignInPage from './signinPage/SignInPage';
 import AboutPage from './navigationBanner/aboutPage/AboutPage';
 import CreateAcctPage from './createacctPage/CreateAcctPage';
-import { Account } from './util/Accounts';
 import Collections from './navigationBanner/collections/Collections';
 import ArchivePage from './navigationBanner/archivepage/ArchivePage';
 import FolderPage from './navigationBanner/folderPage/FolderPage';
 import StatsPage from './navigationBanner/statsPage/StatsPage';
+import Amplify from 'aws-amplify';
+import config from './config.json';
+
+Amplify.configure({
+  Auth: {
+    mandatorySignId: true,
+    region: config.cognito.REGION,
+    userPoolId: config.cognito.USER_POOL_ID,
+    userPoolWebClientId: config.cognito.APP_CLIENT_ID
+  }
+});
+
 
 ReactDOM.render(
    <BrowserRouter>
    <Switch>
-     <Account>
       <Route exact path="/" component={App}/>
       <Route path="/items-page" component={ItemsPage}/>
       <Route path="/profile-page" component={ProfilePage}/>
@@ -29,8 +39,6 @@ ReactDOM.render(
       <Route path = "/archivepage" component = {ArchivePage}/>
       <Route path = "/folderpage" component = {FolderPage}/>
       <Route path = "/statspage" component = {StatsPage}/>
-      
-      </Account>
   </Switch>
   </BrowserRouter>,
   document.getElementById('root')

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './ItemsPage.css';
 import NavBanner from '../NavBanner.js';
-import { AccountContext } from '../../util/Accounts';
+import { Auth } from 'aws-amplify';
 import upload from '../../images/upload-button.png'
 import ItemDetailsView from '../../components/itemDetailsView/itemDetailsView';
 class ItemsPage extends Component {
-    static contextType = AccountContext
+
     constructor(props){
         super(props)
         this.state = {
@@ -18,18 +18,18 @@ class ItemsPage extends Component {
 
     componentDidMount(){
       this.setState({loading: true})
-        const { getSession } = this.context;
-        getSession()
-            .then((data) => {
-                this.getItems(data.email).then(data => this.setState({ Current_Items: data}))
-                this.setState({loading: false})
-            })
-            .catch(err =>{
-            console.log(err);
-            });
+        
+      this.setState({loading: false})
     }
   
-    getItems = async (email) => {
+    getItems = async () => {
+        try{
+          const data = await Auth.currentUserInfo();
+          var email = data.attributes.email;
+        }
+        catch(error){
+          console.log('could not find user :(', error);
+        }
         let queryURL = 'https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items?userEmail="' + email + '"';
         const response = await fetch(queryURL.toString());
         const body = await response.json();
@@ -43,6 +43,7 @@ class ItemsPage extends Component {
     filterItemByID(ID) {
       this.setState({item: this.state.Current_Items.filter(item => item.itemID === ID), editItem: true});
     }
+
 
     toggleDetailsView() {
       this.setState({ editItem: !this.state.editItem });
