@@ -13,7 +13,7 @@ class NavBanner extends Component {
     constructor(props) {
        super(props);
        this.state = { response: '', isOpen: false, showItemMenu: false, showProfileMenu: false, show: true, 
-       firstName: '',
+       firstName: '', userEmail: '',
        style : {
         width : 150,
         height: 0,
@@ -96,7 +96,7 @@ class NavBanner extends Component {
                     <div className="inventor-title">InventorME</div>
                     <img src={InventorLogo} className="inventor-logo" alt="" />
                 </div>
-                <div style={{backgroundColor: 'white', borderRadius: '1em', textAlign: 'center', marginTop: '2em', cursor: 'pointer', fontSize: '0.6em', height: '3em', width: '7em'}}>
+                <div style={{ borderRadius: '1em', textAlign: 'center', marginTop: '2em', cursor: 'pointer', fontSize: '0.6em', height: '3em', width: '7em'}}>
                     <div className="add-item-button" onClick={() => this.toggleItemMenu()}>Add Item</div>
                 </div>
                 <div className="profile" onClick={this.showProfileMenu}>
@@ -107,24 +107,24 @@ class NavBanner extends Component {
             <OverlayMenu
             open={this.state.isOpen}
             onClose={this.toggleMenu}>
-                <div class="side-menu">
-                    <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Items</h1></div>
+                <div className="side-menu">
+                    <Link to = "/items-page"style={{ textDecoration: 'none' }}>
+                    <div><h1 className="menu-text">Items</h1></div>
+                    </Link>
+                    <Link to = "/collections" style={{ textDecoration: 'none' }}>
+                    <div><h1 className="menu-text">Collections</h1></div>
+                    </Link>
+                    <Link to="" style={{ textDecoration: 'none' }}>
+                    <div><h1 className="menu-text">Folders</h1></div>
+                    </Link>
+                    <Link to ="/archivepage" style={{ textDecoration: 'none' }}>
+                    <div><h1 className="menu-text">Archive</h1></div>
                     </Link>
                     <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Collections</h1></div>
-                    </Link>
-                    <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Folders</h1></div>
-                    </Link>
-                    <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Archive</h1></div>
-                    </Link>
-                    <Link style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Stats</h1></div>
+                    <div><h1 className="menu-text">Stats</h1></div>
                     </Link>
                     <Link to="/about-page" style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Profile</h1></div>
+                    <div><h1 className="menu-text">About</h1></div>
                     </Link>
                 </div>
             </OverlayMenu>            
@@ -142,7 +142,7 @@ class NavBanner extends Component {
           </div>
           <div>
             { this.state.showItemMenu ?
-            <FormPage toggleItemMenu = {this.toggleItemMenu}/> : null }
+            <FormPage toggleItemMenu = {this.toggleItemMenu} userEmail={this.state.userEmail} addItem = {true}/> : null }
           </div>
         </div>
         );

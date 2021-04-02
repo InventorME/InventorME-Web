@@ -1,4 +1,4 @@
-
+@import "../util/colors.css";
 .signin-container {
     width: 100%;
 }
@@ -8,7 +8,7 @@
     width: 100%;
 }
 .signin-inventor-title h2 {
-    color: #0e7e92;
+    color:  var(--label);
     margin-left: 40%;
     top: 1em;
     font-size: 2.0em;
@@ -20,6 +20,10 @@
     left: 2.4em;
     width: 17em;
     height: 1.6em;
+    border-radius: 8px;
+    border-color: var(--text);
+    background-color: var(--background);
+    color: var(--text);
 }
 .email{
     position: absolute;
@@ -28,6 +32,10 @@
     left: 2.4em;
     width: 17em;
     height: 1.6em;
+    border-radius: 8px;
+    border-color: var(--text);
+    background-color: var(--background);
+    color: var(--text);
 }
 .lbox{
     height : 37em;
@@ -44,7 +52,7 @@
 .loading-container-sign {
     position: fixed;
     z-index: 1;
-    background-color: rgb(211, 211, 211);
+    background-color: var(--background);
     opacity: 25%;
     height: 100vh;
     width: 100%;
@@ -58,8 +66,8 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 5px solid rgba(29, 161, 242, 0.2);
-    border-left-color: #26a6bd;
+    border: 5px solid var(--accent);
+    border-left-color: var(--theme);
     animation: rotate-s-loader 1s linear infinite;
 }
 
@@ -69,8 +77,8 @@
     left: 1.6em;
     padding: 0.8em;
     font-size: 1.3em;
-    color: white;
-    background-color: #0e7e92;
+    color: var(--buttonText);
+    background-color: var(--button);
     border-radius: 10px;
     border: none;
     cursor: pointer;
@@ -82,8 +90,8 @@
     left: 1.6em;
     padding: 0.8em;
     font-size: 1.3em;
-    color: white;
-    background-color: #0e7e92;
+    color: var(--buttonText);
+    background-color: var(--button);
     border-radius: 10px;
     border: none;
     cursor: pointer;
@@ -94,7 +102,7 @@
     top: 20em;
     left: 1.6em;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .Password{
@@ -102,12 +110,12 @@
     top: 6em;
     left: 1.6em;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 .Email{
     position: absolute;
     top: 1.6em;
     left: 1.6em;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }

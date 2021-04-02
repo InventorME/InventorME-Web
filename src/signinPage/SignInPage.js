@@ -98,7 +98,7 @@ class SignInPage extends Component{
     </div>
     <ToastMessage ref={this.toast}/>
     <div  class="login-box">
-    <img class = "lbox"img style = {this.state.style} src={ProfileBox} alt=""/>
+    {/* <img class = "lbox"img style = {this.state.style} src={ProfileBox} alt=""/> */}
     <p class ="Password"> Password: </p>
     <input type="password"
       input className = "password" 

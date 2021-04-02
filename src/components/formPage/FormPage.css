@@ -1,39 +1,40 @@
+@import "../../util/colors.css";
+
 .add-edit-container {
     position: fixed;
     border: solid;
     z-index: 5;
-    border-color: #0e7e92;
+    border-color: var(--theme);
     border-radius: 3em;
     border-width: 0.3em;
     margin-top: 3%;
-    width: 60%;
+    width: 50%;
     height: 80%;
-    margin-left: 18%;
-    background-color: white;
+    margin-left: 23%;
+    background-color: var(--background);
 }
 
 .enter-manually {
     cursor: pointer;
-    font-weight: bold;
-    color: black;
-    margin-left: 23%;
+    color: var(--buttonText);
+    background-color: var(--button);
+    border-radius: 0.4em;
+    border-width: 0;
+    margin-left: 20%;
     font-size: 1.3em;
     position: relative;
     width: 9em;
-}
-
-.enter-manually p:hover {
-    color: #0e7e92;
 }
 
 .searchCode-box {
     border-top: none;
     border-left: none;
     border-right: none;
+    border-radius: 0.4em;
     padding-left: 0.5em;
     outline: none;
     margin-left: 10%;
-    font-size: 1em;
+    font-size: 1.2em;
     position: relative;
 }
 
@@ -55,22 +56,22 @@
 }
 
 .save-button {
-    border-radius: 8px;
-    border-color: #0e7e92;
-    background-color: #0e7e92;
-    color: white;
+    border-radius: 0.4em;
+    background-color: var(--button);
+    color: var(--buttonText);
     margin-left: 24%;
     cursor: pointer;
     font-size: 1.2em;
     width: 4em;
     height: 2em;
+    border-width: 0;
 }
 
 .cancel-button {
-    border-radius: 8px;
-    border-color: #0e7e92;
-    background-color: #0e7e92;
-    color: white;
+    border-radius: 0.4em;
+    border-width: 0;
+    background-color: var(--button);
+    color: var(--buttonText);
     margin-left: 6em;
     cursor: pointer;
     font-size: 1.2em;
@@ -79,11 +80,12 @@
 }
 
 .searchCode-button {
-    border-radius: 8px;
-    border-color: #0e7e92;
-    background-color: #0e7e92;
-    color: white;
+    border-radius: 0.4em;
+    background-color: var(--button);
+    font-size: 1.1em;
+    color: var(--buttonText);
     margin-left: 2em;
+    border-width: 0;
     cursor: pointer;
 }
 
@@ -96,8 +98,8 @@
     border-style: solid; 
     width: 100.1%;
     margin-top: -0.1%;
-    color: white;
-    background-color: #0e7e92;
+    color: var(--title);
+    background-color: var(--theme);
     border-top-left-radius: 2em;
     border-top-right-radius: 2em;
 }
@@ -105,7 +107,7 @@
 .loading-container {
     position: fixed;
     z-index: 1;
-    background-color: rgb(236, 236, 236);
+    background-color: var(--background);
     opacity: 20%;
     height: inherit;
     width: inherit;
@@ -120,20 +122,20 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 5px solid rgba(29, 161, 242, 0.2);
-    border-left-color: #26a6bd;
+    border: 5px solid var(--accent);
+    border-left-color: var(--theme);
     animation: rotate-s-loader 1s linear infinite;
 }
 
 .form-container {
     margin-left: 2%;
     width: 98%;
-    height: 87%;
+    height: 90%;
     overflow-y: scroll;
 }
 
 .form-container h2 {
-    color:#0e7e92;
+    color: var(--label);
     font-size: 1.2em;
 }
 
@@ -178,7 +180,7 @@
 }
 
 .input-tag {
-    background: white;
+    background: var(--background);
     border: none;
     display: flex;
     flex-wrap: wrap;
@@ -194,9 +196,9 @@
 
 .input-tag-tags li {
     align-items: center;
-    background: #0e7e92;
+    background: var(--button);
     border-radius: 1em;
-    color: white;
+    color: var(--buttonText);
     display: flex;
     font-weight: 500;
     list-style: none;
@@ -208,10 +210,10 @@
 .input-tag-tags li button {
     align-items: center;
     appearance: none;
-    background: #333333;
+    background: var(--background);
     border: none;
     border-radius: 50%;
-    color: white;
+    color: var(--buttonText);
     cursor: pointer;
     display: inline-flex;
     font-size: 0.7em;
