@@ -12,7 +12,7 @@ class NavBanner extends Component {
     constructor(props) {
        super(props);
        this.state = { response: '', isOpen: false, showItemMenu: false, showProfileMenu: false, show: true, 
-       firstName: '',
+       firstName: '', userEmail: '',
        style : {
         width : 150,
         height: 0,
@@ -32,11 +32,11 @@ class NavBanner extends Component {
         getSession()
           .then((data) => {
             this.setState({ firstName: data.name })
-            // this.setState({ userProfilePic: res.userProfilePicURL })        
+            this.setState({ userEmail: data.email })        
           })
           .catch(err =>{
             console.log(err);
-            this.toastMessage("Error: No user found, please sign in again");
+            window.location.href="/signin-page";
         });
     }
 
@@ -102,24 +102,24 @@ class NavBanner extends Component {
             <OverlayMenu
             open={this.state.isOpen}
             onClose={this.toggleMenu}>
-                <div class="side-menu">
+                <div className="side-menu">
                     <Link to = "/items-page"style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Items</h1></div>
+                    <div><h1 className="menu-text">Items</h1></div>
                     </Link>
                     <Link to = "/collections" style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Collections</h1></div>
+                    <div><h1 className="menu-text">Collections</h1></div>
                     </Link>
                     <Link to = "/folderpage" style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Folders</h1></div>
+                    <div><h1 className="menu-text">Folders</h1></div>
                     </Link>
                     <Link to ="/archivepage" style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Archive</h1></div>
+                    <div><h1 className="menu-text">Archive</h1></div>
                     </Link>
                     <Link to = "/statspage" style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Stats</h1></div>
+                    <div><h1 className="menu-text">Stats</h1></div>
                     </Link>
                     <Link to="/about-page" style={{ textDecoration: 'none' }}>
-                    <div><h1 class="menu-text">Profile</h1></div>
+                    <div><h1 className="menu-text">About</h1></div>
                     </Link>
                 </div>
             </OverlayMenu>            
@@ -137,7 +137,7 @@ class NavBanner extends Component {
           </div>
           <div>
             { this.state.showItemMenu ?
-            <FormPage toggleItemMenu = {this.toggleItemMenu}/> : null }
+            <FormPage toggleItemMenu = {this.toggleItemMenu} userEmail={this.state.userEmail} addItem = {true}/> : null }
           </div>
         </div>
         );

@@ -8,15 +8,18 @@ class StatsPage extends Component {
         return (
         <div>
             <NavBanner/>
+<<<<<<< HEAD
             
             <div>
             <StatsTable/>
+=======
+            <div style={{marginTop: '8%', marginLeft: '13%'}}>
+                <div>
+                <StatsTable/>
+                </div>
+>>>>>>> 4091f09489101a72867c1022ade8da11b7ad336b
             </div>
-            </div>
-          
-       
-        
-        
+        </div>        
         );
       }
     }

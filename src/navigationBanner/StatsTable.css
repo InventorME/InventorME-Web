@@ -1,3 +1,10 @@
+.loading-container-stats{
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    opacity: 40%;
+    height: 100vh;
+    width: 100%;
+}
 
 .Circle1{
     margin-left: 12em;
