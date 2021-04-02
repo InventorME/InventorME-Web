@@ -19,17 +19,19 @@
     border-collapse: collapse;
     border: 3px solid var(--background);
     width: 70%;
+    color: var(--tabelText);
+    background-color: var(--row);
     
   }
   
   #Current_Items td, #Current_Items th {
-    border: 1px solid var(--background);
+    border: 1px solid var(--title);
     padding-top: 15px;
     padding-bottom: 15px;
     
   }
   
-  #Current_Items tr:nth-child(even){background-color: var(--title);}
+  #Current_Items tr:nth-child(even){background-color: var(--rowAccent);}
   
   #Current_Items tr:hover {background-color: var(--hover);}
   
@@ -37,6 +39,6 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
-    background-color: var(--theme);
+    background-color: var(--header);
     color: var(--title);
   }

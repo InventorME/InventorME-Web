@@ -11,6 +11,12 @@
         --icon: #36244f;
         --hover: #ffffff;
         --objectsText: #ffffff;
+        --folder: #3f9388;
+        --folderText: #ffffff;
+        --header:#3f9388;
+        --rowAccent: #00ffff;
+        --row: #f2f2f2;
+        --tableText: #000000;
     }
     
 }
@@ -27,6 +33,12 @@
         --icon: #36244f;
         --hover: #ffffff;
         --objectsText: #ffffff;
+        --folder: #001e38;
+        --header: #3f9388;
+        --folderText: #ffffff;
+        --rowAccent: #00bfff;
+        --row: #00b3b3;
+        --tableText: #000000;
     }
 }
 body{

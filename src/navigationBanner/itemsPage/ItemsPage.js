@@ -28,8 +28,7 @@ class ItemsPage extends Component {
           let items = [];
           if(body.items.length > 0)
             items = body.items.filter(item => item.itemArchived === 0)
-            
-          this.setState({ Current_Item: items});
+          this.setState({ Current_Items: items});
           this.render();
           this.setState({loading: false});
       }
