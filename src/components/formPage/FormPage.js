@@ -28,6 +28,7 @@ class FormPage extends Component {
   }
 
 componentDidMount() {
+  console.log(this.props.item)
   if(this.props.item) {
     let buyDate = "";
     let sellDate = "";
@@ -207,7 +208,7 @@ saveItem() {
       itemCategory: this.quotes(this.state.category),
       itemName: this.quotes(this.state.name),
       itemPhotoURL: this.quotes(this.state.imageURL),
-      itemSerialNum: this.state.serialNum,
+      itemSerialNum: this.quotes(this.state.serialNum),
       itemPurchaseAmount: this.quotes(this.state.purchaseAmount),
       itemWorth: this.quotes(this.state.itemWorth),
       itemReceiptPhotoURL: this.quotes(this.state.itemReceipt),
@@ -229,7 +230,7 @@ saveItem() {
     itemCategory: this.quotes(this.state.category),
     itemName: this.quotes(this.state.name),
     itemPhotoURL: this.quotes(this.state.imageURL),
-    itemSerialNum: this.state.serialNum,
+    itemSerialNum: this.quotes(this.state.serialNum),
     itemPurchaseAmount: this.quotes(this.state.purchaseAmount),
     itemWorth: this.quotes(this.state.itemWorth),
     itemReceiptPhotoURL: this.quotes(this.state.itemReceipt),
