@@ -12,6 +12,7 @@ class FolderTable extends Component {
         this.state = {
             Folder_Items: [],
             Headers: ['Name', 'Category', 'Notes', 'Image'],
+            items: []
         }
     }
 
@@ -34,7 +35,8 @@ class FolderTable extends Component {
         let folderItems = [];
         
        if(body.items.length > 0)
-         folderItems = body.items.filter(item => item.itemFolder != "null")
+         folderItems = body.items.filter(item => item.itemFolder !== null)
+         folderItems = body.items.filter(item => item.itemArchived !== 1)
         //console.log(folderItems)
 
         var groupBy = function(xs, key) {
@@ -58,8 +60,9 @@ class FolderTable extends Component {
      
           
       if (response.status !== 200) throw Error(body.message);
-           return Object.keys(folderItems) ;
-
+      this.setState({items:groubedByTeam})
+      this.setState({foldername:Object.keys(groubedByTeam)})
+            return body
     }
 
     renderTableHeader(){
@@ -75,12 +78,13 @@ class FolderTable extends Component {
         
       
         return (
-                
-            <Collapsible trigger= "personal">
+            <div>
+            { this.state.foldername ? this.state.foldername.map((folderName) => (
+            <Collapsible trigger= {folderName}>
             <table id= 'Folder_Items' style={{ marginBottom: '12em'}}>
             <tbody>
             <tr>{this.renderTableHeader()}</tr>
-            { this.state.Folder_Items ? this.state.Folder_Items.map((Folder_Item) => (
+            { this.state.items[folderName] ? this.state.items[folderName].map((Folder_Item) => (
             <tr key = {Folder_Item.itemName}>
             <td>{Folder_Item.itemName}</td> 
             <td>{Folder_Item.itemCategory}</td>
@@ -92,6 +96,8 @@ class FolderTable extends Component {
             </tbody>
             </table>
                 </Collapsible>
+               )) : null}
+               </div>
             
         )
     }

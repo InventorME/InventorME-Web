@@ -8,8 +8,8 @@ class StatsPage extends Component {
         return (
         <div>
             <NavBanner/>
-            <div>
             
+            <div>
             <StatsTable/>
             </div>
             </div>
