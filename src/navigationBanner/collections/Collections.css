@@ -1,10 +1,44 @@
 .area{
-    padding: 100px;
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
-    flex:1;
-    width: 150px;
-    margin: 40px;
-    
+  padding: 5%;
+  position: relative;
+  border-radius: 20px;
+  width: 10%;
+  min-height: 50px;
+  margin: 2%;
+  display: inline-block;
+  overflow: hidden;
   }
+
+.icon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 3%;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+}
+.icon:hover{
+  background-color: #0e7e00;
+}
+.textTittle{
+  font-size: 100%;
+  position: absolute;
+  color: white;
+  left: 0;
+  padding-left: 10%;
+  top: 20%;
+  padding: 5%;
+}
+.textAmount{
+  font-size: 100%;
+  position: absolute;
+  color: white;
+  padding-left: 10%;
+  padding: 5%;
+  bottom: 2%;
+  right: 2%;
+}
