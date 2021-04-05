@@ -5,10 +5,11 @@ import './NavBanner.css';
 import OverlayMenu from 'react-overlay-menu';
 import { Link } from "react-router-dom";
 import FormPage from '../components/formPage/FormPage';
-import { AccountContext } from '../util/Accounts';
+import { Auth } from 'aws-amplify';
+
 
 class NavBanner extends Component {
-    static contextType = AccountContext
+
     constructor(props) {
        super(props);
        this.state = { response: '', isOpen: false, showItemMenu: false, showProfileMenu: false, show: true, 
@@ -24,20 +25,20 @@ class NavBanner extends Component {
        this.showProfileMenu = this.showProfileMenu.bind(this);
        this.closeProfileMenu = this.closeProfileMenu.bind(this);
        this.logoutUser = this.logoutUser.bind(this);
+       this.toast = React.createRef();
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
-        const { getSession } = this.context;
-        getSession()
-          .then((data) => {
-            this.setState({ firstName: data.name })
-            this.setState({ userEmail: data.email })        
-          })
-          .catch(err =>{
-            console.log(err);
-            window.location.href="/signin-page";
-        });
+        try{
+            const data = await Auth.currentUserInfo();
+            this.setState({ firstName: data.attributes.name })
+            this.setState({ userEmail: data.attributes.email })
+        }catch(error){
+            console.log(error);
+            alert("Error: No user found, please sign in again");
+            window.location.href = "/signin-page";
+        }
     }
 
     componentWillUnmount() {
@@ -74,11 +75,23 @@ class NavBanner extends Component {
         const style = { width : 150, height: 0 };
         this.setState({ style });
     }
-    logoutUser(){
-        const { logout } = this.context;
-        logout();
-        window.location.href="/signin-page";
+    async logoutUser(){
+        try {
+            await Auth.signOut();
+            console.log("User Signed Out");
+            window.location.href="/signin-page";
+          }
+          catch (error) {
+            console.log("user sign out error");
+            alert("ERROR: Could Not Sign Out, Please Try Again...");
+          }
+        
+        
     }
+
+    toastMessage = (message) => {
+        this.toast.current.openToast(message);
+      };
 
     render() {
         return (
@@ -91,7 +104,7 @@ class NavBanner extends Component {
                     <div className="inventor-title">InventorME</div>
                     <img src={InventorLogo} className="inventor-logo" alt="" />
                 </div>
-                <div style={{backgroundColor: 'white', borderRadius: '1em', textAlign: 'center', marginTop: '2em', cursor: 'pointer', fontSize: '0.6em', height: '3em', width: '7em'}}>
+                <div style={{ backgroundColor: 'white', borderRadius: '1em', textAlign: 'center', marginTop: '2em', cursor: 'pointer', fontSize: '0.6em', height: '3em', width: '7.2em'}}>
                     <div className="add-item-button" onClick={() => this.toggleItemMenu()}>Add Item</div>
                 </div>
                 <div className="profile" onClick={this.showProfileMenu}>

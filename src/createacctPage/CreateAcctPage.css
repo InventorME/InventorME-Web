@@ -1,10 +1,12 @@
+@import "../util/colors.css";
+
 .createacct-inventor-title {
     display: inline-flex;
     width: 100em;
 }
 .createacct-inventor-title h2 {
     position: absolute;
-    color: #0e7e92;
+    color: var(--label);
     margin-left: 18em;
     margin-top: 1em;
     font-size: 2.0em;
@@ -16,6 +18,7 @@
     padding-left: 3em;
     padding-top: 2em;
     left: .5em;
+    background-color: var(--background);
 }
 .email2{
     position: absolute;
@@ -23,6 +26,10 @@
     left: 30.4em;
     width: 17em;
     height: 1.6em;
+    color: var(--text);
+    border-radius: 8px;
+    background-color: var(--background);
+    
     
 }
 
@@ -33,6 +40,9 @@
     left: 30.4em;
     width: 17em;
     height: 1.6em;
+    color: var(--text);
+    border-radius: 8px;
+    background-color: var(--background);
 }
 
 .last{
@@ -41,6 +51,9 @@
     left: 30.4em;
     width: 17em;
     height: 1.6em;
+    color: var(--text);
+    border-radius: 8px;
+    background-color: var(--background);
 }
 .phone{
     position: absolute;
@@ -48,6 +61,9 @@
     left: 30.4em;
     width: 17em;
     height: 1.6em;
+    color: var(--text);
+    border-radius: 8px;
+    background-color: var(--background);
 }
 .password2{
     position: absolute;
@@ -55,6 +71,10 @@
     left: 30.4em;
     width: 17em;
     height: 1.6em;
+    color: var(--text);
+    border-radius: 8px;
+    background-color: var(--background);
+    
 }
 
 
@@ -64,35 +84,35 @@
     top: 9.5em;
     left: 19.6em;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 .Email2{
     position: absolute;
     top: 5em;
     left: 19.6em;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 .Lname{
     position: absolute;
     top: 13.8em;
     left: 19.6em;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 .Phone{
     position: absolute;
     top: 18em;
     left: 19.6em;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 .Password2{
     position: absolute;
     top: 21.9em;
     left: 19.6em;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 .goto-account {
     position: absolute;
@@ -100,8 +120,8 @@
     left: 19.6em;
     padding: 0.8em;
     font-size: 1.3em;
-    color: white;
-    background-color: #0e7e92;
+    color: var(--buttonText);
+    background-color: var(--button);
     border-radius: 10px;
     border: none;
     cursor: pointer;

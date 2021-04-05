@@ -1,7 +1,9 @@
+@import "../../util/colors.css";
+
 .archive-button {
     border-radius: 8px;
-    border-color: #0e7e92;
-    background-color: #0e7e92;
+    border-color: var(--theme);
+    background-color: var(--theme);
     color: white;
     margin-left: 6em;
     cursor: pointer;
@@ -16,7 +18,7 @@
     border-style: solid;
     width: 40%;
     height: 20%;
-    border-color: #0e7e92;
+    border-color: var(--theme);
     background-color: white;
     position: absolute;
     margin-top: 19em;
@@ -24,7 +26,7 @@
 }
 
 .check-title {
-    color: #0e7e92;
+    color: var(--theme);
     font-size: 1.4em;
     font-weight: bold;
     text-align: center;
@@ -32,8 +34,8 @@
 
 .yes-button {
     border-radius: 8px;
-    border-color: #0e7e92;
-    background-color: #0e7e92;
+    border-color: var(--theme);
+    background-color: var(--theme);
     color: white;
     cursor: pointer;
     font-size: 1em;
@@ -43,8 +45,8 @@
 
 .no-button {
     border-radius: 8px;
-    border-color: #0e7e92;
-    background-color: #0e7e92;
+    border-color: var(--theme);
+    background-color: var(--theme);
     color: white;
     margin-left: 2em;
     cursor: pointer;

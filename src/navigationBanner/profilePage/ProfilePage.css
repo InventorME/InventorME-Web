@@ -1,7 +1,8 @@
+@import "../../util/colors.css";
 .profile-container {
     margin-top: 2%;
     overflow-x: hidden;
-    background-color: white;
+    background-color: var(--background);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -13,7 +14,7 @@
 }
 
 .profile-banner h2 {
-    color: #0e7e92;
+    color: var(--label);
     padding-left: 39%;
     margin-top: 1.2em;
     font-size: 1.8em;
@@ -29,7 +30,7 @@
 .load-container {
     position: absolute;
     z-index: 2;
-    background-color: rgb(235, 235, 235);
+    background-color: var(--background);
     opacity: 40%;
     height: 100vh;
     width: 100%;
@@ -43,8 +44,8 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 5px solid rgba(29, 161, 242, 0.2);
-    border-left-color: #26a6bd;
+    border: 5px solid var(--accent);
+    border-left-color: var(--theme);
     animation: rotate-s-loader 1s linear infinite;
 }
 
@@ -62,7 +63,7 @@
     margin-left: 45%;
     padding-top: 2%;
     padding-bottom: 2%;
-    color: #0e7e92;
+    color: var(--label);
  }
 
 .phone-number {
@@ -70,14 +71,14 @@
     top: 10em;
     left: 3em;
     font-size: 1.2em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .phone-number-value {
     position: relative;
     font-size: 1em;
     height: 1.5em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .user-email {
@@ -85,14 +86,14 @@
     top: 15em;
     left: 3em;
     font-size: 1.2em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .user-email-value {
     position: relative;
     height: 1.5em;
     font-size: 1em; 
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .info-container {
@@ -106,8 +107,8 @@
     margin-top: 5%;
     padding: 0.8em;
     font-size: 1.0em;
-    color: white;
-    background-color: #0e7e92;
+    color: var(--buttonText);
+    background-color: var(--button);
     border-radius: 10px;
     border: none;
     cursor: pointer;
@@ -136,8 +137,8 @@
     padding-right: 1.5em;
     padding-left: 1.5em;
     font-size: 1.0em;
-    color: white;
-    background-color: #0e7e92;
+    color: var(--buttonText);
+    background-color: var(--button);
     border-radius: 10px;
     border: none;
     cursor: pointer;
@@ -150,8 +151,8 @@
     padding-left: 0.8em;
     padding-right: 0.8em;
     font-size: 1.0em;
-    color: white;
-    background-color: #0e7e92;
+    color: var(--buttonText);
+    background-color: var(--button);
     border-radius: 10px;
     border: none;
     cursor: pointer;
@@ -168,20 +169,19 @@
     position: relative;
     width: 5em;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .first-input {
     position: relative;
     height: 1.5em;
     font-size: 1.2em;
-    outline: none;
-    border-top: none; 
-    border-left: none;
-    border-right: none;
-    border-width: 0 0 1.5px; 
-    border-color: gray;
-    color: black;
+    border-radius: .5em;
+    border-color: var(--text);
+    border-width: 1.5px; 
+    border-color: var(--text);
+    color: var(--text);
+    background-color: var(--background);
 }
 
 .edit-last-input {
@@ -194,20 +194,19 @@
     position: relative;
     width: inherit;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .last-input {
     position: relative;
     height: 1.5em;
     font-size: 1.2em;
-    outline: none;
-    border-top: none; 
-    border-left: none;
-    border-right: none;
-    border-width: 0 0 1.5px; 
-    border-color: gray;
-    color: black;
+    border-radius: .5em;
+    border-color: var(--text);
+    border-width: 1.5px; 
+    border-color: var(--text);
+    color: var(--text);
+    background-color: var(--background);
 }
 
 .edit-email-input {
@@ -220,7 +219,7 @@
 .edit-email {
     position: relative;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .edit-phone-input {
@@ -233,28 +232,28 @@
     position: relative;
     width: inherit;
     font-size: 1.1em;
+    border-radius: 8px;
     margin-left: 45%;
+    
 }
 
 .edit-phone {
     position: relative;
     width: inherit;
     font-size: 1.3em;
-    color: #0e7e92;
+    color: var(--label);
 }
 
 .phone-input {
     position: relative;
     height: 1.5em;
-    width: 9em;
     font-size: 1.2em;
-    outline: none;
-    border-top: none; 
-    border-left: none;
-    border-right: none;
-    border-width: 0 0 1.5px; 
-    border-color: gray;
-    color: black;
+    border-radius: 8px;
+    border-color: var(--text);
+    border-width: 1.5px; 
+    border-color: var(--text);
+    color: var(--text);
+    background-color: var(--background);
 }
 
 .special-label {
@@ -262,11 +261,13 @@
 }
 
 .form-control {
-    border-top: none;
-    border-left: none;
-    border-right: none;
     outline: none;
     font-size: 1em;
+    border-width: 1.5px; 
+    border-color: var(--text);
+    color: var(--text);
+    border-radius: 8px;
+    background-color: var(--background);
 }
 
 input[type=number]::-webkit-inner-spin-button, 

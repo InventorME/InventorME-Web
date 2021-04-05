@@ -1,37 +1,47 @@
+@import "../../util/colors.css";
+
 #Title {
     margin: margin-top;
     font-family: arial, sans-serif;
     text-align: center;
+    color: var(--label)
   }
+
+
  
   
   
   #Current_Items {
     margin: auto;
-    margin:auto;
+    margin: auto;
     text-align: center;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    border: 3px solid #ddd;
+    border: 3px solid var(--background);
     width: 70%;
+    color: var(--tableText);
+    background-color: var(--row);
     
   }
   
   #Current_Items td, #Current_Items th {
-    border: 1px solid #ddd;
+    border: 1px solid var(--title);
     padding-top: 15px;
     padding-bottom: 15px;
     
   }
   
-  #Current_Items tr:nth-child(even){background-color: #f2f2f2;}
+  #Current_Items tr:nth-child(even){background-color: var(--rowAccent);}
   
-  #Current_Items tr:hover {background-color: #ddd;}
+  #Current_Items tr:hover {
+    background-color: var(--hover);
+    color: var(--hoverText);
+  }
   
   #Current_Items th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
-    background-color: #0e7e92;
-    color: white;
+    background-color: var(--header);
+    color: var(--title);
   }

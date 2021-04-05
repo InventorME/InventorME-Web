@@ -4,13 +4,13 @@ import ReactRoundedImage from "react-rounded-image"
 import UploadButton from '../../images/upload-button.png'
 import PhoneInput from 'react-phone-input-2'
 import ToastMessage from '../../components/toastMessage/ToastMessage';
-import { CognitoUserAttribute } from "amazon-cognito-identity-js";
-import { AccountContext } from '../../util/Accounts';
 import BackButton from '../../images/back-button.png'
 import { Link } from "react-router-dom";
+import { Auth } from 'aws-amplify';
+
 
 class ProfilePage extends Component {
-  static contextType = AccountContext
+
   constructor(props) {
     super(props);
     this.state = { loading: false, profile: true,
@@ -19,7 +19,8 @@ class ProfilePage extends Component {
       lastName: '',
       userEmail: '',
       userProfilePic: '',
-      userPhone: ''
+      userPhone: '',
+      phoneFormat: ''
     }
     this.toggleForm = this.toggleForm.bind(this);
     this.saveProfile = this.saveProfile.bind(this);
@@ -28,23 +29,24 @@ class ProfilePage extends Component {
     this.toast = React.createRef();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ loading: true });
-    const { getSession } = this.context;
-    getSession()
-      .then((data) => { 
-        this.setState({ response: data.user })
-        this.setState({ firstName: data.name })
-        this.setState({ lastName: data.family_name })
-        this.setState({ userEmail: data.email })
-        this.setState({ userPhone: data.phone_number })
+
+    try{
+      const data = await Auth.currentUserInfo();
+        this.setState({ response: data })
+        this.setState({ firstName: data.attributes.name })
+        this.setState({ lastName: data.attributes.family_name })
+        this.setState({ userEmail: data.attributes.email })
+        this.setState({ userPhone: data.attributes.phone_number })
+        this.setState({ phoneFormat: this.formatPhoneNumber(data.attributes.phone_number)})
         // this.setState({ userProfilePic: res.userProfilePicURL }) 
-        this.setState({ loading: false });       
-      })
-      .catch(err =>{
-        console.log(err);
-        window.location.href="/signin-page";
-    });
+        this.setState({ loading: false }); 
+    }  
+    catch (error) {
+      console.log('could not find user :(', error);
+      window.location.href="/signin-page";
+    }
   }
   
   formatPhoneNumber(phoneNumberString) {
@@ -70,7 +72,18 @@ class ProfilePage extends Component {
   }
 
   phoneOnChange = (event) => {
-    this.setState({userPhone: "+" + event});
+    var cleaned = ('' + event).replace(/\D/g, '');
+    cleaned = '+' + cleaned;
+    cleaned = cleaned.substring(0, 12);
+    this.setState({ userPhone: cleaned });
+    var format = '';
+    if (cleaned.length < 6)
+      format = '+1 (' + cleaned.substring(2, 5);
+    else if (cleaned.length < 9)
+      format = '+1 (' + cleaned.substring(2, 5) + ') ' + cleaned.substring(5, 8);
+    else
+      format = '+1 (' + cleaned.substring(2, 5) + ') ' + cleaned.substring(5, 8) + '-' + cleaned.substring(8, 12);
+    this.setState({ phoneFormat: format });
   }
 
   onImageChange = async(event) => {
@@ -146,40 +159,30 @@ class ProfilePage extends Component {
     }, 2000); 
   }
 
-  saveProfile=(event) => {
-    const { getSession } = this.context;
+ 
+  saveProfile= async (event) => {
+    // const { getSession } = this.context;
+
     if(!this.validateUser()){   
       event.preventDefault();
     } else {
       this.setState({ loading: true });
       event.preventDefault();
-        getSession().then(({ user }) => {
-          const attributes = [];
-          attributes.push(new CognitoUserAttribute({
-            Name: 'name',
-            Value: this.state.firstName
-          }));
-          attributes.push(new CognitoUserAttribute({
-            Name: 'phone_number',
-            Value: this.state.userPhone
-          }));
-          attributes.push(new CognitoUserAttribute({
-            Name: 'family_name',
-            Value: this.state.lastName
-          }));
-    
-          user.updateAttributes(attributes, (err, result) => {
-            if (err) {
-              console.error(err);
-              this.setState({ loading: false });
-              this.toastMessage('Error: Failed to save profile.');
-            } else {
-              this.toastMessage('Saved Successfully! ㋡');
-              this.reloadPage();
-            }
-          });
-        });
-      
+      const attributes = {
+        'name': this.state.firstName,
+        'phone_number': this.state.userPhone,
+        'family_name': this.state.lastName
+      }
+      try{
+        const user = await Auth.currentAuthenticatedUser();
+        await Auth.updateUserAttributes(user, attributes);
+        
+        this.toastMessage('Saved Successfully! ㋡');
+        this.reloadPage();
+      }catch (error) {
+        this.setState({ loading: false });
+        this.toastMessage('Error: Failed to save profile.');
+      }      
     }
   }
   
@@ -262,9 +265,9 @@ render() {
             </div>
             
             <div style={{display: 'inline-flex', width: '100%', height: '22%'}}>
-              <div className = "edit-phone-input2">
-              <p className = "edit-phone"> Phone Number: </p>
-              <PhoneInput country='us' countryCodeEditable={false} withCountryCallingCode={true} className="phone-input"  value={this.state.userPhone} onChange={this.phoneOnChange}/>
+              <div class = "edit-phone-input2">
+              <p class = "edit-phone"> Phone Number: </p>
+              <PhoneInput country='us' countryCodeEditable={false} withCountryCallingCode={true} class="phone-input"  value={this.state.phoneFormat} onChange={this.phoneOnChange}/>
               </div>
             </div>
             
