@@ -4,12 +4,15 @@ import NavBanner from '../NavBanner.js';
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Database } from '../../util/Database';
 
+var color=0;
 
 class Collections extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        items: [], editItem: false, item: null
+        items: [], 
+        editItem: false, 
+        item: null,
     }
   }
   componentDidMount() {
@@ -37,8 +40,6 @@ class Collections extends Component {
         var groubedByTeam = groupBy(collectionItems , 'itemCategory')
         this.setState({ items: groubedByTeam })
         this.setState({ collectionTittle: Object.keys(groubedByTeam) })
-        console.log("ITEMS");
-        console.log(groubedByTeam);
         
         this.render();
         this.setState({ loading: false });
@@ -46,7 +47,7 @@ class Collections extends Component {
     catch (error) {
         console.log('Error pulling data', error);
     }
-}
+  }
   renderFolders = (props) =>{
     return(
       <div className='area' style={{backgroundColor:props.color}}>
@@ -54,19 +55,34 @@ class Collections extends Component {
             <div className='textTittle'>{props.tittle}</div>
             <div className='textAmount'>Items: {props.amount}</div>
       </div>
-
     );
+  }
+  getColors(){
+    let colorCode='';
+    switch(color) {
+      case 0:
+        color++;
+        colorCode='#ffb5b9';
+        break;
+      case 1:
+        color++;
+        colorCode='#b3b5ff';
+        break;
+      case 2:
+        color=0;
+        colorCode='#47ff72';
+        break;
+      default:
+        console.log('An Error Ocured')
+    }
+    return colorCode
   }
   render() {
       return (
       <div>
           <NavBanner/>
-          {this.state.collectionTittle ? this.state.collectionTittle.map((collectionTittle) => (
-            <div className='area' style={{backgroundColor:'red'}}>
-            <AiOutlinePlusCircle onClick={() => alert('Clicked')} class={'icon'}/>
-            <div className='textTittle'>{collectionTittle}</div>
-            <div className='textAmount'>Items: {'5'}</div>
-      </div>
+          {this.state.collectionTittle ? this.state.collectionTittle.map((collTittle) => (
+            <this.renderFolders tittle={collTittle} amount={this.state.items[collTittle].length} color={this.getColors()}/>
           )):null}
       </div>
       );

@@ -3,7 +3,8 @@
   position: relative;
   border-radius: 20px;
   width: 10%;
-  min-height: 50px;
+  min-width: 100px;
+  min-height: 100px;
   margin: 2%;
   display: inline-block;
   overflow: hidden;
@@ -22,10 +23,11 @@
   outline: none;
 }
 .icon:hover{
-  background-color: #0e7e00;
+  background-color:gray;
 }
 .textTittle{
-  font-size: 100%;
+  font-size: 200%;
+  text-shadow: none;
   position: absolute;
   color: white;
   left: 0;
