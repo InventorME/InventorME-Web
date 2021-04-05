@@ -14,7 +14,7 @@
     text-align: center;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    color: var(--tabelText);
+    color: var(--tableText);
     border: 2px solid var(--background);
     width: 70%;
     background-color: var(--row);
@@ -30,7 +30,9 @@
   
   #Archived_Items tr:nth-child(even){background-color: var(--rowAccent);}
   
-  #Archived_Items tr:hover {background-color: var(--hover);}
+  #Archived_Items tr:hover {
+    color: var(--hoverText);
+    background-color: var(--hover);}
   
   #Archived_Items th {
     padding-top: 12px;

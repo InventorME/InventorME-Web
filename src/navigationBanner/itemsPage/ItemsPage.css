@@ -19,7 +19,7 @@
     border-collapse: collapse;
     border: 3px solid var(--background);
     width: 70%;
-    color: var(--tabelText);
+    color: var(--tableText);
     background-color: var(--row);
     
   }
@@ -33,7 +33,10 @@
   
   #Current_Items tr:nth-child(even){background-color: var(--rowAccent);}
   
-  #Current_Items tr:hover {background-color: var(--hover);}
+  #Current_Items tr:hover {
+    background-color: var(--hover);
+    color: var(--hoverText);
+  }
   
   #Current_Items th {
     padding-top: 12px;

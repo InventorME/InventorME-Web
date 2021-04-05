@@ -11,7 +11,7 @@ function colorGenerator(){
     else{
         const color = {
             object: ['#ffb5b9', '#b3b5ff', '#47ff72', '#aebffc', '#b3b5ff','#ffb5b9', '#b3b5ff', '#47ff72'],
-            fill: '#979797',
+            fill: '#e6e6e6',
             background: '#333333',
             label: '#000000'
         }

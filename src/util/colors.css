@@ -1,24 +1,21 @@
-@media (prefers-color-scheme: light) {
-    :root{
-        --text: #000000;
-        --accent: #979797;
-        --background: #ffffff;
-        --theme: #0e7e92;
-        --button: #0e7e92;
-        --buttonText: #ffffff;
-        --title: #ffffff;
-        --label: #0e7e92;
-        --icon: #36244f;
-        --hover: #dddddd;
-        --objectsText: #ffffff;
-        --folder: #0e7e92;
-        --header: #0e7e92;
-        --folderText: #ffffff;
-        --rowAccent: #ffffff;
-        --row: #ffffff;
-        --tableText: #000000;
-    }
-    
+:root{
+    --text: #000000;
+    --accent: #979797;
+    --background: #ffffff;
+    --theme: #0e7e92;
+    --button: #0e7e92;
+    --buttonText: #ffffff;
+    --title: #ffffff;
+    --label: #0e7e92;
+    --icon: #36244f;
+    --hover: #dddddd;
+    --objectsText: #ffffff;
+    --folder: #0e7e92;
+    --header: #0e7e92;
+    --rowAccent: #00b3b3;
+    --row: #00cccc;
+    --tableText: #ffffff;
+    --hoverText: #333333;
 }
 @media (prefers-color-scheme: dark) {
     :root{
@@ -31,14 +28,14 @@
         --title: #ffffff;
         --label: #ffffff;
         --icon: #36244f;
-        --hover: #ffffff;
+        --hover: #666666;
         --objectsText: #ffffff;
         --folder: #001e38;
-        --header: #3f9388;
-        --folderText: #ffffff;
-        --rowAccent: #00bfff;
-        --row: #00b3b3;
-        --tableText: #000000;
+        --header: #800000;
+        --rowAccent: #595959;
+        --row: #595959;
+        --tableText: #ffffff;
+        --hoverText: #ffffff;
     }
 }
 body{
