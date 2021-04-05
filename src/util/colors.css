@@ -1,28 +1,6 @@
 @media (prefers-color-scheme: light) {
     :root{
         --text: #000000;
-        --accent: #fffc40;
-        --background: #ffffff;
-        --theme: #3f9388;
-        --button: #f4ebc1;
-        --buttonText: #ffffff;
-        --title: #ffffff;
-        --label: #000000;
-        --icon: #36244f;
-        --hover: #ffffff;
-        --objectsText: #ffffff;
-        --folder: #3f9388;
-        --folderText: #ffffff;
-        --header:#3f9388;
-        --rowAccent: #00ffff;
-        --row: #f2f2f2;
-        --tableText: #000000;
-    }
-    
-}
-@media (prefers-color-scheme: dark) {
-    :root{
-        --text: #000000;
         --accent: #979797;
         --background: #ffffff;
         --theme: #0e7e92;
@@ -38,6 +16,28 @@
         --folderText: #ffffff;
         --rowAccent: #ffffff;
         --row: #ffffff;
+        --tableText: #000000;
+    }
+    
+}
+@media (prefers-color-scheme: dark) {
+    :root{
+        --text: #ffffff;
+        --accent: #fffc40;
+        --background: #333333;
+        --theme: #001e38;
+        --button: #f4ebc1;
+        --buttonText: #ffffff;
+        --title: #ffffff;
+        --label: #ffffff;
+        --icon: #36244f;
+        --hover: #ffffff;
+        --objectsText: #ffffff;
+        --folder: #001e38;
+        --header: #3f9388;
+        --folderText: #ffffff;
+        --rowAccent: #00bfff;
+        --row: #00b3b3;
         --tableText: #000000;
     }
 }
