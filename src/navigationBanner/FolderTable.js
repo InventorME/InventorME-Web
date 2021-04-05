@@ -19,7 +19,7 @@ class FolderTable extends Component {
         const { getSession } = this.context;
         getSession()
             .then((data) => {
-                this.getItems(data.email).then(data => this.setState({ Folder_Items: data}))
+                this.getItems(data.email).then(data => this.setState({ Folder_Items: data.items}))
             })
             .catch(err =>{
             console.log(err);
@@ -35,10 +35,31 @@ class FolderTable extends Component {
         
        if(body.items.length > 0)
          folderItems = body.items.filter(item => item.itemFolder != "null")
-        console.log(folderItems)
+        //console.log(folderItems)
+
+        var groupBy = function(xs, key) {
+            return xs.reduce(function(rv, x) {
+              (rv[x[key]] = rv[x[key]] || []).push(x);
+              return rv;
+            }, {});
+          };
+
+          var groubedByTeam=groupBy(folderItems, 'itemFolder')
+          console.log(groubedByTeam);
            if (response.status !== 200) throw Error(body.message);
-        return folderItems;
-        
+          console.log( Object.keys(groubedByTeam))
+          // Object.keys(groubedByTeam).forEach(function(category){
+     
+            //console.log(`Team ${category} has ${groubedByTeam[category].length} itemFolder : `);
+          //   groubedByTeam[category].forEach(function(memb,i){
+          //         console.log(`---->${i+1}. ${memb.name}.`)
+           // })
+      // }); 
+     
+          
+      if (response.status !== 200) throw Error(body.message);
+           return Object.keys(folderItems) ;
+
     }
 
     renderTableHeader(){

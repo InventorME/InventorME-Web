@@ -6,24 +6,21 @@
     border-radius: 3em;
     border-width: 0.3em;
     margin-top: 3%;
-    width: 60%;
+    width: 50%;
     height: 80%;
-    margin-left: 18%;
+    margin-left: 23%;
     background-color: white;
 }
 
 .enter-manually {
     cursor: pointer;
-    font-weight: bold;
-    color: black;
-    margin-left: 23%;
+    color: white;
+    background-color: #0e7e92;
+    border-radius: 0.5em;
+    margin-left: 20%;
     font-size: 1.3em;
     position: relative;
     width: 9em;
-}
-
-.enter-manually p:hover {
-    color: #0e7e92;
 }
 
 .searchCode-box {
@@ -33,7 +30,7 @@
     padding-left: 0.5em;
     outline: none;
     margin-left: 10%;
-    font-size: 1em;
+    font-size: 1.2em;
     position: relative;
 }
 
@@ -82,6 +79,7 @@
     border-radius: 8px;
     border-color: #0e7e92;
     background-color: #0e7e92;
+    font-size: 1.1em;
     color: white;
     margin-left: 2em;
     cursor: pointer;
@@ -128,7 +126,7 @@
 .form-container {
     margin-left: 2%;
     width: 98%;
-    height: 87%;
+    height: 90%;
     overflow-y: scroll;
 }
 
