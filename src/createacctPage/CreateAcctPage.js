@@ -64,39 +64,11 @@ class CreateAcctPage extends Component {
 
     try {
       await Auth.signUp({ username: this.state.email, password: this.state.password, attributes: attributeList });
-      alert("NOTE: Please confirm account by clicking on the link sent to your email, then sign in");
+      this.toastMessage("Please verify account by clicking on the link sent to your email, then sign in");
       window.location.href="/signin-page";
     } catch (error) {
-      alert("Error: There was an error creating your account. Please try again.");
-      console.log('create user error: ', error);
+      this.toastMessage("Error: There was an error creating your account. Please try again.");
     }
-    // const attributeList = [];
-    // attributeList.push(new CognitoUserAttribute({
-    //   Name: 'name',
-    //   Value: this.state.name
-    // }));
-    // attributeList.push(new CognitoUserAttribute({
-    //   Name: 'phone_number',
-    //   Value: this.state.phone_number
-    // }));
-    // attributeList.push(new CognitoUserAttribute({
-    //   Name: 'family_name',
-    //   Value: this.state.family_name
-    // }));
-
-    // UserPool.signUp(this.state.email, this.state.password, attributeList, null, (err, data) => {
-    //   if (err) {
-    //     console.log("err", err);
-    //     // this.setState({ loading: true })
-    //     // this.toastMessage("Error creating account")
-    //   }
-    //   //If no errors new user is created here
-    //   else {
-    //     window.location.href = "/signin-page";
-    //   }
-
-    // });
-
   }
   upperCheck(str) {
     if (str.toLowerCase() === str) {

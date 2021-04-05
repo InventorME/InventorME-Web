@@ -34,7 +34,6 @@ class ProfilePage extends Component {
 
     try{
       const data = await Auth.currentUserInfo();
-      // console.log()
         this.setState({ response: data })
         this.setState({ firstName: data.attributes.name })
         this.setState({ lastName: data.attributes.family_name })
@@ -46,26 +45,8 @@ class ProfilePage extends Component {
     }  
     catch (error) {
       console.log('could not find user :(', error);
-      alert("Error: No user found, please sign in again");
       window.location.href="/signin-page";
     }
-
-
-    // const { getSession } = this.context;
-    // getSession()
-    //   .then((data) => { 
-    //     this.setState({ response: data.user })
-    //     this.setState({ firstName: data.name })
-    //     this.setState({ lastName: data.family_name })
-    //     this.setState({ userEmail: data.email })
-    //     this.setState({ userPhone: data.phone_number })
-    //     // this.setState({ userProfilePic: res.userProfilePicURL }) 
-    //     this.setState({ loading: false });       
-    //   })
-    //   .catch(err =>{
-    //     console.log(err);
-    //     window.location.href="/signin-page";
-    // });
   }
   
   formatPhoneNumber(phoneNumberString) {
@@ -195,39 +176,13 @@ class ProfilePage extends Component {
       try{
         const user = await Auth.currentAuthenticatedUser();
         await Auth.updateUserAttributes(user, attributes);
-        this.setState({ loading: false });
+        
         this.toastMessage('Saved Successfully! ㋡');
         this.reloadPage();
       }catch (error) {
-        console.log("error saving user", error);
-      }
-        // getSession().then(({ user }) => {
-        //   const attributes = [];
-        //   attributes.push(new CognitoUserAttribute({
-        //     Name: 'name',
-        //     Value: this.state.firstName
-        //   }));
-        //   attributes.push(new CognitoUserAttribute({
-        //     Name: 'phone_number',
-        //     Value: this.state.userPhone
-        //   }));
-        //   attributes.push(new CognitoUserAttribute({
-        //     Name: 'family_name',
-        //     Value: this.state.lastName
-        //   }));
-    
-        //   user.updateAttributes(attributes, (err, result) => {
-        //     if (err) {
-        //       console.error(err);
-        //       this.setState({ loading: false });
-        //       this.toastMessage('Error: Failed to save profile.');
-        //     } else {
-        //       this.toastMessage('Saved Successfully! ㋡');
-        //       this.reloadPage();
-        //     }
-        //   });
-        // });
-      
+        this.setState({ loading: false });
+        this.toastMessage('Error: Failed to save profile.');
+      }      
     }
   }
   

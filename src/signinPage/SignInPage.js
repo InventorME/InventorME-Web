@@ -19,25 +19,13 @@ class SignInPage extends Component{
       }
       
       async componentDidMount() {
-
         try{
           await Auth.currentSession();
-          // console.log('user found!');
           window.location.href="/items-page";
         }
         catch(error){
           console.log('could not find user :(', error);
         }
-
-        // const { getSession } = this.context;
-        // getSession()
-        // .then(session => {
-        //   console.log('Signed In:', "user found");
-        //   console.log('Session:', session);
-        //   window.location.href="/items-page";
-        // }).catch(err => {
-        //   console.log('err:', "no user found");
-        // });
       }
 
       setEmail(event){
@@ -48,38 +36,29 @@ class SignInPage extends Component{
         this.setState({ password: event.target.value});
         event.preventDefault();
       }
-      validateUser(event){
-        if(this.state.email === "")
+      validateUser(){
+        this.setState({ loading: true})
+        if(this.state.email === ""){
+          this.setState({ loading: false});
           this.toastMessage("Error: Please Type Email");
-        else if(this.state.password === "")
+        }
+        else if(this.state.password === ""){
+          this.setState({ loading: false});
           this.toastMessage("Error: Please Type Password");
+        }
         else
           this.submit();
       };
 
       submit = async () =>{
-        this.setState({ loading: true})
         try{
           const user = await Auth.signIn(this.state.email, this.state.password);
           console.log('Logged in!', user);
           window.location.href="/items-page";
         }catch(error){
-          // console.log(error);
           this.setState({ loading: false});
-          alert("Sign In Error", "Please Make Sure Account Is Confirmed. Please Check Email or Password Are Correct");
+          this.toastMessage('Error: Password or Email is incorrect');
         }
-
-
-
-        // const { authenticate } = this.context;
-        // authenticate(this.state.email, this.state.password)
-        //   .then(data =>{
-        //     window.location.href="/items-page";
-        //   })
-        //   .catch(err =>{
-        //     this.setState({ loading: false})
-        //     this.toastMessage('Error: Password or Email is incorrect');
-        //   })
       };
 
       toastMessage = (message) => {
