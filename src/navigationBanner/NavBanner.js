@@ -104,7 +104,7 @@ class NavBanner extends Component {
                     <div className="inventor-title">InventorME</div>
                     <img src={InventorLogo} className="inventor-logo" alt="" />
                 </div>
-                <div style={{ borderRadius: '1em', textAlign: 'center', marginTop: '2em', cursor: 'pointer', fontSize: '0.6em', height: '3em', width: '7em'}}>
+                <div style={{ backgroundColor: 'white', borderRadius: '1em', textAlign: 'center', marginTop: '2em', cursor: 'pointer', fontSize: '0.6em', height: '3em', width: '7.2em'}}>
                     <div className="add-item-button" onClick={() => this.toggleItemMenu()}>Add Item</div>
                 </div>
                 <div className="profile" onClick={this.showProfileMenu}>

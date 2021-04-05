@@ -30,8 +30,8 @@
 }
 
 .add-item-button {
-    color: var(--buttonText);
-    background-color: var(--button);
+    color: #0e7e92;
+    background-color: white;
     width: 6em;
     height: 1.5em;
     padding-top: 0.4em;
