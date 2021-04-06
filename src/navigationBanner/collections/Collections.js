@@ -3,6 +3,7 @@ import './Collections.css';
 import NavBanner from '../NavBanner.js';
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Database } from '../../util/Database';
+import { colors } from '../../util/objectColors';
 
 var color=0;
 
@@ -53,37 +54,23 @@ class Collections extends Component {
       <div className='area' style={{backgroundColor:props.color}}>
             <AiOutlinePlusCircle onClick={() => alert('Clicked')} class={'icon'}/>
             <div className='textTittle'>{props.tittle}</div>
-            <div className='textAmount'>Items: {props.amount}</div>
+            <div className='textAmount'>{props.amount}</div>
       </div>
     );
   }
   getColors(){
-    let colorCode='';
-    switch(color) {
-      case 0:
-        color++;
-        colorCode='#ffb5b9';
-        break;
-      case 1:
-        color++;
-        colorCode='#b3b5ff';
-        break;
-      case 2:
-        color=0;
-        colorCode='#47ff72';
-        break;
-      default:
-        console.log('An Error Ocured')
-    }
-    return colorCode
+    color++;
+    return colors.object[color%8];
   }
   render() {
       return (
       <div className='container'>
         <NavBanner/>
-          {this.state.collectionTittle ? this.state.collectionTittle.map((collTittle) => (
-            <this.renderFolders tittle={collTittle} amount={this.state.items[collTittle].length} color={this.getColors()}/>
-          )):null}
+        <div className='container2'>
+            {this.state.collectionTittle ? this.state.collectionTittle.map((collTittle) => (
+              <this.renderFolders tittle={collTittle} amount={this.state.items[collTittle].length} color={this.getColors()}/>
+            )):null}
+        </div>
       </div>
       );
     }
