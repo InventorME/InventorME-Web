@@ -1,3 +1,9 @@
+.container{
+  width:auto; 
+  overflow-y:scroll; 
+  position:relative;
+  height: 800px;
+}
 .area{
   padding: 5%;
   position: relative;
@@ -7,7 +13,6 @@
   min-height: 100px;
   margin: 2%;
   display: inline-block;
-  overflow: hidden;
   }
 
 .icon{
@@ -16,8 +21,8 @@
   right: 0;
   padding: 3%;
   color: white;
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: none;
   outline: none;
@@ -30,8 +35,7 @@
   text-shadow: none;
   position: absolute;
   color: white;
-  left: 0;
-  padding-left: 10%;
+  left: 10%;
   top: 20%;
   padding: 5%;
 }

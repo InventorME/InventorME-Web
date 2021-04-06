@@ -79,8 +79,8 @@ class Collections extends Component {
   }
   render() {
       return (
-      <div>
-          <NavBanner/>
+      <div className='container'>
+        <NavBanner/>
           {this.state.collectionTittle ? this.state.collectionTittle.map((collTittle) => (
             <this.renderFolders tittle={collTittle} amount={this.state.items[collTittle].length} color={this.getColors()}/>
           )):null}
