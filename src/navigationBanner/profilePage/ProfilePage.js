@@ -20,7 +20,10 @@ class ProfilePage extends Component {
       userEmail: '',
       userProfilePic: '',
       userPhone: '',
-      phoneFormat: ''
+      phoneFormat: '',
+      oldPass: '',
+      newPass: '',
+      passwordForm: false
     }
     this.toggleForm = this.toggleForm.bind(this);
     this.saveProfile = this.saveProfile.bind(this);
@@ -59,12 +62,50 @@ class ProfilePage extends Component {
     return null
   }
 
+  changePassword() {
+    const error = "Attempt limit exceeded, please try after some time.";
+    if(this.validatePass()) {
+      this.setState({ loading: true });
+      Auth.currentAuthenticatedUser()
+      .then(user => {
+          return Auth.changePassword(user, this.state.oldPass, this.state.newPass);
+      })
+      .then(data => {
+        this.toastMessage("Password changed successfully")
+        this.reloadPage();
+      })
+      .catch(err => { 
+        this.setState({ loading: false });
+        if(err.message === error)
+          this.toastMessage("Failed to save. Please try again at a later time.") 
+        else
+          this.toastMessage("Incorrect old password") 
+      });
+    }
+  }
+
+  closePasswordForm() {
+    this.setState({ passwordForm: false });
+  }
+
+  openPasswordForm() {
+    this.setState({ passwordForm: true });
+  }
+
   toggleForm() {
     this.setState({ profile: !this.state.profile });
   }
 
   firstNameOnChange = (event) => {
     this.setState({firstName: event.target.value});
+  }
+
+  oldPassOnChange = (event) => {
+    this.setState({oldPass: event.target.value});
+  }
+
+  newPassOnChange = (event) => {
+    this.setState({newPass: event.target.value});
   }
 
   lastNameOnChange = (event) => {
@@ -125,6 +166,28 @@ class ProfilePage extends Component {
     var regex = /^[a-zA-Z]+[0-9_.+-]*@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/g
     return regex.test(str);
   }
+
+  validatePass() {
+    if (this.state.newPass.length < 8) {
+      this.toastMessage("Error: Password Must Be At Least 8 Characters Long");
+      return false;
+    } else if (!this.alphCheck(this.state.newPass)) {
+      this.toastMessage("Error: Password Must Contain Letter");
+      return false;
+    } else if (!this.upperCheck(this.state.newPass)) {
+      this.toastMessage("Error: Password Must Contain One Upper-Case Letter");
+      return false;
+    } else if (!this.lowerCheck(this.state.newPass)) {
+      this.toastMessage("Error: Password Must Contain One Lower-Case Letter");
+      return false;
+    } else if (!this.numCheck(this.state.newPass)) {
+      this.toastMessage("Error: Password Must Contain One Number");
+      return false;
+    } else {
+      return true;
+    }
+
+  };
 
   validateUser(){
     if(this.state.firstName === ""){
@@ -206,8 +269,21 @@ render() {
         </Link> 
         <h2>InventorME</h2>   
       </div>
+      { this.state.passwordForm ?
+            <div className="check-box2">
+                <p className="check-title">Change Password</p>
+                <div style={{marginTop: '2.5em', display: 'block'}}>
+                  <p className="edit-oldPass"> Old Password: </p>
+                  <input className="edit-oldPass-input" type="text" onChange={this.oldPassOnChange} value={this.state.oldPass}/>
+                  <p className="edit-newPass"> New Password: </p>
+                  <input className="edit-newPass-input" type="text" onChange={this.newPassOnChange} value={this.state.newPass}/>
+                </div>
+                    <button className="savePass-button" onClick={()=>this.changePassword()}>Save</button>
+                    <button className="cancelPass-button" onClick={()=>this.closePasswordForm()}>Cancel</button>
+            </div> : null }
       <div className="profile-container">
         <ToastMessage ref={this.toast}/>
+        
           { this.state.profile ?
             <div>
               <div style={{display: 'block', width: '100%', height: '20%'}}>
@@ -236,7 +312,10 @@ render() {
                 </div>
               </div>
 
-              <button className="update-profile" onClick={() => this.toggleForm()}>UPDATE PROFILE</button>
+              <div style={{display: 'inline-flex', width: '100%', height: '5%', marginTop: '4em'}}>
+                <button className="update-profile" onClick={() => this.toggleForm()}>UPDATE PROFILE</button>
+                <button className="change-pass" onClick={() => this.openPasswordForm()}>CHANGE PASSWORD</button>
+              </div>
             </div>
             : 
           <form style={{height: '100vh'}}>

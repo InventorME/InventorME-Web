@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ItemDetailsView from '../components/itemDetailsView/itemDetailsView';
 import archived from '../images/archived.png'
-// import { Auth } from "aws-amplify";
 import './Table.css';
 import { Database } from '../util/Database';
 

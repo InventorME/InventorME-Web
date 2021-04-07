@@ -28,7 +28,6 @@ class FormPage extends Component {
   }
 
 componentDidMount() {
-  console.log(this.props.item)
   if(this.props.item) {
     let buyDate = "";
     let sellDate = "";

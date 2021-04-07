@@ -8,7 +8,8 @@ class ItemDetailsView extends Component{
     constructor(props) {
         super(props);
         this.state = { item: this.props.editItem[0], detailsView: true, itemName: '', buyDate: null, sellDate: null, checkForm: false,
-        baseURL: "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items", archive: true }
+        baseURL: "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items", archive: false,
+        unarchive: false, delete: false, loading: false }
         this.toggleItemMenu = this.toggleItemMenu.bind(this);
         this.toast = React.createRef();
     }
@@ -19,7 +20,7 @@ class ItemDetailsView extends Component{
         if(this.state.item.itemBuyDate)
             this.setState({buyDate: moment.utc(this.state.item.itemBuyDate).format("MMMM Do YYYY")})
         if(this.props.archive)
-            this.setState({archive: false})
+            this.setState({archive: true})
         this.setState({itemName: this.state.item.itemName})
     }
 
@@ -33,6 +34,81 @@ class ItemDetailsView extends Component{
 
     checkForm() {
         this.setState({checkForm: true});
+    }
+
+    toggleArchiveMenu() {
+        this.setState({ unarchive: true });
+    }
+
+    closeUnarchiveForm() {
+        this.setState({ unarchive: false });
+    }
+
+    toggleDeleteMenu() {
+        this.setState({ delete: true });
+    }
+
+    closeDeleteForm() {
+        this.setState({ delete: false });
+    }
+
+    deleteArchiveItem() {
+        let payload = {
+            itemID: this.state.item.itemID
+        }
+        this.setState({loading: true})
+        this.deleteItem(payload).then(res => {
+            if(res === 200) {
+                this.toastMessage("Deleted Successfully.")
+                this.reloadPage();
+            } else {
+                this.setState({loading: false})
+                this.toastMessage("Error: Failed to delete item.")
+            }
+        });
+    }
+
+    unarchiveItem() {
+        this.setState({loading: true})
+        let buyDate = null;
+        let sellDate = null;
+        if(this.state.item.itemBuyDate)
+          buyDate = moment.utc(this.state.item.itemBuyDate).format("YYYY-MM-DD")
+        if(this.state.item.itemSellDate)
+          sellDate = moment.utc(this.state.item.itemSellDate).format("YYYY-MM-DD")
+
+        let itemPutPayload = {
+            userEmail: this.quotes(this.state.item.userEmail),
+            itemID: this.state.item.itemID,
+            itemCategory: this.quotes(this.state.item.itemCategory),
+            itemName: this.quotes(this.state.item.itemName),
+            itemPhotoURL: this.quotes(this.state.item.itemPhotoURL),
+            itemSerialNum: this.state.item.itemSerialNum,
+            itemPurchaseAmount: this.quotes(this.state.item.itemPurchaseAmount),
+            itemWorth: this.quotes(this.state.item.itemWorth),
+            itemReceiptPhotoURL: this.quotes(this.state.item.itemReceiptPhotoURL),
+            itemManualURL: this.quotes(this.state.item.itemManualURL),
+            itemSellDate: this.quotes(sellDate),
+            itemBuyDate: this.quotes(buyDate),
+            itemLocation: this.quotes(this.state.item.itemLocation),
+            itemNotes: this.quotes(this.state.item.itemNotes),
+            itemSellAmount: this.quotes(this.state.item.itemSellAmount),
+            itemRecurringPaymentAmount: this.quotes(this.state.item.itemRecurringPaymentAmount),
+            itemEbayURL: this.quotes(this.state.item.itemEbayURL),
+            itemTags: this.quotes(this.state.item.itemTags),
+            itemArchived: 0,
+            itemFolder: this.quotes(this.state.item.itemFolder)
+        }
+
+        this.put(itemPutPayload).then(res => {
+            if(res === 200) {
+                this.toastMessage("Unarchive Successfully.")
+                this.reloadPage();
+            } else {
+                this.setState({loading: false})
+                this.toastMessage("Error: Failed to unarchive.")
+            }
+        });
     }
 
     closeCheckForm() {
@@ -107,6 +183,16 @@ class ItemDetailsView extends Component{
         return response.status;
     }
 
+    deleteItem = async(id) => {
+            var deleteData = {
+                method: 'DELETE',
+                body: JSON.stringify(id),
+                headers: { 'Content-Type': 'application/json' }
+            }
+        const response = await fetch(this.state.baseURL,deleteData);
+        return response.status;
+    }
+
     openInNewTab = (url) => {
         const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
         if (newWindow) newWindow.opener = null
@@ -135,6 +221,24 @@ class ItemDetailsView extends Component{
                 <div style={{marginTop: '2.5em', display: 'block', textAlign: 'center'}}>
                     <button className="yes-button" onClick={()=>this.archiveItem()}>Yes</button>
                     <button className="no-button" onClick={()=>this.closeCheckForm()}>No</button>
+                </div>
+            </div> : null }
+
+            { this.state.unarchive ?
+            <div className="check-box">
+                <p className="check-title">Are you sure?</p>
+                <div style={{marginTop: '2.5em', display: 'block', textAlign: 'center'}}>
+                    <button className="yes-button" onClick={()=>this.unarchiveItem()}>Yes</button>
+                    <button className="no-button" onClick={()=>this.closeUnarchiveForm()}>No</button>
+                </div>
+            </div> : null }
+
+            { this.state.delete ?
+            <div className="check-box">
+                <p className="check-title">Are you sure?</p>
+                <div style={{marginTop: '2.5em', display: 'block', textAlign: 'center'}}>
+                    <button className="yes-button" onClick={()=>this.deleteArchiveItem()}>Yes</button>
+                    <button className="no-button" onClick={()=>this.closeDeleteForm()}>No</button>
                 </div>
             </div> : null }
 
@@ -230,10 +334,13 @@ class ItemDetailsView extends Component{
                 </div>
             </div>
             <div style={{paddingTop: '0em', paddingBottom: '2em', paddingLeft: '5em'}}>
-                { this.state.archive ?
+                { this.state.archive ? <div>
+                <button className="unarchive-button" onClick={() => this.toggleArchiveMenu()}>Unarchive</button>
+                <button className="delete-button" onClick={()=>this.toggleDeleteMenu()}>Delete</button></div>
+                 :
                 <div>
                 <button className="save-button" onClick={() => this.toggleItemMenu()}>Edit</button>
-                <button className="archive-button" onClick={()=>this.checkForm()}>Archive</button></div> : null }
+                <button className="archive-button" onClick={()=>this.checkForm()}>Archive</button></div> }
             </div></div>
             </div>
             </div> : 

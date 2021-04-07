@@ -76,16 +76,14 @@ class SignInPage extends Component{
     <h2>InventorME</h2>
     </div>
     <ToastMessage ref={this.toast}/>
-    <div  class="login-box">
+    <div  className="login-box">
     {/* <img class = "lbox"img style = {this.state.style} src={ProfileBox} alt=""/> */}
-    <p class ="Password"> Password: </p>
-    <input type="password"
-      input className = "password" 
+    <p className ="Password"> Password: </p>
+    <input type="password" className = "password" 
       value={this.state.password} 
       onChange={this.setPassword}/>
     <p className ="Email"> Email: </p>
-    <input type="text" 
-     input className = "email" 
+    <input type="text" className = "email" 
      value={this.state.email} 
      onChange={this.setEmail}/>
         <button className="login-account" onClick={this.validateUser}>Log in</button>

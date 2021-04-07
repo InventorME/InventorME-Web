@@ -12,6 +12,30 @@
     height: 2em;
 }
 
+.delete-button {
+    border-radius: 8px;
+    border-color: var(--theme);
+    background-color: var(--theme);
+    color: white;
+    margin-left: 6em;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 5.5em;
+    height: 2em;
+}
+
+.unarchive-button {
+    border-radius: 8px;
+    border-color: var(--theme);
+    background-color: var(--theme);
+    color: white;
+    margin-left: 9em;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 5.5em;
+    height: 2em;
+}
+
 .check-box {
     border: 0.3em;
     border-radius: 2.5em;

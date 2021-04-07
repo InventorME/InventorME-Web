@@ -94,7 +94,7 @@
 .overlay {
     position: fixed;
     right: 0;
-    margin-right: 2.5%;
+    margin-right: 3.5%;
     background-color: var(--theme);
     overflow: hidden;
     transition: 0.2s;
