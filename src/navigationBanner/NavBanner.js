@@ -157,7 +157,7 @@ class NavBanner extends Component {
           </div>
           <div>
             { this.state.showItemMenu ?
-            <FormPage toggleItemMenu = {this.toggleItemMenu} userEmail={this.state.userEmail} addItem = {true}/> : null }
+            <div style={{marginTop: '3%'}}><FormPage toggleItemMenu = {this.toggleItemMenu} userEmail={this.state.userEmail} addItem = {true}/></div> : null }
           </div>
         </div>
         );

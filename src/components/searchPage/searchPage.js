@@ -87,14 +87,14 @@ render() {
         { this.state.loading ?
         <div className="load-container"> <div className="load-symbol"/></div>
         : null }
-       { this.state.editItem ? 
-        <ItemDetailsView toggleDetailsView = {this.toggleDetailsView} editItem = {this.state.item}/> : null }
         <div className="profile-banner">
         <Link to="/items-page" style={{ textDecoration: 'none' }}>
           <img src={BackButton} className="profile-back" alt="back" />
         </Link> 
         <h2>InventorME</h2>   
         </div>
+        { this.state.editItem ? 
+        <div style={{marginTop: '2%'}}><ItemDetailsView toggleDetailsView = {this.toggleDetailsView} editItem = {this.state.item}/></div> : null }
 
         <div className="search-overlay">
             <input className="input-search" onChange={e => this.searchBar(e)} placeholder="Search by name, notes, collection, folder, tags" value={this.state.search}/> 
