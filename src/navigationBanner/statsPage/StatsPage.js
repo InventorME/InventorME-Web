@@ -10,10 +10,11 @@ class StatsPage extends Component {
             <NavBanner/>
            
                 <div>
+                <div style={{overflow: 'scroll', height: '89vh'}}>
                 <StatsTable/>
                 </div>
             </div>
-                
+              </div>  
         );
       }
     }
