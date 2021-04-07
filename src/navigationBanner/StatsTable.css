@@ -69,7 +69,7 @@
     font-weight: bold;
     position: relative;
     margin-top: 1.7em;
-    margin-left: 1.1em;
+    margin-left: 1em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -87,7 +87,7 @@
     font-weight: bold;
     position: relative;
     margin-top: 1.7em;
-    margin-left: 1.3em;
+    margin-left: 1.2em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -98,6 +98,7 @@
     margin-top: 1.7em;
     margin-left: 0.4em;
     font-size: 1.6em;
+    width: 12em;
     color: var(--label);
 }
 
@@ -105,7 +106,7 @@
     font-weight: bold;
     position: relative;
     margin-top: 1.7em;
-    margin-left: 1.6em;
+    margin-left: 1.4em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -114,7 +115,7 @@
     font-weight: bold;
     position: relative;
     margin-top: 1.7em;
-    margin-left: 1em;
+    margin-left: 0.4em;
     font-size: 1.6em;
     color: var(--label);
 }
@@ -123,7 +124,8 @@
     font-weight: bold;
     position: relative;
     margin-top: 1.7em;
-    margin-left: -0.7em;
+    margin-left: -1em;
+    width: 12em;
     font-size: 1.6em;
     color: var(--label);
 }

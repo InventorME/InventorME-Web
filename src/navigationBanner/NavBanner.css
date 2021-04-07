@@ -11,7 +11,8 @@
 .title {
     color: var(--title);
     font-weight: bold;
-    margin: auto;
+    margin-left: 30%;
+    margin-right: auto;
     display: inline-flex;
     font-size: 1.5em;
 }
@@ -49,6 +50,36 @@
     display: inline-flex;
     color: var(--title);
     cursor: pointer;
+}
+
+.search-icon  {
+    margin-left: 7%;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    display: inline-flex;
+    color: var(--title);
+    cursor: pointer;
+}
+
+.input-search {
+    width: 30%;
+    font-size: 1.3em;
+    border-radius: 0.3em;
+    border-color: gray;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+}
+
+.search-overlay {
+    width: 100%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    transition: 3.2s;
+    text-align: center;
+    border-top: 2px solid var(--background);
 }
 
 .firstName-profile {

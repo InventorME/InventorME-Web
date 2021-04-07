@@ -35,14 +35,6 @@ class ItemsPage extends Component {
       catch (error) {
           console.log('Error pulling data', error);
       }
-        // let queryURL = 'https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items?userEmail="' + email + '"';
-        // const response = await fetch(queryURL.toString());
-        // const body = await response.json();
-        // let items = [];
-        // if(body.items.length > 0)
-        //   items = body.items.filter(item => item.itemArchived === 0)
-        //   if (response.status !== 200) throw Error(body.message);
-        // return items;
     }
 
     filterItemByID(ID) {

@@ -15,6 +15,7 @@ import FolderPage from './navigationBanner/folderPage/FolderPage';
 import StatsPage from './navigationBanner/statsPage/StatsPage';
 import Amplify from 'aws-amplify';
 import config from './config.json';
+import searchPage from './components/searchPage/searchPage';
 
 Amplify.configure({
   Auth: {
@@ -39,6 +40,7 @@ ReactDOM.render(
       <Route path = "/archivepage" component = {ArchivePage}/>
       <Route path = "/folderpage" component = {FolderPage}/>
       <Route path = "/statspage" component = {StatsPage}/>
+      <Route path="/search-page" component={searchPage}/>
   </Switch>
   </BrowserRouter>,
   document.getElementById('root')

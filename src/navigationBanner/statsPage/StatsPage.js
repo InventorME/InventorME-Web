@@ -8,9 +8,8 @@ class StatsPage extends Component {
         return (
         <div>
             <NavBanner/>
-           
                 <div>
-                <div style={{overflow: 'scroll', height: '89vh'}}>
+                <div style={{overflow: 'scroll', height: '100vh', width: '100%'}}>
                 <StatsTable/>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import OverlayMenu from 'react-overlay-menu';
 import { Link } from "react-router-dom";
 import FormPage from '../components/formPage/FormPage';
 import { Auth } from 'aws-amplify';
+import searchIcon from '../images/searchIcon.png'
 
 
 class NavBanner extends Component {
@@ -36,7 +37,7 @@ class NavBanner extends Component {
             this.setState({ userEmail: data.attributes.email })
         }catch(error){
             console.log(error);
-            alert("Error: No user found, please sign in again");
+            this.toastMessage("Error: No user found, please sign in again");
             window.location.href = "/signin-page";
         }
     }
@@ -95,7 +96,7 @@ class NavBanner extends Component {
 
     render() {
         return (
-        <div>
+        <div style={{marginBottom: '3%'}}>
             <div className="NavBanner">
                 <div className="menu">
                     <img className="menu-icon" src={hamburgerIcon} alt="Menu" onClick={this.toggleMenu}/>
@@ -107,6 +108,12 @@ class NavBanner extends Component {
                 <div style={{ backgroundColor: 'white', borderRadius: '1em', textAlign: 'center', marginTop: '2em', cursor: 'pointer', fontSize: '0.6em', height: '3em', width: '7.2em'}}>
                     <div className="add-item-button" onClick={() => this.toggleItemMenu()}>Add Item</div>
                 </div>
+                <div className="search-icon">
+                    <Link to = "/search-page"style={{ textDecoration: 'none' }}>
+                        <img style={{borderRadius: "12em", height: "2.5em", width: "2.5em", 'paddingTop': '0.4em'}} alt="" src={searchIcon} />
+                    </Link>
+                </div>
+
                 <div className="profile" onClick={this.showProfileMenu}>
                     <img style={{borderRadius: "12em", height: "2.5em", width: "2.5em", 'paddingTop': '0.4em'}} alt="" src={this.state.response.userProfilePicURL} />
                     <p className="firstName-profile"> {this.state.firstName}</p>
@@ -116,7 +123,7 @@ class NavBanner extends Component {
             open={this.state.isOpen}
             onClose={this.toggleMenu}>
                 <div className="side-menu">
-                    <Link to = "/items-page"style={{ textDecoration: 'none' }}>
+                    <Link to = "/items-page" style={{ textDecoration: 'none' }}>
                     <div><h1 className="menu-text">Items</h1></div>
                     </Link>
                     <Link to = "/collections" style={{ textDecoration: 'none' }}>
