@@ -249,58 +249,58 @@ class ItemDetailsView extends Component{
             </div>
             <div>
                 <h2>Name</h2>
-                <p className="input-box">{this.state.item.itemName}</p>
+                <p className="input-box21">{this.state.item.itemName}</p>
             </div>
 
             <div style={{display: 'inline-flex', width: '100%'}}>
                 <div style={{display: 'block'}}>
                 <h2>Collection</h2>
-                <p className="input-box2">{this.state.item.itemCategory}</p>
+                <p className="input-box22">{this.state.item.itemCategory}</p>
                 </div>
                 <div style={{display: 'block', marginLeft: '18em'}}>
                 <h2>Item Location</h2>
-                <p className="input-box2">{this.state.item.itemLocation}</p>
+                <p className="input-box22">{this.state.item.itemLocation}</p>
                 </div>
             </div>
 
             <div style={{display: 'inline-flex', width: '100%'}}>
                 <div style={{display: 'block'}}>
                 <h2>Item Worth</h2>
-                <p className="input-box3">${this.state.item.itemWorth}</p>
+                <p className="input-box32">${this.state.item.itemWorth}</p>
                 </div>
                 <div style={{display: 'block', marginLeft: '5em'}}>
                 <h2>Purchase Amount</h2>
-                <p className="input-box3">${this.state.item.itemPurchaseAmount}</p>
+                <p className="input-box32">${this.state.item.itemPurchaseAmount}</p>
                 </div>
                 <div style={{display: 'block', marginLeft: '7em'}}>
                 <h2>Sell Amount</h2>
-                <p className="input-box3">${this.state.item.itemSellAmount}</p>
+                <p className="input-box32">${this.state.item.itemSellAmount}</p>
                 </div>
             </div>
 
             <div style={{display: 'inline-flex', width: '100%'}}>
                 <div style={{display: 'block'}}>
                 <h2>Serial Number</h2>
-                <p className="input-box3">{this.state.item.itemSerialNum}</p>
+                <p className="input-box32">{this.state.item.itemSerialNum}</p>
                 </div>
                 <div style={{display: 'block', marginLeft: '5em'}}>
                 <h2>Recurring Payment</h2>
-                <p className="input-box3">{this.state.item.itemRecurringPaymentAmount}</p>
+                <p className="input-box32">{this.state.item.itemRecurringPaymentAmount}</p>
                 </div>
                 <div style={{display: 'block', marginLeft: '7em'}}>
                 <h2>Item Folder</h2>
-                <p className="input-box3">{this.state.item.itemFolder}</p>
+                <p className="input-box32">{this.state.item.itemFolder}</p>
                 </div>
             </div>
 
             <div style={{display: 'inline-flex', width: '100%'}}>
                 <div style={{display: 'block'}}>
                 <h2>Item Receipt</h2>
-                <p className="input-box3">{this.state.item.itemReceiptPhotoURL}</p>
+                <p className="input-box32">{this.state.item.itemReceiptPhotoURL}</p>
                 </div>
                 <div style={{display: 'block', marginLeft: '5em'}}>
                 <h2>Item Manual Url</h2>
-                <p className="input-box3">{this.state.item.itemManualURL}</p>
+                <p className="input-box32">{this.state.item.itemManualURL}</p>
                 </div>
                 <div style={{ display: 'block', marginLeft: '7em'}}>
                 <h2>Online Url</h2>
@@ -322,7 +322,7 @@ class ItemDetailsView extends Component{
             <div style={{display: 'inline-flex', width: '100%', height: '13em'}}>
                 <div style={{display: 'block'}}>
                     <h2>Tags</h2>
-                    <div className="input-tag">
+                    <div className="input-tag2">
                     <ul className="input-tag-tags">
                     {this.state.item.itemTags}
                     </ul>
@@ -330,7 +330,7 @@ class ItemDetailsView extends Component{
                 </div>
                 <div style={{display: 'block', marginLeft: '16.5em'}}>
                     <h2>Notes</h2>
-                    <p className="input-notes">{this.state.item.itemNotes}</p>
+                    <p className="input-notes2">{this.state.item.itemNotes}</p>
                 </div>
             </div>
             <div style={{paddingTop: '0em', paddingBottom: '2em', paddingLeft: '5em'}}>

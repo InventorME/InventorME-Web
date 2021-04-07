@@ -103,7 +103,7 @@
 
 .update-profile {
     position: relative;
-    margin-left: 35%;
+    margin-left: 37%;
     margin-top: 5%;
     padding: 0.8em;
     font-size: 1.0em;
@@ -225,7 +225,7 @@
 .savePass-button {
     border-radius: 8px;
     border-color: var(--theme);
-    background-color: var(--theme);
+    background-color: var(--button);
     color: white;
     cursor: pointer;
     margin-left: 30%;
@@ -237,7 +237,7 @@
 .cancelPass-button {
     border-radius: 8px;
     border-color: var(--theme);
-    background-color: var(--theme);
+    background-color: var(--button);
     color: white;
     margin-left: 16%;
     cursor: pointer;

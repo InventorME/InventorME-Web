@@ -460,7 +460,7 @@ render() {
         <div style={{marginTop: '19em', marginLeft: '30%', width: '60%'}}>
           <input type="text" name="barcodeNumber" className="searchCode-box" placeholder="Enter barcode" onChange={this.onChange} value={this.state.barcodeNumber}/>
           <button className="searchCode-button" onClick={()=>this.searchBarcodeItem()} ref={this.hiddenInput}>Search</button>
-          <p style={{marginLeft: "33%", fontSize: '1.3em'}}>or</p>
+          <p className="orText">or</p>
           <button className="enter-manually" onClick={()=> this.showForm(true)}>Enter manually</button>
         </div>
       </div>

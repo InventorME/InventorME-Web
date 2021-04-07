@@ -1,5 +1,7 @@
+@import "../../util/colors.css";
+
 .toast {
-    background: #0e7e92;
+    background: var(--theme);
     transition: 0.2s;
     overflow: hidden;
     top: 6em;
@@ -22,6 +24,6 @@
     outline: none;
     margin: 4%;
     font-size: 110%;
-    background-color: #0e7e92;
+    background-color: var(--theme);
     position: relative;
 }

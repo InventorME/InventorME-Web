@@ -54,6 +54,17 @@
     left: 8.5em; 
 }
 
+.orText {
+    margin-left: 33%;
+    font-size: 1.3em;
+    color: var(--label);
+}
+
+.react-date-picker, .react-date-picker *, .react-date-picker *:before, .react-date-picker *:after {
+    box-sizing: border-box;
+    background-color: white;
+}
+
 .save-button {
     border-radius: 0.4em;
     background-color: var(--button);
@@ -212,7 +223,7 @@
     background: var(--background);
     border: none;
     border-radius: 50%;
-    color: var(--buttonText);
+    color: var(--label);
     cursor: pointer;
     display: inline-flex;
     font-size: 0.7em;
