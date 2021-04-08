@@ -17,7 +17,7 @@ class FormPage extends Component {
     itemReceipt: '', itemManual: '', onlineUrl: '',
     buyDate: '', sellDate: '', 
     tags: [], notes: '',
-    itemCreationDate: '', itemArchived: '', addItem: this.props.addItem, itemFolder: '',
+    itemCreationDate: '', itemArchived: '', addItem: this.props.addItem, addCollection: false, itemFolder: '',
     showForm: false, loading: false, itemID: '',
     baseURL: "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"};
     this.hiddenFileInput = React.createRef();
@@ -75,6 +75,10 @@ componentDidMount() {
   }
   if(!this.props.addItem)
     this.setState({showForm: true})
+  if(this.props.addCollection)
+    this.setState({showForm: true, addItem: true, addCollection: true})
+  if(this.props.collection)
+    this.setState({category: this.props.collection})
 }
 
  searchBarcodeItem() {
@@ -148,7 +152,7 @@ showForm() {
 
 cancelForm() {
   this.scrollRef.current.scrollIntoView()
-  if(!this.state.addItem)
+  if(!this.state.addItem || this.state.addCollection)
     this.props.toggleItemMenu();
   this.setState({showForm: false, imageURL: '', name: '', category: '', itemLocation: '', itemWorth: '', purchaseAmount: '', sellAmount: '',
   serialNum: '', recurringAmount: '', itemReceipt: '', itemManual: '', onlineUrl: '', barcodeNumber: '',

@@ -33,6 +33,7 @@
   width: 25%;
   height: 25%;
   border-radius: 50%;
+  cursor: pointer;
   border: none;
   outline: none;
 }
