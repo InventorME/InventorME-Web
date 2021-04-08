@@ -50,9 +50,20 @@ class searchPage extends Component {
           let itemTags = this.state.All_Items;
   
           itemNames = itemNames.filter(item => item.itemName.toUpperCase().includes(input.toUpperCase()));
-          itemCollections = itemCollections.filter(item => item.itemCategory.toUpperCase().includes(input.toUpperCase()));
-          itemFolders = itemFolders.filter(item => item.itemFolder.toUpperCase().includes(input.toUpperCase()));
-          itemNotes = itemNotes.filter(item => item.itemNotes.toUpperCase().includes(input.toUpperCase()));
+          itemCollections = itemCollections.filter(item => {
+            if(item.itemCategory) {
+              return item.itemCategory.toUpperCase().includes(input.toUpperCase())
+            } return null});
+          itemFolders = itemFolders.filter(item => {
+            if(item.itemFolder) {
+              return item.itemFolder.toUpperCase().includes(input.toUpperCase())
+            } return null;
+          });
+          itemNotes = itemNotes.filter(item => {
+            if(item.itemNotes) {
+              return item.itemNotes.toUpperCase().includes(input.toUpperCase())
+            } return null;
+          });
           itemTags = itemTags.filter(item => {
             if(item.itemTags) {
               return item.itemTags.toUpperCase().includes(input.toUpperCase())
