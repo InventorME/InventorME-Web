@@ -59,12 +59,12 @@ const scraperObject = {
             }
 
             object = {
-                name,
-                category,
+                name: name.trim(),
+                category: category,
                 tags,
-                price,
-                onlineUrl: onlineUrl[0],
-                imageURL: imageURL
+                price: price.trim(),
+                onlineUrl: onlineUrl[0].trim(),
+                imageURL: imageURL.trim()
             }
         } else {
             console.log('Failed to find image by barcode')
