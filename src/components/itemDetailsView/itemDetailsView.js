@@ -311,11 +311,11 @@ class ItemDetailsView extends Component{
             <div style={{display: 'inline-flex', width: '100%', paddingBottom: '1em'}}>
                 <div style={{display: 'block', width: '11.7em'}}>
                 <h2>Buy Date</h2>
-                <p>{this.state.buyDate}</p>
+                <p style={{color: 'white'}}>{this.state.buyDate}</p>
                 </div>
                 <div style={{display: 'block', marginLeft: '4.5em'}}>
                 <h2>Sell Date</h2>
-                <p>{this.state.sellDate}</p>
+                <p style={{color: 'white'}}>{this.state.sellDate}</p>
                 </div>
             </div>
 
