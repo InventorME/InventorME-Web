@@ -18,6 +18,7 @@ class NavBanner extends Component {
        style : {
         width : 150,
         height: 0,
+        visibility: "hidden"
     }};
        this.toggleMenu = this.toggleMenu.bind(this);
        this.toggleItemMenu = this.toggleItemMenu.bind(this);
@@ -73,7 +74,7 @@ class NavBanner extends Component {
     }
 
     closeProfileMenu() {
-        const style = { width : 150, height: 0 };
+        const style = { width : 150, height: 0, visibility: "hidden" };
         this.setState({ style });
     }
     async logoutUser(){

@@ -31,7 +31,7 @@ class ItemsPage extends Component {
             items = body.items.filter(item => item.itemArchived === 0)
             sortedItems = items.slice().sort((a, b) => new Date(b.itemCreationDate) - new Date(a.itemCreationDate))
           }
-
+console.log(sortedItems)
           this.setState({ Current_Items: sortedItems});
           this.render();
           this.setState({loading: false});
@@ -66,7 +66,7 @@ class ItemsPage extends Component {
               { this.state.editItem ? 
                 <ItemDetailsView toggleDetailsView = {this.toggleDetailsView} editItem = {this.state.item}/> :
                 null }
-              <div style={{overflowY: 'scroll', height: '100vh'}}>
+              <div style={{height: '100vh', marginBottom: '20%'}}>
                 <h1 id = 'Title'>Current Items</h1>
                 <table id= 'Current_Items' style={{ marginBottom: '12em', cursor: 'pointer'}}>
                 <tbody>

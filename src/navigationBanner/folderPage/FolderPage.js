@@ -68,7 +68,7 @@ class FolderPage extends Component {
         return (
             <div>
                 <NavBanner />
-                <div style={{ overflowY: 'scroll', height: '100vh' }}>
+                <div style={{ height: '100vh' }}>
                     {this.state.editItem ?
                         <div style={{ marginTop: '2em' }}>
                             <ItemDetailsView toggleDetailsView={this.toggleDetailsView} editItem={this.state.item} /></div> :

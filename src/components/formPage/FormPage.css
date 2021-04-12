@@ -1,7 +1,7 @@
 @import "../../util/colors.css";
 
 .add-edit-container {
-    position: fixed;
+    position: absolute;
     border: solid;
     z-index: 5;
     border-color: var(--theme);
