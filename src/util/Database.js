@@ -1,9 +1,8 @@
 import { Auth } from 'aws-amplify';
+import { create } from 'apisauce'
 const fetch = require('node-fetch');
 
-
-
-var urly = "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items";
+const urly = "https://secret-ocean-49799.herokuapp.com/https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"
 
 export class Database{
     async get(){
@@ -14,7 +13,7 @@ export class Database{
         catch(error){
             console.log('could not find user :(', error);
         }
-        let queryURL = urly + "?userEmail='" + email +"'";
+         let  queryURL = urly + "?userEmail='" + email +"'";
         return new Promise((resolve, reject)=>{
             fetch(queryURL,{method: 'GET', mode: 'no-cors'})
             .then(res => resolve(res.json()))
