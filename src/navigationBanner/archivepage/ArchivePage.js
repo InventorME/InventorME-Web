@@ -10,7 +10,7 @@ class ArchivePage extends Component {
         return (
             <div>
               <NavBanner/>
-              <div style={{overflowY: 'scroll', height: '100vh'}}>
+              <div style={{height: '100vh'}}>
               <Table/>
               </div>
             </div>          

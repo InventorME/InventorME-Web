@@ -89,7 +89,8 @@ class StatsTable extends Component {
         { this.state.loading ?
           <div className="loading-container-stats"> <div className="form-load-symbol" /></div>
           : null}
-        <div className="Circle1" style={{ width: 200, height: 200 }}>
+          <div style={{display: '-webkit-inline-box'}}>
+        <div className="Circle1" style={{ width: '14%', height: '13%' }}>
           <CircularProgressbar
             value={percentage}
             text={`$${Math.round(this.state.currentWorth / this.state.allLength) * 100}`}
@@ -114,7 +115,7 @@ class StatsTable extends Component {
           />
           <p className="Circle_1"> Net Worth </p>
         </div>
-        <div className="Circle2" style={{ width: 200, height: 200 }}>
+        <div className="Circle2" style={{ width: '14%', height: '13%' }}>
           <CircularProgressbar
             value={(this.state.depreciation - this.state.currentWorth) / 100}
             text={`$${(this.state.depreciation - this.state.currentWorth)}`}
@@ -142,7 +143,7 @@ class StatsTable extends Component {
 
 
         
-        <div className="Circle3" style={{ width: 200, height: 200 }}>
+        <div className="Circle3" style={{ width: '14%', height: '13%' }}>
           <CircularProgressbar
             value={(this.state.archiveLength / this.state.allLength) * 100}
             text={`${this.state.archiveLength}`}
@@ -167,8 +168,7 @@ class StatsTable extends Component {
           />
           <p className="Circle_3">Archived Items </p>
         </div>
-
-        <div className="Circle4" style={{ width: 200, height: 200 }}>
+        <div className="Circle4" style={{ width: '14%', height: '13%' }}>
           <CircularProgressbar
             value={100}
             text={`${this.state.allLength}`}
@@ -193,7 +193,9 @@ class StatsTable extends Component {
           />
           <p className="Circle_4"> # All Items </p>
         </div>
-        <div className="Circle5" style={{ width: 200, height: 200 }}>
+        </div> 
+        <div style={{display: '-webkit-inline-box'}}>
+        <div className="Circle5" style={{ width: '14%', height: '13%' }}>
           <CircularProgressbar
             value={percentage}
             text={`$${this.state.depreciation}`}
@@ -219,7 +221,7 @@ class StatsTable extends Component {
           <p className="Circle_5"> Money Invested </p>
         </div>
 
-        <div className="Circle6" style={{ width: 200, height: 200 }}>
+        <div className="Circle6" style={{ width: '14%', height: '13%' }}>
           <CircularProgressbar
             value={this.state.soldLength}
             text={`${this.state.soldLength}`}
@@ -245,7 +247,7 @@ class StatsTable extends Component {
           <p className="Circle_6"> Items Sold </p>
         </div>
 
-        <div className="Circle7" style={{ width: 200, height: 200 }}>
+        <div className="Circle7" style={{ width: '14%', height: '13%' }}>
           <CircularProgressbar
             value={this.state.Lost * 100}
             text={`${this.state.Lost * 100}%`}
@@ -273,7 +275,7 @@ class StatsTable extends Component {
           <p className="Circle_7"> % Money Lost </p>
         </div>
         
-        <div className="Circle8" style={{ width: 200, height: 200 }}>
+        <div className="Circle8" style={{ width: '14%', height: '13%' }}>
           <CircularProgressbar
             value={this.state.Costper}
             text={`$${this.state.Costper}/Mo`}
@@ -297,6 +299,7 @@ class StatsTable extends Component {
             })}
           />
           <p className="Circle_8"> Monthly Recurring Cost </p>
+        </div>
         </div>
       </div>
     )

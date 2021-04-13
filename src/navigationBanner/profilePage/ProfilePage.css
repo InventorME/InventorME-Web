@@ -1,11 +1,8 @@
 @import "../../util/colors.css";
 .profile-container {
     margin-top: 2%;
-    overflow-x: hidden;
+    margin-bottom: 10%;
     background-color: var(--background);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .profile-banner {

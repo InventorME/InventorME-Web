@@ -5,7 +5,6 @@
 }
 .container2{
   justify-content: center;
-  overflow-y: scroll; 
   position: absolute;
   height: 94%;
   width: 100%;
