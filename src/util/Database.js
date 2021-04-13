@@ -3,7 +3,7 @@ import { create } from 'apisauce'
 const fetch = require('node-fetch');
 
 const urly = "https://secret-ocean-49799.herokuapp.com/https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"
-
+ const url= "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"
 export class Database{
     async get(){
         try{
@@ -27,7 +27,7 @@ export class Database{
                 body: JSON.stringify(item),
                 headers: { 'Content-Type': 'application/json' }
             }
-            fetch(urly,postData)
+            fetch(url,postData)
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
@@ -39,7 +39,7 @@ export class Database{
                 body: JSON.stringify(item),
                 headers: { 'Content-Type': 'application/json' }
             }
-            fetch(urly,putData)
+            fetch(url,putData)
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
@@ -51,7 +51,7 @@ export class Database{
                 body: JSON.stringify(id),
                 headers: { 'Content-Type': 'application/json' }
             }
-            fetch(urly,deleteData)
+            fetch(url,deleteData)
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
@@ -70,7 +70,7 @@ export class Database{
                 body: JSON.stringify(email),
                 headers: { 'Content-Type': 'application/json' }
             }
-            fetch(urly,deleteData)
+            fetch(url,deleteData)
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
