@@ -9,7 +9,7 @@ class StatsPage extends Component {
         <div>
             <NavBanner/>
                 <div>
-                <div style={{ height: '87vh', width:'100%'}}>
+                <div style={{ height: '87vh', width:'100%', textAlign: 'center'}}>
                 <StatsTable/>
                 </div>
             </div>
