@@ -99,8 +99,10 @@ componentDidMount() {
     this.setState({ loading: true})
     const response = await fetch('/api/getBarcodeItem?code=' + this.state.barcodeNumber);
     const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
+    if ((response.status === 200) || (response.status === 304)) 
+      return body;
+    else
+      throw Error(body.message);
 };
 
 onChange = (event) => {
@@ -286,7 +288,7 @@ reloadPage = () => {
 
 post = async(item) => {
       var postData = {
-          method: 'POST',
+          method: 'POST', mode: 'no-cors',
           body: JSON.stringify(item),
           headers: { 'Content-Type': 'application/json' }
       }
