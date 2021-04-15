@@ -109,7 +109,10 @@ getItems = async () => {
           this.showForm(true);
         }
         this.setState({ loading: false})
-     }).catch(err => console.log(err))
+     }).catch(err => { console.log(err)
+     this.setState({ loading: false})
+     this.toastMessage('Failed to search for item.')
+    })
  }
 
  getBarcodeItem = async () => {

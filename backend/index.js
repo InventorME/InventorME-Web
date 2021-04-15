@@ -19,9 +19,9 @@ app.get('/api/getBarcodeItem', (req, res) => {
   getItemByBarcode(req.query.code).then(response => res.json(response))
 });
 
-app.get('/*', function(request, response) {
-  response.sendFile(path.join(__dirname, '../src', 'index.html'));
-});
+// app.get('/*', function(request, response) {
+//   response.sendFile(path.join(__dirname, '../src', 'index.html'));
+// });
 
 async function getItemByBarcode(barcode) {
   let browserInstance = browserObject.startBrowser();
