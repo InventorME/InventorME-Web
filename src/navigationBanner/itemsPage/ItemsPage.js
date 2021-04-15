@@ -31,7 +31,6 @@ class ItemsPage extends Component {
             items = body.items.filter(item => item.itemArchived === 0)
             sortedItems = items.slice().sort((a, b) => new Date(b.itemCreationDate) - new Date(a.itemCreationDate))
           }
-console.log(sortedItems)
           this.setState({ Current_Items: sortedItems});
           this.render();
           this.setState({loading: false});

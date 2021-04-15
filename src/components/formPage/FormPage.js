@@ -5,6 +5,7 @@ import ToastMessage from '../toastMessage/ToastMessage';
 import DatePicker from 'react-date-picker';
 import CurrencyInput from 'react-currency-input-field';
 import moment from 'moment';
+import { Database } from '../../util/Database';
 
 class FormPage extends Component {
   constructor(props) {
@@ -81,6 +82,22 @@ componentDidMount() {
     this.setState({category: this.props.collection})
 }
 
+getItems = async () => {
+  const db = new Database();
+  try {
+      const body = await db.get();
+      let items = null;
+      if(body.items.length > 0) {
+        items = body.items
+      }
+      return items;
+  }
+  catch (error) {
+      console.log('Error pulling data', error);
+      return null;
+  }
+}
+
  searchBarcodeItem() {
       this.getBarcodeItem().then(res => {
         if (Object.keys(res).length === 0) {
@@ -92,15 +109,30 @@ componentDidMount() {
           this.showForm(true);
         }
         this.setState({ loading: false})
-     }).catch(err => console.log(err))
+     }).catch(err => { console.log(err)
+     this.setState({ loading: false})
+     this.toastMessage('Failed to search for item.')
+    })
  }
 
  getBarcodeItem = async () => {
     this.setState({ loading: true})
-    const response = await fetch('/api/getBarcodeItem?code=' + this.state.barcodeNumber);
+    var data = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+  }
+    const response = await fetch('/api/getBarcodeItem?code=' + this.state.barcodeNumber, data);
     const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
+    console.log('ok', response, body)
+    if ((response.status === 200) || (response.status === 304)) {
+      console.log('body ', body)
+      return body;
+    }
+    else {
+      console.log(body.message);
+      this.setState({ loading: false})
+      this.toastMessage('Failed to search for item.')
+    }
 };
 
 onChange = (event) => {
@@ -253,27 +285,34 @@ saveItem() {
 if(this.state.addItem) {
   if(this.validatePayload(itemPostPayload)){
       this.post(itemPostPayload).then(res => {
-        if(res === 200) {
+        if((res === 200) || (res === 0)) {
           this.toastMessage("Saved Successfully.")
           this.reloadPage();
         } else {
-          this.setState({loading: false})
-          this.toastMessage("Error: Failed to saved.")
+            this.setState({loading: false})
+            this.toastMessage("Error: Failed to save.")
         }
       });
     }
   }
   else {
     if(this.validatePayload(itemPutPayload)){
-        this.put(itemPutPayload).then(res => {
-          if(res === 200) {
-            this.toastMessage("Saved Successfully.")
-            this.reloadPage();
+        this.put(itemPutPayload).catch(res => {
+          this.getItems().then(res => {
+          let items = [];
+          if(res.length > 0) {
+              items = res.filter(item => item.itemArchived === 0)
+              items = items.filter(item => item.itemID === itemPutPayload.itemID);
+          }
+          if(items.length === 1) {
+              this.toastMessage("Saved Successfully.")
+              this.reloadPage();
           } else {
-            this.setState({loading: false})
-            this.toastMessage("Error: Failed to saved.")
+              this.setState({loading: false})
+              this.toastMessage("Error: Failed to save.")
           }
         });
+      })
   }
 }
 }
@@ -286,7 +325,7 @@ reloadPage = () => {
 
 post = async(item) => {
       var postData = {
-          method: 'POST',
+          method: 'POST', mode: 'no-cors',
           body: JSON.stringify(item),
           headers: { 'Content-Type': 'application/json' }
       }

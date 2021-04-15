@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './itemDetailsView.css';
 import FormPage from '../formPage/FormPage';
 import ToastMessage from '../toastMessage/ToastMessage';
+import { Database } from '../../util/Database';
 import moment from 'moment';
 
 class ItemDetailsView extends Component{
@@ -22,6 +23,22 @@ class ItemDetailsView extends Component{
         if(this.props.archive)
             this.setState({archive: true})
         this.setState({itemName: this.state.item.itemName})
+    }
+
+    getItems = async () => {
+        const db = new Database();
+        try {
+            const body = await db.get();
+            let items = null;
+            if(body.items.length > 0) {
+              items = body.items
+            }
+            return items;
+        }
+        catch (error) {
+            console.log('Error pulling data', error);
+            return null;
+        }
     }
 
     toastMessage = (message) => {
@@ -57,14 +74,21 @@ class ItemDetailsView extends Component{
             itemID: this.state.item.itemID
         }
         this.setState({loading: true})
-        this.deleteItem(payload).then(res => {
-            if(res === 200) {
-                this.toastMessage("Deleted Successfully.")
-                this.reloadPage();
-            } else {
-                this.setState({loading: false})
-                this.toastMessage("Error: Failed to delete item.")
-            }
+        this.deleteItem(payload).catch(res => {
+            this.getItems().then(res => {
+                let items = [];
+                if(res.length > 0) {
+                    items = res.filter(item => item.itemArchived === 1)
+                    items = items.filter(item => item.itemID === payload.itemID);
+                }
+                if(items.length === 0) {
+                    this.toastMessage("Deleted Successfully.")
+                    this.reloadPage();
+                } else {
+                    this.setState({loading: false})
+                    this.toastMessage("Error: Failed to delete item.")
+                }
+            })      
         });
     }
 
@@ -100,14 +124,22 @@ class ItemDetailsView extends Component{
             itemFolder: this.quotes(this.state.item.itemFolder)
         }
 
-        this.put(itemPutPayload).then(res => {
-            if(res === 200) {
-                this.toastMessage("Unarchive Successfully.")
-                this.reloadPage();
-            } else {
-                this.setState({loading: false})
-                this.toastMessage("Error: Failed to unarchive.")
-            }
+        this.put(itemPutPayload).catch(res => {
+            this.getItems().then(res => {
+                let items = [];
+                if(res.length > 0) {
+                    items = res.filter(item => item.itemArchived === 1)
+                    items = items.filter(item => item.itemID === itemPutPayload.itemID);
+                }
+                
+                if(items.length === 0) {
+                    this.toastMessage("Unarchived Successfully.")
+                    this.reloadPage();
+                } else {
+                    this.setState({loading: false})
+                    this.toastMessage("Error: Failed to unarchive.")
+                }
+            })      
         });
     }
 
@@ -161,14 +193,21 @@ class ItemDetailsView extends Component{
             itemFolder: this.quotes(this.state.item.itemFolder)
         }
 
-        this.put(itemPutPayload).then(res => {
-            if(res === 200) {
-                this.toastMessage("Archived Successfully.")
-                this.reloadPage();
-            } else {
-                this.setState({loading: false})
-                this.toastMessage("Error: Failed to archive.")
-            }
+        this.put(itemPutPayload).catch(res => {
+            this.getItems().then(res => {
+                let items = [];
+                if(res.length > 0) {
+                    items = res.filter(item => item.itemArchived === 0)
+                    items = items.filter(item => item.itemID === itemPutPayload.itemID);
+                }
+                if(items.length === 0) {
+                    this.toastMessage("Archived Successfully.")
+                    this.reloadPage();
+                } else {
+                    this.setState({loading: false})
+                    this.toastMessage("Error: Failed to archive.")
+                }
+            })      
         });
         
     }

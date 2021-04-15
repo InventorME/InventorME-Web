@@ -13,15 +13,13 @@ app.use(pino);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.static(__dirname)); 
 
-app.get('/api/getBarcodeItem', (req, res) => {
-  getItemByBarcode(req.query.code).then(result => { res.json(result)}); 
-});
-
-app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '../src', 'index.html'));
-});
-
+if(process.env.NODE_ENV === 'production') {
+  app.get('/api/getBarcodeItem', (req, res) => {
+    getItemByBarcode(req.query.code).then(response => res.json(response))
+  });
+}
 async function getItemByBarcode(barcode) {
   let browserInstance = browserObject.startBrowser();
   let response = await scraperController(browserInstance, barcode)
