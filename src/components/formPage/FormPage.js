@@ -117,12 +117,22 @@ getItems = async () => {
 
  getBarcodeItem = async () => {
     this.setState({ loading: true})
-    const response = await fetch('/api/getBarcodeItem?code=' + this.state.barcodeNumber);
+    var data = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+  }
+    const response = await fetch('/api/getBarcodeItem?code=' + this.state.barcodeNumber, data);
     const body = await response.json();
-    if ((response.status === 200) || (response.status === 304)) 
+    console.log('ok', response, body)
+    if ((response.status === 200) || (response.status === 304)) {
+      console.log('body ', body)
       return body;
-    else
-      throw Error(body.message);
+    }
+    else {
+      console.log(body.message);
+      this.setState({ loading: false})
+      this.toastMessage('Failed to search for item.')
+    }
 };
 
 onChange = (event) => {
