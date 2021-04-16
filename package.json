@@ -33,7 +33,7 @@
   },
   "scripts": {
     "frontend": "react-scripts start",
-    "start": "run-p server frontend",
+    "start": "run-p server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
