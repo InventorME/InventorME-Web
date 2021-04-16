@@ -34,12 +34,12 @@
   },
   "scripts": {
     "frontend": "react-scripts start",
-    "start": "run-p server",
+    "start": "node backend/server.js",
     "build": "react-scripts build",
     "buildWeb": "webpack",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node-env-run backend --exec nodemon | pino-colada"
+    "server": "node backend/server.js"
   },
   "eslintConfig": {
     "extends": [
