@@ -6,7 +6,8 @@ import OverlayMenu from 'react-overlay-menu';
 import { Link } from "react-router-dom";
 import FormPage from '../components/formPage/FormPage';
 import { Auth } from 'aws-amplify';
-import searchIcon from '../images/searchIcon.png'
+import searchIcon from '../images/searchIcon.png';
+import { Photo } from '../util/Photos';
 
 
 class NavBanner extends Component {
@@ -15,6 +16,9 @@ class NavBanner extends Component {
        super(props);
        this.state = { response: '', isOpen: false, showItemMenu: false, showProfileMenu: false, show: true, 
        firstName: '', userEmail: '',
+       imageLoaded: false,
+       profilePic: "",
+       photoType: "image/jpg",
        style : {
         width : 150,
         height: 0,
@@ -41,6 +45,15 @@ class NavBanner extends Component {
             this.toastMessage("Error: No user found, please sign in again");
             window.location.href = "/signin-page";
         }
+        try{
+            const photo = new Photo();
+            const photoURL = String(this.state.userEmail) + ".jpg";
+            const image = await photo.get(photoURL);
+            this.setState({profilePic: image});
+            this.setState({imageLoaded: true});
+          }catch (error) {
+            console.log('could not find image', error);
+          }
     }
 
     componentWillUnmount() {
@@ -116,7 +129,7 @@ class NavBanner extends Component {
                 </div>
 
                 <div className="profile" onClick={this.showProfileMenu}>
-                    <img style={{borderRadius: "12em", height: "2.5em", width: "2.5em", 'paddingTop': '0.4em'}} alt="" src={this.state.response.userProfilePicURL} />
+                    <img style={{borderRadius: "40em", height: "2.5em", width: "2.5em", 'paddingTop': '0.4em'}} alt="" src={`data:${this.state.photoType};base64,${this.state.profilePic}`} />
                     <p className="firstName-profile"> {this.state.firstName}</p>
                 </div>
                 </div>
