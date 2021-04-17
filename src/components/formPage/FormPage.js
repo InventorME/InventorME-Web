@@ -19,7 +19,7 @@ class FormPage extends Component {
     buyDate: '', sellDate: '', 
     tags: [], notes: '',
     itemCreationDate: '', itemArchived: '', addItem: this.props.addItem, addCollection: false, itemFolder: '',
-    showForm: false, loading: false, itemID: '',
+    showForm: true, loading: false, itemID: '',
     baseURL: "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"};
     this.hiddenFileInput = React.createRef();
     this.scrollRef = React.createRef()
@@ -182,10 +182,10 @@ showForm() {
 }
 
 cancelForm() {
-  this.scrollRef.current.scrollIntoView()
-  if(!this.state.addItem || this.state.addCollection)
+  // this.scrollRef.current.scrollIntoView()
+  // if(!this.state.addItem || this.state.addCollection)
     this.props.toggleItemMenu();
-  this.setState({showForm: false, imageURL: '', name: '', category: '', itemLocation: '', itemWorth: '', purchaseAmount: '', sellAmount: '',
+  this.setState({showForm: true, imageURL: '', name: '', category: '', itemLocation: '', itemWorth: '', purchaseAmount: '', sellAmount: '',
   serialNum: '', recurringAmount: '', itemReceipt: '', itemManual: '', onlineUrl: '', barcodeNumber: '',
   buyDate: '', sellDate: '', tags: [], notes: ''});
 }
