@@ -2,7 +2,6 @@ import { Auth } from 'aws-amplify';
 const fetch = require('node-fetch');
 
 const urly = "https://secret-ocean-49799.herokuapp.com/https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"
- const puturl= " https://api.allorigins.win/raw?url=https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"
 const url = "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"
 export class Database{
     async get(){
@@ -50,7 +49,7 @@ export class Database{
             'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
                     'Content-Type': 'application/json' }
             }
-            fetch(puturl,putData)
+            fetch(url,putData)
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
