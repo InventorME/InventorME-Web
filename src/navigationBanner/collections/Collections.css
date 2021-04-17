@@ -22,7 +22,22 @@
   margin: 2%;
   display: inline-block;
   }
+  .c_arrow {
+    height: 3.5em;
+    width: 3.5em;
+    margin-left: -40%;
+    margin-top:60%;
+    cursor: pointer;
+}
 
+.backer {
+  position:absolute;
+  height: 3.5em;
+  width: 3.5em;
+  bottom: 37em;
+  left: 5.4em;
+  cursor: pointer;
+}
 .icon{
   position: absolute;
   top: 0;

@@ -2,7 +2,8 @@ import { Auth } from 'aws-amplify';
 const fetch = require('node-fetch');
 
 const urly = "https://secret-ocean-49799.herokuapp.com/https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"
-
+ const puturl= " https://api.allorigins.win/raw?url=https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"
+const url = "https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"
 export class Database{
     async get(){
         try{
@@ -23,10 +24,16 @@ export class Database{
         return new Promise((resolve, reject)=>{
             var postData = {
                 method: 'POST',
+                mode: 'no-cors',
                 body: JSON.stringify(item),
-                headers: { 'Content-Type': 'application/json' }
+                
+                headers: { 
+                    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+                    "Access-Control-Allow-Credentials" : true, 
+                    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+                    'Content-Type': 'application/json' }
             }
-            fetch(urly,postData)
+            fetch(url,postData)
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
@@ -36,9 +43,14 @@ export class Database{
             var putData = {
                 method: 'PUT',
                 body: JSON.stringify(item),
-                headers: { 'Content-Type': 'application/json' }
+                
+                headers: { 
+                    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+            
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+                    'Content-Type': 'application/json' }
             }
-            fetch(urly,putData)
+            fetch(puturl,putData)
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
@@ -48,9 +60,13 @@ export class Database{
             var deleteData = {
                 method: 'DELETE',
                 body: JSON.stringify(id),
-                headers: { 'Content-Type': 'application/json' }
+                
+                headers: {
+                    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+                    'Content-Type': 'application/json' }
             }
-            fetch(urly,deleteData)
+            fetch(url,deleteData)
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
@@ -67,9 +83,13 @@ export class Database{
             var deleteData = {
                 method: 'DELETE',
                 body: JSON.stringify(email),
-                headers: { 'Content-Type': 'application/json' }
+                statusCode: 200,
+                headers: { 
+                    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+                
+                    'Content-Type': 'application/json' }
             }
-            fetch(urly,deleteData)
+            fetch(url,deleteData)
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
