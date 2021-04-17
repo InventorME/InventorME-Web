@@ -1,8 +1,4 @@
 import { Auth } from 'aws-amplify';
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 const fetch = require('node-fetch');
 
 const urly = "https://secret-ocean-49799.herokuapp.com/https://3cv3j619jg.execute-api.us-east-2.amazonaws.com/test/inventorme-items"

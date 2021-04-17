@@ -10,6 +10,7 @@ import SignInPage from './signinPage/SignInPage';
 import AboutPage from './navigationBanner/aboutPage/AboutPage';
 import CreateAcctPage from './createacctPage/CreateAcctPage';
 import Collections from './navigationBanner/collections/Collections';
+import CollectionPage from './navigationBanner/collections/collectionPage';
 import ArchivePage from './navigationBanner/archivepage/ArchivePage';
 import FolderPage from './navigationBanner/folderPage/FolderPage';
 import StatsPage from './navigationBanner/statsPage/StatsPage';
@@ -41,6 +42,7 @@ ReactDOM.render(
       <Route path = "/folderpage" component = {FolderPage}/>
       <Route path = "/statspage" component = {StatsPage}/>
       <Route path="/search-page" component={searchPage}/>
+      <Route path="/collectionspage" component={CollectionPage}/>
   </Switch>
   </BrowserRouter>,
   document.getElementById('root')
