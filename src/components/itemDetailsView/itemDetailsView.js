@@ -217,11 +217,7 @@ class ItemDetailsView extends Component{
         var putData = {
           method: 'PUT',
           body: JSON.stringify(item),
-          headers: { 
-            "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
-            
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-            'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json' }
         }
         const response = await fetch(this.state.baseURL,putData);
         return response.status;
@@ -231,11 +227,7 @@ class ItemDetailsView extends Component{
             var deleteData = {
                 method: 'DELETE',
                 body: JSON.stringify(id),
-                headers: { 
-                    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
-                    "Access-Control-Allow-Credentials" : true, 
-                    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-                    'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' }
             }
         const response = await fetch(this.state.baseURL,deleteData);
         return response.status;
