@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import './Collections.css';
+
 import NavBanner from '../NavBanner.js';
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Database } from '../../util/Database';
 import { colors } from '../../util/objectColors';
 import FormPage from '../../components/formPage/FormPage';
 import { Auth } from 'aws-amplify';
+import arrow from '../../images/arrow.png'
+import CollectionPage from './CollectionPage.js';
+import BackButton from '../../images/back-button.png'
 
 var color=0;
 
@@ -18,10 +22,12 @@ class Collections extends Component {
         item: null,
         showItemMenu: false,
         collection: '',
+        toggledetails: false,
         userEmail: '', loading: false
     }
-    
+    this.toggleTableView = this.toggleTableView.bind(this);
     this.closeItemMenu = this.closeItemMenu.bind(this);
+    this.scrollRef = React.createRef();
   }
   async componentDidMount() {
     this.setState({ loading: true });
@@ -40,7 +46,15 @@ class Collections extends Component {
   filterItemByID(ID, collectionName) {
         this.setState({ item: this.state.items[collectionName].filter(item => item.itemID === ID), editItem: true });
   }
+//------------------------------------
+  toggleTableView(prop) {
+    this.setState({ toggledetails: !this.state.toggledetails,collection:prop });
+    this.scrollRef.current.scrollIntoView()
+  }
 
+
+
+//----------------------------------------------
   closeItemMenu() {
     this.setState({ showItemMenu: false });
   }
@@ -77,10 +91,13 @@ class Collections extends Component {
     }
   }
 
+
+// this is where the boxes are created, we want to put the arrow button in the bottom left corner
   renderFolders = (props) =>{
     return(
       <div className='area' style={{backgroundColor:props.color}}>
             <AiOutlinePlusCircle onClick={() => this.openItemMenu(props.tittle)} className={'icon'}/>
+            <img className="c_arrow" src={arrow} onClick={() =>  this.toggleTableView(props.tittle)}/>
             <div className='textTittle'>{props.tittle}</div>
             <div className='textAmount'>{props.amount}</div>
       </div>
@@ -94,19 +111,22 @@ class Collections extends Component {
 
   render() {
       return (
-      <div className='container'>
+      <div className='container' ref={this.scrollRef}>
         <NavBanner/>
         { this.state.loading ?
         <div className="loading-container"> <div className="form-load-symbol"/></div>: null }
         { this.state.showItemMenu ?
             <div style={{marginTop: '3%'}}><FormPage toggleItemMenu = {this.closeItemMenu} userEmail={this.state.userEmail} collection={this.state.collection} addCollection = {true}/></div> : null }
+        {this.state.toggledetails ?
         
+        <div> <CollectionPage name = {this.state.collection}/> <img className="backer" src={BackButton} onClick={event => window.location.href = '/collections'}/></div>:
+      
         <div className='container2'>
             {this.state.collectionTittle ? this.state.collectionTittle.map((collTittle) => (
               <this.renderFolders tittle={collTittle} amount={this.state.items[collTittle].length} color={this.getColors()}/>
             )):null}
          </div>
-      </div>
+  }</div>
       );
     }
   }

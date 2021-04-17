@@ -123,7 +123,6 @@ getItems = async () => {
   }
     const response = await fetch('/api/getBarcodeItem?code=' + this.state.barcodeNumber, data);
     const body = await response.json();
-    console.log('ok', response, body)
     if ((response.status === 200) || (response.status === 304)) {
       console.log('body ', body)
       return body;
