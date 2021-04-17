@@ -71,6 +71,7 @@ class Collections extends Component {
         let collectionItems = [];
         if (body.items.length > 0)
         collectionItems = body.items.filter(item => item.Collections !== null)
+        collectionItems = collectionItems.filter(item => item.itemArchived === 0)
 
         var groupBy = function (xs, key) {
             return xs.reduce(function (rv, x) {

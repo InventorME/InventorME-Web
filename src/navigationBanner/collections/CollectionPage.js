@@ -32,6 +32,7 @@ getItems = async () => {
       let sortedItems = [];
       if(body.items.length > 0) {
         items = body.items.filter(item => item.itemCategory === this.props.name)
+        items = items.filter(item => item.itemArchived === 0)
         sortedItems = items.slice().sort((a, b) => new Date(b.itemCreationDate) - new Date(a.itemCreationDate))
       }
       this.setState({ Current_Items: sortedItems});
