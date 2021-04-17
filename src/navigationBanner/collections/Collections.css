@@ -27,6 +27,7 @@
     width: 3.5em;
     margin-left: -40%;
     margin-top:60%;
+    cursor: pointer;
 }
 
 .backer {
@@ -35,6 +36,7 @@
   width: 3.5em;
   bottom: 37em;
   left: 5.4em;
+  cursor: pointer;
 }
 .icon{
   position: absolute;

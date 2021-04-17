@@ -10,7 +10,6 @@ import { Auth } from 'aws-amplify';
 import arrow from '../../images/arrow.png'
 import CollectionPage from './CollectionPage.js';
 import BackButton from '../../images/back-button.png'
-import { Link } from "react-router-dom";
 
 var color=0;
 
@@ -28,6 +27,7 @@ class Collections extends Component {
     }
     this.toggleTableView = this.toggleTableView.bind(this);
     this.closeItemMenu = this.closeItemMenu.bind(this);
+    this.scrollRef = React.createRef();
   }
   async componentDidMount() {
     this.setState({ loading: true });
@@ -49,6 +49,7 @@ class Collections extends Component {
 //------------------------------------
   toggleTableView(prop) {
     this.setState({ toggledetails: !this.state.toggledetails,collection:prop });
+    this.scrollRef.current.scrollIntoView()
   }
 
 
@@ -110,7 +111,7 @@ class Collections extends Component {
 
   render() {
       return (
-      <div className='container'>
+      <div className='container' ref={this.scrollRef}>
         <NavBanner/>
         { this.state.loading ?
         <div className="loading-container"> <div className="form-load-symbol"/></div>: null }
