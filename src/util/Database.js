@@ -14,7 +14,7 @@ export class Database{
         }
          let  queryURL = urly + "?userEmail='" + email +"'";
         return new Promise((resolve, reject)=>{
-            fetch(queryURL,{method: 'GET', mode: 'no-cors'})
+            fetch(queryURL,{method: 'GET'})
             .then(res => resolve(res.json()))
             .catch(err => reject(err))
         });
