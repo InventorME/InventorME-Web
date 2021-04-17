@@ -1,10 +1,10 @@
 const fetch = require('node-fetch');
 
 var urly = "https://9zulviqkd0.execute-api.us-east-2.amazonaws.com/v1/imager";
-
+var url2 = "https://secret-ocean-49799.herokuapp.com/https://9zulviqkd0.execute-api.us-east-2.amazonaws.com/v1/imager"
 export class Photo {
     get(url) {
-        let queryURL = urly + "?url=" + url;
+        let queryURL = url2 + "?url=" + url;
         return new Promise((resolve, reject) => {
             fetch(queryURL)
                 .then(res => resolve(res.text()))
