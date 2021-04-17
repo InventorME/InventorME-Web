@@ -23,7 +23,6 @@ export class Database{
         return new Promise((resolve, reject)=>{
             var postData = {
                 method: 'POST',
-                mode: 'no-cors',
                 body: JSON.stringify(item),
                 
                 headers: { 
