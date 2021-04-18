@@ -7,7 +7,7 @@ var url2 = "https://secret-ocean-49799.herokuapp.com/https://9zulviqkd0.execute-
 export class Photo {
     get(url) {
         let queryURL = urly + "?url=" + url;
-        console.log("qurl: ", queryURL);
+        // console.log("qurl: ", queryURL);
         return new Promise((resolve, reject) => {
             fetch(queryURL)
                 .then(res => resolve(res.text()))

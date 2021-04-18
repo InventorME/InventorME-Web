@@ -31,9 +31,11 @@ class FormPage extends Component {
     this.onChangeSellDate = this.onChangeSellDate.bind(this);
     this.onImageChange = this.onImageChange.bind(this);
     this.getPhoto = this.getPhoto.bind(this);
+    this.getPhoto();
   }
 
   componentDidMount() {
+    
     if (this.props.item) {
       let buyDate = "";
       let sellDate = "";
@@ -55,8 +57,11 @@ class FormPage extends Component {
       }
       if (this.props.item.itemTags)
         this.setState({ tags: this.props.item.itemTags.split(',') })
-      if (this.props.item.itemPhotoURL)
-        this.setState({ imageURL: this.props.item.itemPhotoURL })
+      if (this.props.item.itemPhotoURL){
+        this.setState({ imageURL: this.props.item.itemPhotoURL });
+        console.log("imageURL:", this.props.item.itemPhotoURL);
+        this.getPhoto();
+      }
       if (this.props.item.itemSerialNum)
         this.setState({ serialNum: this.props.item.itemSerialNum })
       if (this.props.item.itemReceiptPhotoURL)
@@ -86,7 +91,6 @@ class FormPage extends Component {
     if (this.props.collection)
       this.setState({ category: this.props.collection })
 
-    this.getPhoto();
 
   }
 
@@ -113,8 +117,9 @@ class FormPage extends Component {
         const image = await photo.get(this.state.imageURL);
         this.setState({ imageData: image });
         this.setState({imageLoaded: true});
+        console.log("image", image);
       } catch (error) {
-        console.log("Load Image error");
+        console.log("Load Image error", error);
       }
     }
   }
