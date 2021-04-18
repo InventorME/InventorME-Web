@@ -210,23 +210,13 @@ class FormPage extends Component {
   showForm() {
     this.setState({ showForm: true });
   }
+
   cancelForm() {
     // this.scrollRef.current.scrollIntoView()
     // if(!this.state.addItem || this.state.addCollection)
     this.props.toggleItemMenu();
     this.setState({
       showForm: true, imageURL: '', name: '', category: '', itemLocation: '', itemWorth: '', purchaseAmount: '', sellAmount: '',
-      serialNum: '', recurringAmount: '', itemReceipt: '', itemManual: '', onlineUrl: '', barcodeNumber: '',
-      buyDate: '', sellDate: '', tags: [], notes: ''
-    });
-  }
-
-  cancelForm() {
-    this.scrollRef.current.scrollIntoView()
-    if (!this.state.addItem || this.state.addCollection)
-      this.props.toggleItemMenu();
-    this.setState({
-      showForm: false, imageURL: '', name: '', category: '', itemLocation: '', itemWorth: '', purchaseAmount: '', sellAmount: '',
       serialNum: '', recurringAmount: '', itemReceipt: '', itemManual: '', onlineUrl: '', barcodeNumber: '',
       buyDate: '', sellDate: '', tags: [], notes: ''
     });

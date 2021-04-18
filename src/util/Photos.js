@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const dateFormat = require('dateformat');
 
 var urly = "https://9zulviqkd0.execute-api.us-east-2.amazonaws.com/v1/imager";
-var url2 = "https://secret-ocean-49799.herokuapp.com/https://9zulviqkd0.execute-api.us-east-2.amazonaws.com/v1/imager"
+// var url2 = "https://secret-ocean-49799.herokuapp.com/https://9zulviqkd0.execute-api.us-east-2.amazonaws.com/v1/imager"
 export class Photo {
     get(url) {
         let queryURL = urly + "?url=" + url;
