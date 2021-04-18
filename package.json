@@ -37,7 +37,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node-env-run backend --exec nodemon | pino-colada"
+    "server": "node-env-run backend/server.js --exec nodemon | pino-colada"
   },
   "eslintConfig": {
     "extends": [

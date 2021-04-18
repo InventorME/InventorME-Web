@@ -35,7 +35,7 @@ class FormPage extends Component {
   }
 
   componentDidMount() {
-    
+
     if (this.props.item) {
       let buyDate = "";
       let sellDate = "";
@@ -57,7 +57,7 @@ class FormPage extends Component {
       }
       if (this.props.item.itemTags)
         this.setState({ tags: this.props.item.itemTags.split(',') })
-      if (this.props.item.itemPhotoURL){
+      if (this.props.item.itemPhotoURL) {
         this.setState({ imageURL: this.props.item.itemPhotoURL });
         console.log("imageURL:", this.props.item.itemPhotoURL);
         this.getPhoto();
@@ -116,7 +116,7 @@ class FormPage extends Component {
       try {
         const image = await photo.get(this.state.imageURL);
         this.setState({ imageData: image });
-        this.setState({imageLoaded: true});
+        this.setState({ imageLoaded: true });
         console.log("image", image);
       } catch (error) {
         console.log("Load Image error", error);
@@ -209,6 +209,16 @@ class FormPage extends Component {
 
   showForm() {
     this.setState({ showForm: true });
+  }
+  cancelForm() {
+    // this.scrollRef.current.scrollIntoView()
+    // if(!this.state.addItem || this.state.addCollection)
+    this.props.toggleItemMenu();
+    this.setState({
+      showForm: true, imageURL: '', name: '', category: '', itemLocation: '', itemWorth: '', purchaseAmount: '', sellAmount: '',
+      serialNum: '', recurringAmount: '', itemReceipt: '', itemManual: '', onlineUrl: '', barcodeNumber: '',
+      buyDate: '', sellDate: '', tags: [], notes: ''
+    });
   }
 
   cancelForm() {

@@ -24,12 +24,7 @@ export class Database{
             var postData = {
                 method: 'POST',
                 body: JSON.stringify(item),
-                
-                headers: { 
-                    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
-                    "Access-Control-Allow-Credentials" : true, 
-                    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-                    'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' }
             }
             fetch(url,postData)
             .then(res => resolve(res.json()))
@@ -41,12 +36,7 @@ export class Database{
             var putData = {
                 method: 'PUT',
                 body: JSON.stringify(item),
-                
-                headers: { 
-                    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
-            
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-                    'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' }
             }
             fetch(url,putData)
             .then(res => resolve(res.json()))
@@ -58,11 +48,7 @@ export class Database{
             var deleteData = {
                 method: 'DELETE',
                 body: JSON.stringify(id),
-                
-                headers: {
-                    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-                    'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' }
             }
             fetch(url,deleteData)
             .then(res => resolve(res.json()))
