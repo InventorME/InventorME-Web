@@ -31,7 +31,6 @@ class FormPage extends Component {
     this.onChangeSellDate = this.onChangeSellDate.bind(this);
     this.onImageChange = this.onImageChange.bind(this);
     this.getPhoto = this.getPhoto.bind(this);
-    this.getPhoto();
   }
 
   componentDidMount() {
@@ -59,8 +58,7 @@ class FormPage extends Component {
         this.setState({ tags: this.props.item.itemTags.split(',') })
       if (this.props.item.itemPhotoURL) {
         this.setState({ imageURL: this.props.item.itemPhotoURL });
-        console.log("imageURL:", this.props.item.itemPhotoURL);
-        this.getPhoto();
+        this.getPhoto(this.props.item.itemPhotoURL);
       }
       if (this.props.item.itemSerialNum)
         this.setState({ serialNum: this.props.item.itemSerialNum })
@@ -90,8 +88,6 @@ class FormPage extends Component {
       this.setState({ showForm: true, addItem: true, addCollection: true })
     if (this.props.collection)
       this.setState({ category: this.props.collection })
-
-
   }
 
   getItems = async () => {
@@ -110,14 +106,20 @@ class FormPage extends Component {
     }
   }
 
-  getPhoto = async () => {
-    if (this.state.imageURL !== '') {
+  getPhoto = async (url) => {
+   if (this.state.imageURL !== '') {
       const photo = new Photo();
       try {
         const image = await photo.get(this.state.imageURL);
-        this.setState({ imageData: image });
-        this.setState({ imageLoaded: true });
-        console.log("image", image);
+        this.setState({ imageData: image, imageLoaded: true });
+      } catch (error) {
+        console.log("Load Image error", error);
+      }
+    } else if (url !== null) {
+      const photo = new Photo();
+      try {
+        const image = await photo.get(url);
+        this.setState({ imageData: image, imageLoaded: true });
       } catch (error) {
         console.log("Load Image error", error);
       }
@@ -237,6 +239,7 @@ class FormPage extends Component {
       const pName = await photo.generateNewItemName("jpg");
       await photo.uploadFile(file, pName, file.type);
       this.setState({ imageURL: pName });
+      this.getPhoto();
     }
   }
 
@@ -316,7 +319,6 @@ class FormPage extends Component {
       itemArchived: 0,
       itemFolder: this.quotes(this.state.itemFolder)
     }
-
     if (this.state.addItem) {
       if (this.validatePayload(itemPostPayload)) {
         this.post(itemPostPayload).then(res => {

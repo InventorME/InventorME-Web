@@ -3,10 +3,10 @@ const fetch = require('node-fetch');
 const dateFormat = require('dateformat');
 
 var urly = "https://9zulviqkd0.execute-api.us-east-2.amazonaws.com/v1/imager";
-// var url2 = "https://secret-ocean-49799.herokuapp.com/https://9zulviqkd0.execute-api.us-east-2.amazonaws.com/v1/imager"
+var url2 = "https://secret-ocean-49799.herokuapp.com/https://9zulviqkd0.execute-api.us-east-2.amazonaws.com/v1/imager"
 export class Photo {
     get(url) {
-        let queryURL = urly + "?url=" + url;
+        let queryURL = url2 + "?url=" + url;
         // console.log("qurl: ", queryURL);
         return new Promise((resolve, reject) => {
             fetch(queryURL)
@@ -21,6 +21,7 @@ export class Photo {
             var postData = {
                 method: 'POST',
                 body: binary,
+                mode: 'no-cors',
                 headers: { 'Content-Type': fileType }
             }
             fetch(queryURL, postData)
@@ -64,14 +65,12 @@ export class Photo {
     }
     async generateNewItemName(type){
         try{
-            console.log("generating");
             const data = await Auth.currentUserInfo();
             var url = data.attributes.email;
             var now = new Date();
             now = dateFormat(now,"ddMMyymmss");
             url += now;
             url += "."+type;
-            console.log(url);
             return Promise.resolve(url);
         }
         catch(error){
