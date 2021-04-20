@@ -22,7 +22,7 @@
   }
   
   #Archived_Items td, #Archived_Items th {
-    border-bottom: 2px solid var(--text);
+    border: 1px solid var(--lines);
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 7px;

@@ -2,7 +2,7 @@
     --text: #000000;
     --accent: #979797;
     --background: #ffffff;
-    --theme: #001e38;
+    --theme: #003666;
     --button: #4e148c;
     --buttonText: #ffffff;
     --title: #f2f7ff;
@@ -16,6 +16,7 @@
     --row: #ffffff;
     --tableText: #000000;
     --hoverText: #333333;
+    --lines: #bababa;
 }
 @media (prefers-color-scheme: dark) {
     :root{
@@ -36,6 +37,7 @@
         --row: #333333;
         --tableText: #ffffff;
         --hoverText: #ffffff;
+        --lines: #ffffff;
     }
 }
 body{
