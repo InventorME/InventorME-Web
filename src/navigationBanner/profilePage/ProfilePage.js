@@ -343,7 +343,7 @@ class ProfilePage extends Component {
             <form style={{ height: '100vh' }}>
               <div style={{ display: 'inline-flex', width: '100%', height: '20%' }}>
                 <div className="profile-image-container">
-                  <input type="file" accept="image/jpg,image/jpeg"ref={this.hiddenFileInput} onChange={this.onImageChange} style={{ display: 'none' }} />
+                  <input type="file" accept="image/jpg,image/jpeg" ref={this.hiddenFileInput} onChange={this.onImageChange} style={{ display: 'none' }} />
                   <ReactRoundedImage
                     roundedColor='#333333'
                     imageWidth="170"

@@ -5,13 +5,14 @@ import upload from '../../images/upload-button.png';
 import ItemDetailsView from '../../components/itemDetailsView/itemDetailsView';
 import Collapsible from 'react-collapsible';
 import { Database } from '../../util/Database';
+import { Photo } from '../../util/Photos';
 class FolderPage extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             Headers: ['Name', 'Collection', 'Notes', 'Image'],
-            items: [], editItem: false, item: null
+            items: [], editItem: false, item: null, imageLoaded: false
         }
         this.toggleDetailsView = this.toggleDetailsView.bind(this);
     }
@@ -32,7 +33,7 @@ class FolderPage extends Component {
         const db = new Database();
         try {
             const body = await db.get();
-            
+
             let folderItems = [];
             if (body.items.length > 0)
                 folderItems = body.items.filter(item => item.itemFolder !== null)
@@ -49,13 +50,32 @@ class FolderPage extends Component {
 
             this.setState({ items: groubedByTeam })
             this.setState({ foldername: Object.keys(groubedByTeam) })
-            
+
             this.render();
             this.setState({ loading: false });
+            this.getPhotos();
         }
         catch (error) {
             console.log('Error pulling data', error);
         }
+    }
+    getPhotos = async () => {
+        const photo = new Photo();
+        for (const folder of this.state.foldername) {
+            for (const item of this.state.items[folder]) {
+                if (item.itemPhotoURL !== null) {
+                    try {
+                        const data = await photo.get(item.itemPhotoURL);
+                        item.photoData = data;
+                        if (data !== "Error executing file IO")
+                            item.imageFound = true;
+                    } catch (error) {
+                        console.log("error finding image");
+                    }
+                }
+            }
+        }
+        this.setState({ imageLoaded: true });
     }
 
     renderTableHeader() {
@@ -84,7 +104,7 @@ class FolderPage extends Component {
                                                 <td>{Folder_Item.itemName}</td>
                                                 <td>{Folder_Item.itemCategory}</td>
                                                 <td>{Folder_Item.itemNotes}</td>
-                                                <td>{Folder_Item.itemPhotoURL ? <img src={Folder_Item.itemPhotoURL} alt="" width="40" height="30" /> :
+                                                <td>{Folder_Item.imageFound ? <img src={`data:image/jpg;base64,${Folder_Item.photoData}`} alt="" width="40" height="30" /> :
                                                     <img src={upload} alt="" width="40" height="30" />}</td>
                                             </tr>
                                         )) : null}

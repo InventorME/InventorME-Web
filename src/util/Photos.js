@@ -1,10 +1,13 @@
+import { Auth } from 'aws-amplify';
 const fetch = require('node-fetch');
+const dateFormat = require('dateformat');
 
 var urly = "https://9zulviqkd0.execute-api.us-east-2.amazonaws.com/v1/imager";
 var url2 = "https://secret-ocean-49799.herokuapp.com/https://9zulviqkd0.execute-api.us-east-2.amazonaws.com/v1/imager"
 export class Photo {
     get(url) {
         let queryURL = url2 + "?url=" + url;
+        // console.log("qurl: ", queryURL);
         return new Promise((resolve, reject) => {
             fetch(queryURL)
                 .then(res => resolve(res.text()))
@@ -18,6 +21,7 @@ export class Photo {
             var postData = {
                 method: 'POST',
                 body: binary,
+                mode: 'no-cors',
                 headers: { 'Content-Type': fileType }
             }
             fetch(queryURL, postData)
@@ -48,6 +52,31 @@ export class Photo {
             console.log(error);
         }
     }
+    async generateProfilePicName(type){
+        try{
+            const data = await Auth.currentUserInfo();
+            var url = data.attributes.email;
+            url += "."+type;
+            return Promise.resolve(url);
+        }
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+    async generateNewItemName(type){
+        try{
+            const data = await Auth.currentUserInfo();
+            var url = data.attributes.email;
+            var now = new Date();
+            now = dateFormat(now,"ddMMyymmss");
+            url += now;
+            url += "."+type;
+            return Promise.resolve(url);
+        }
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
 
 }
 
@@ -60,7 +89,7 @@ export class Photo {
 //TO UPLOAD PHOTOS:
 
 //Upload input tag:
-{/* <input type="file" onChange={(e) => this.submitFile(e.target.files)} /> */ }
+/* <input type="file" onChange={(e) => this.submitFile(e.target.files)} /> */ 
 
 //On submit event:
 // submitFile(event) {

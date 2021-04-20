@@ -5,6 +5,7 @@ import './searchPage.css';
 import ItemDetailsView from '../itemDetailsView/itemDetailsView';
 import BackButton from '../../images/back-button.png'
 import { Link } from 'react-router-dom';
+import { Photo } from '../../util/Photos';
 
 class searchPage extends Component {
     constructor(props) {
@@ -30,10 +31,28 @@ class searchPage extends Component {
             this.setState({ Current_Items: items, All_Items: items});
             this.render();
             this.setState({loading: false});
+            this.getPhotos();
         }
         catch (error) {
             console.log('Error pulling data', error);
         }
+    }
+    getPhotos = async () => {
+      const photo = new Photo();
+      for (const item of this.state.Current_Items) {
+        item.imageFound = false;
+        if (item.itemPhotoURL !== null) {
+          try {
+            const data = await photo.get(item.itemPhotoURL);
+            item.photoData = data;
+            if (data !== "Error executing file IO")
+              item.imageFound = true;
+          } catch (error) {
+            console.log("error finding image");
+          }
+        }
+      }
+      this.setState({ imageLoaded: true });
     }
 
     searchBar = (event) => {
@@ -120,7 +139,7 @@ render() {
                 <td>{Current_Item.itemName}</td> 
                 <td>{Current_Item.itemCategory}</td>
                 <td>{Current_Item.itemNotes}</td>
-                <td>{ Current_Item.itemPhotoURL ?  <img src={Current_Item.itemPhotoURL} alt="" width="40" height="30"/> :
+                <td>{ Current_Item.imageFound ?  <img src={`data:image/jpg;base64,${Current_Item.photoData}`} alt="" width="40" height="30"/> :
                     <img src={upload} alt="" width="40" height="30"/>}</td>   
                 </tr>
                 )) : null}
