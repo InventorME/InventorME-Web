@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import InventorLogo from '../images/InventorLogo.png'
-import hamburgerIcon from '../images/hamburgerIcon.png'
+import InventorLogo from '../images/InventorLogo.png';
 import './NavBanner.css';
 import OverlayMenu from 'react-overlay-menu';
 import { Link } from "react-router-dom";
 import FormPage from '../components/formPage/FormPage';
 import { Auth } from 'aws-amplify';
-import searchIcon from '../images/searchIcon.png';
+import { MdSearch } from "react-icons/md";
+import {IoIosMenu} from "react-icons/io";
 import { Photo } from '../util/Photos';
 
 
@@ -113,7 +113,7 @@ class NavBanner extends Component {
         <div style={{marginBottom: '3%'}}>
             <div className="NavBanner">
                 <div className="menu">
-                    <img className="menu-icon" src={hamburgerIcon} alt="Menu" onClick={this.toggleMenu}/>
+                    <IoIosMenu onClick={this.toggleMenu} style={{color: "white", textDecoration: 'none'}} size={50}/>
                 </div>
                 <div className="title">
                     <div className="inventor-title">InventorME</div>
@@ -123,8 +123,8 @@ class NavBanner extends Component {
                     <div className="add-item-button" onClick={() => this.toggleItemMenu()}>Add Item</div>
                 </div>
                 <div className="search-icon">
-                    <Link to = "/search-page"style={{ textDecoration: 'none' }}>
-                        <img style={{borderRadius: "12em", height: "2.5em", width: "2.5em", 'paddingTop': '0.4em'}} alt="" src={searchIcon} />
+                    <Link to = "/search-page" style={{ textDecoration: 'none' }}>
+                        <MdSearch style={{color: "white", textDecoration: 'none'}} size={40}/>
                     </Link>
                 </div>
 

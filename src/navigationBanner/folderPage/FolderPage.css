@@ -76,18 +76,21 @@
     text-align: center;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    border: 1px solid var(--text);
+    border: 2px solid var(--text);
     width: 70%;
-    color: var(--tabelText);
+    color: var(--text);
     background-color: var(--row);
     
     
   }
   
   #Folder_Items td, #Folder_Items th {
-    border: 1px solid var(--title);
+    border-bottom: 2px solid var(--text);
     padding-top: 15px;
     padding-bottom: 15px;
+    padding-left: 7px;
+    padding-right: 7px;
+    
     
     
   }

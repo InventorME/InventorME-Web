@@ -87,7 +87,7 @@ class ItemsPage extends Component {
           <ItemDetailsView toggleDetailsView={this.toggleDetailsView} editItem={this.state.item} /> :
           null}
         <div style={{ height: '100vh', marginBottom: '20%' }}>
-          <h1 id='Title'>Current Items</h1>
+          <h1 id='Title'>Items</h1>
           <table id='Current_Items' style={{ marginBottom: '12em', cursor: 'pointer' }}>
             <tbody>
               <tr>{this.renderTableHeader()}</tr>

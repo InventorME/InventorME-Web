@@ -2,19 +2,19 @@
     --text: #000000;
     --accent: #979797;
     --background: #ffffff;
-    --theme: #0e7e92;
-    --button: #0e7e92;
+    --theme: #001e38;
+    --button: #4e148c;
     --buttonText: #ffffff;
-    --title: #ffffff;
-    --label: #0e7e92;
-    --icon: #36244f;
+    --title: #f2f7ff;
+    --label: #000000;
+    --icon: #f2f7ff;
     --hover: #dddddd;
     --objectsText: #ffffff;
-    --folder: #0e7e92;
-    --header: #0e7e92;
-    --rowAccent: #00b3b3;
-    --row: #00cccc;
-    --tableText: #ffffff;
+    --folder: #004ca3;
+    --header: #003666;
+    --rowAccent: #ffffff;
+    --row: #ffffff;
+    --tableText: #000000;
     --hoverText: #333333;
 }
 @media (prefers-color-scheme: dark) {
@@ -27,13 +27,13 @@
         --buttonText: #001e38;
         --title: #ffffff;
         --label: #ffffff;
-        --icon: #36244f;
+        --icon: #f2f7ff;
         --hover: #666666;
         --objectsText: #ffffff;
-        --folder: #001e38;
-        --header: #800000;
-        --rowAccent: #595959;
-        --row: #595959;
+        --folder: #003666;
+        --header: #003666;
+        --rowAccent: #333333;
+        --row: #333333;
         --tableText: #ffffff;
         --hoverText: #ffffff;
     }

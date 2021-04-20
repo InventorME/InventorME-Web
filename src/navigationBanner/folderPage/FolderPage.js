@@ -96,7 +96,7 @@ class FolderPage extends Component {
                     <div style={{ marginTop: '7%', marginLeft: '15%', paddingBottom: '10%' }}>
                         {this.state.foldername ? this.state.foldername.map((folderName) => (
                             <Collapsible trigger={folderName}>
-                                <table id='Folder_Items' style={{ marginBottom: '2em' }}>
+                                <table id='Folder_Items' style={{ marginBottom: '2em'}}>
                                     <tbody>
                                         <tr>{this.renderTableHeader()}</tr>
                                         {this.state.items[folderName] ? this.state.items[folderName].map((Folder_Item) => (

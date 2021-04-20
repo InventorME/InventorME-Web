@@ -13,25 +13,29 @@
   
   #Current_Items {
     margin: auto;
-    margin: auto;
     text-align: center;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    border: 3px solid var(--background);
+    border: 2px solid var(--text);
     width: 70%;
     color: var(--tableText);
     background-color: var(--row);
+    margin-bottom: 50px;
     
   }
   
   #Current_Items td, #Current_Items th {
-    border: 1px solid var(--title);
+    border-bottom: 2px solid var(--text);
     padding-top: 15px;
     padding-bottom: 15px;
+    padding-left: 7px;
+    padding-right: 7px;
     
   }
   
-  #Current_Items tr:nth-child(even){background-color: var(--rowAccent);}
+  #Current_Items tr:nth-child(even){
+    background-color: var(--rowAccent);
+  }
   
   #Current_Items tr:hover {
     background-color: var(--hover);

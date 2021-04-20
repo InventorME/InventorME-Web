@@ -10,21 +10,24 @@
   
   #Archived_Items {
     margin: auto;
-    margin:auto;
     text-align: center;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     color: var(--tableText);
-    border: 2px solid var(--background);
+    border: 2px solid var(--text);
     width: 70%;
     background-color: var(--row);
+    margin-bottom: 10%;
     
   }
   
   #Archived_Items td, #Archived_Items th {
-    border: 1px solid var(--title);
+    border-bottom: 2px solid var(--text);
     padding-top: 15px;
     padding-bottom: 15px;
+    padding-left: 7px;
+    padding-right: 7px;
+    
     
   }
   

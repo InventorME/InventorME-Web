@@ -41,7 +41,11 @@
     text-align: center;
     font-weight: bolder;
 }
+.icon{
+    color: white;
+    width: 5%;
 
+  }
 .profile  {
     margin-left: auto;
     margin-top: auto;
@@ -58,7 +62,9 @@
     margin-right: auto;
     margin-bottom: auto;
     display: inline-flex;
-    color: var(--title);
+    color: white;
+    width: 5%;
+    text-decoration:  'none';
     cursor: pointer;
 }
 

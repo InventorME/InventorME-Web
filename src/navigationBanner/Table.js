@@ -57,7 +57,7 @@ class Table extends Component {
                 { this.state.editItem ?
                     <ItemDetailsView toggleDetailsView={this.toggleDetailsView} editItem={this.state.item} archive={true} /> :
                     null}
-                <h1 id='title'>Archived Items</h1>
+                <h1 id='title'>Archive</h1>
                 { this.state.loading ?
                     <div className="loading-container"> <div className="form-load-symbol" /></div>
                     : null}
