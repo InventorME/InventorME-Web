@@ -69,8 +69,7 @@ class Table extends Component {
                                 <td>{Archived_Item.itemName}</td>
                                 <td>{Archived_Item.itemCategory}</td>
                                 <td>{Archived_Item.itemNotes}</td>
-                                <td>{Archived_Item.itemPhotoURL ? <img src={Archived_Item.itemPhotoURL} alt="" width="40" height="30" /> :
-                                    <img src={archived} alt="" width="40" height="20" />}</td>
+                                <td><img src={archived} alt="" width="40" height="20" /></td>
                             </tr>
                         )) : null}
                     </tbody>
